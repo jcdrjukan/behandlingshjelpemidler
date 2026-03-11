@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behandlingshjelpemidler – Helsenorge</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+:root {
+  --blueberry-50:  #E4F7F9; --blueberry-100: #CAE7ED; --blueberry-200: #AFDAE3;
+  --blueberry-500: #188097; --blueberry-600: #126F87; --blueberry-700: #08667C;
+  --blueberry-800: #06596C; --blueberry-900: #084350;
+  --cherry-50: #FFF2EA; --cherry-100: #F7E1D2; --cherry-500: #C83521; --cherry-700: #A31F0E;
+  --kiwi-50: #E6F8EE; --kiwi-100: #C2EDD6; --kiwi-700: #0CA161; --kiwi-800: #099150; --kiwi-900: #078141;
+  --banana-50: #FDF8DF; --banana-100: #FCF2BF; --banana-700: #AB7C00; --banana-800: #916500;
+  --neutral-50: #F5F3F3; --neutral-100: #EAE7E7; --neutral-200: #D6D4D3; --neutral-300: #BDBAB9;
+  --neutral-500: #989693; --neutral-600: #7D7C79; --neutral-700: #62625F;
+  --neutral-800: #474745; --neutral-900: #2B2C2B;
+
+  --color-action-text-onlight:              #126F87;
+  --color-action-text-onlight-hover:        #08667C;
+  --color-action-border-onlight:            #188097;
+  --color-action-border-onlight-hover:      #08667C;
+  --color-action-background-onlight:        #188097;
+  --color-action-background-onlight-hover:  #08667C;
+  --color-action-background-onlight-active: #06596C;
+  --color-action-graphics-onlight:          #188097;
+  --color-action-background-transparent-onlight-hover: rgba(18,111,135,0.13);
+
+  --color-base-text-onlight:         #000000;
+  --color-base-text-ondark:          #ffffff;
+  --color-base-text-onlight-subdued: #474745;
+  --color-base-border-onlight:       #7D7C79;
+  --color-base-border-onlight-subtle:#D6D4D3;
+  --color-base-background-cherry:    #FFF2EA;
+  --color-base-background-dark-neutral: #2B2C2B;
+
+  --color-notification-background-info:    #E4F7F9;
+  --color-notification-border-info:        #08667C;
+  --color-notification-background-warning: #FDF8DF;
+  --color-notification-border-warning:     #AB7C00;
+  --color-notification-background-success: #E6F8EE;
+  --color-notification-border-success:     #078141;
+  --color-notification-background-error:   #FFF2EA;
+  --color-notification-border-error:       #A31F0E;
+  --color-notification-text-success:       #078141;
+  --color-notification-text-warning:       #916500;
+  --color-notification-text-error:         #A31F0E;
+
+  --color-disabled-text:     #62625F;
+  --color-disabled-border:   #7D7C79;
+  --color-disabled-graphics: #62625F;
+  --color-help-graphics-normal: #5C27A1;
+  --color-placeholder-text-onlight: #62625F;
+
+  --component-listelements-background-neutral-light:  #F5F3F3;
+  --component-listelements-background-neutral-medium: #EAE7E7;
+  --component-listelements-border-neutral-normal:     #7D7C79;
+
+  --space-4xs: 0.125rem; --space-3xs: 0.25rem; --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;   --space-s: 1rem;      --space-m: 1.5rem;
+  --space-l: 2rem;       --space-xl: 3rem;     --space-2xl: 4rem;
+
+  --mobile-h1: 600 2rem/120% 'Source Sans Pro', sans-serif;
+  --mobile-h2: 600 1.625rem/120% 'Source Sans Pro', sans-serif;
+  --mobile-h3: 600 1.375rem/136% 'Source Sans Pro', sans-serif;
+  --mobile-h4: 600 1.25rem/130% 'Source Sans Pro', sans-serif;
+  --mobile-label: 600 1.125rem/120% 'Source Sans Pro', sans-serif;
+  --mobile-label-subdued: 400 1.125rem/120% 'Source Sans Pro', sans-serif;
+  --mobile-sublabel: 600 1rem/120% 'Source Sans 3', sans-serif;
+  --mobile-sublabel-subdued: 400 1rem/120% 'Source Sans 3', sans-serif;
+  --mobile-body: 400 1.125rem/150% 'Source Sans Pro', sans-serif;
+  --mobile-body-strong: 600 1.125rem/150% 'Source Sans Pro', sans-serif;
+  --mobile-image-caption: 400 1rem/150% 'Source Sans Pro', sans-serif;
+
+  --radius-s: 4px; --radius-m: 8px; --radius-l: 16px; --radius-full: 9999px;
+  --focus-outline: 3px solid #000; --focus-offset: 2px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+
+body {
+  font: var(--mobile-body);
+  color: var(--color-base-text-onlight);
+  background: var(--neutral-100);
+  display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: var(--focus-outline); outline-offset: var(--focus-offset); border-radius: var(--radius-s);
+}
+
+.app {
+  background: #fff; width: 360px; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-3xs);
+}
+
+/* ── Header ── */
+.header { background: var(--blueberry-50); width: 100%; }
+.header__top {
+  background: #fff; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 var(--space-xs); height: 56px;
+}
+.header__left { display: flex; gap: var(--space-m); align-items: center; }
+.logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+.logo img { height: 38.766px; width: 80px; display: block; }
+.icon-btn {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-4xs); background: none; border: none; cursor: pointer;
+  padding: var(--space-3xs); border-radius: var(--radius-m);
+  color: var(--color-base-text-onlight); transition: background 0.15s;
+}
+.icon-btn:hover { background: var(--color-action-background-transparent-onlight-hover); }
+.icon-btn__icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; }
+.icon-btn__icon img { width: 22px; height: 22px; object-fit: contain; }
+.icon-btn__label { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); white-space: nowrap; }
+.profile-bar {
+  background: var(--blueberry-50);
+  border-top: 1px solid var(--blueberry-700);
+  border-bottom: 1px solid var(--blueberry-700);
+  display: flex; align-items: center; gap: var(--space-2xs);
+  padding: var(--space-3xs) var(--space-xs); cursor: pointer;
+}
+.profile-bar__inner { display: flex; flex: 1; gap: var(--space-2xs); align-items: center; min-width: 0; }
+.avatar {
+  width: 38px; height: 38px; background: var(--color-action-background-onlight);
+  border-radius: var(--radius-s); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; color: #fff;
+  font: 600 16px/1.4 'Source Sans Pro', sans-serif;
+}
+.profile-bar__name { font: var(--mobile-label); color: var(--color-base-text-onlight); white-space: nowrap; }
+.chevron { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.chevron img { width: 16px; height: 10px; object-fit: contain; }
+
+/* ── Page title ── */
+.page-title { width: 344px; padding-top: var(--space-xl); }
+.page-title h1 { font: 600 2.25rem/120% 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
+.page-intro { width: 344px; font: 600 1.375rem/130% 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
+.section-h2 { width: 344px; font: var(--mobile-h2); color: var(--color-base-text-onlight); }
+
+/* ── Notification panel ── */
+.notification-panel {
+  width: 344px; border-radius: var(--radius-m);
+  display: flex; gap: var(--space-xs); padding: var(--space-xs) var(--space-s); align-items: flex-start;
+}
+.notification-panel--info    { background: var(--color-notification-background-info);    border-left: 4px solid var(--color-notification-border-info); }
+.notification-panel--success { background: var(--color-notification-background-success); border-left: 4px solid var(--color-notification-border-success); }
+.notification-panel--warning { background: var(--color-notification-background-warning); border-left: 4px solid var(--color-notification-border-warning); }
+.notification-panel--error   { background: var(--color-notification-background-error);   border-left: 4px solid var(--color-notification-border-error); }
+.notification-panel__icon { width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px; }
+.notification-panel__icon svg { width: 24px; height: 24px; }
+.notification-panel--success .notification-panel__icon { color: var(--color-notification-border-success); }
+.notification-panel--warning .notification-panel__icon { color: var(--color-notification-border-warning); }
+.notification-panel--info    .notification-panel__icon { color: var(--color-notification-border-info); }
+.notification-panel__body { flex: 1; min-width: 0; }
+.notification-panel__title { font: var(--mobile-body-strong); color: var(--color-base-text-onlight); margin-bottom: var(--space-4xs); }
+.notification-panel__text  { font: var(--mobile-image-caption); color: var(--color-base-text-onlight); }
+
+/* ── Equipment accordion card ── */
+.equipment-card {
+  width: 344px; background: #fff;
+  border: 1px solid var(--neutral-200); border-radius: var(--radius-m); overflow: hidden;
+}
+.equipment-card + .equipment-card { margin-top: var(--space-2xs); }
+
+.equipment-card__toggle {
+  width: 100%; background: #fff; border: none;
+  padding: var(--space-s); display: flex; align-items: center;
+  gap: var(--space-xs); cursor: pointer; text-align: left;
+}
+.equipment-card__toggle:hover,
+.equipment-card--open .equipment-card__toggle { background: var(--neutral-50); }
+
+.equipment-card__icon {
+  width: 40px; height: 40px; flex-shrink: 0; object-fit: contain;
+}
+.equipment-card__toggle-text { flex: 1; min-width: 0; }
+.equipment-card__name  { font: var(--mobile-body-strong); color: var(--color-base-text-onlight); }
+.equipment-card__model { font: var(--mobile-body); color: var(--color-base-text-onlight); margin-top: 2px; }
+
+.equipment-card__chevron {
+  width: 20px; height: 20px; flex-shrink: 0;
+  color: var(--color-action-text-onlight); transition: transform 0.2s ease;
+  transform: rotate(90deg);
+}
+.equipment-card--open .equipment-card__chevron { transform: rotate(270deg); }
+
+/* Body: info + consumables list — hidden when collapsed */
+.equipment-card__body {
+  padding: var(--space-s);
+  display: flex; flex-direction: column; gap: var(--space-xs); align-items: flex-start;
+  border-top: 1px solid var(--neutral-100);
+}
+.equipment-card__divider { height: 1px; background: var(--neutral-100); margin: var(--space-3xs) 0; }
+
+/* Duolist */
+.duolist { display: flex; flex-direction: column; gap: var(--space-3xs); }
+.duolist__row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-xs); }
+.duolist__key { font: var(--mobile-image-caption); color: var(--color-disabled-text); flex-shrink: 0; }
+.duolist__value { font: var(--mobile-image-caption); color: var(--color-base-text-onlight); text-align: right; }
+.duolist__value--strong { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); }
+.duolist__value--urgent { font: var(--mobile-sublabel); color: var(--cherry-500); }
+
+/* Read-only consumable list (expanded view) */
+.consumable-info-list { display: flex; flex-direction: column; }
+.consumable-info-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: var(--space-xs); padding: var(--space-2xs) 0;
+  border-bottom: 1px solid var(--neutral-100);
+}
+.consumable-info-row:last-child { border-bottom: none; }
+.consumable-info-row__name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); flex: 1; }
+.consumable-info-row__quota { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); white-space: nowrap; }
+
+/* ── Buttons ── */
+.btn-primary {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-2xs);
+  background: var(--color-action-background-onlight); color: #fff;
+  border: none; border-radius: var(--radius-m); padding: var(--space-xs) var(--space-m);
+  font: var(--mobile-label); cursor: pointer; width: auto; transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--color-action-background-onlight-hover); }
+.btn-primary svg { width: 20px; height: 20px; }
+.btn-primary:disabled { background: var(--neutral-200); color: var(--color-disabled-text); cursor: not-allowed; }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: var(--space-3xs);
+  background: none; border: 2px solid var(--color-action-border-onlight);
+  border-radius: var(--radius-m); cursor: pointer;
+  padding: var(--space-2xs) var(--space-s);
+  color: var(--color-action-text-onlight); font: var(--mobile-label); font-size: 1rem;
+  transition: border-color 0.15s, background 0.15s; text-decoration: none;
+  width: auto;
+}
+.btn-outline:hover { border-color: var(--color-action-border-onlight-hover); background: var(--color-action-background-transparent-onlight-hover); }
+.btn-outline svg { width: 18px; height: 18px; }
+
+.btn-borderless {
+  display: inline-flex; align-items: center; gap: var(--space-3xs);
+  background: none; border: none; cursor: pointer;
+  padding: var(--space-2xs) 0; text-decoration: none;
+  color: var(--color-action-text-onlight); border-radius: var(--radius-s);
+}
+.btn-borderless:hover { color: var(--color-action-text-onlight-hover); }
+.btn-borderless__text { font: var(--mobile-label-subdued); text-decoration: underline; text-underline-offset: 2px; }
+.btn-borderless__icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; }
+.btn-borderless__icon svg { width: 20px; height: 20px; }
+
+/* ── Qty control ── */
+.qty-control { display: flex; align-items: center; gap: var(--space-3xs); flex-shrink: 0; }
+.qty-btn {
+  width: 32px; height: 32px; border: 1.5px solid var(--color-action-border-onlight);
+  border-radius: var(--radius-full); background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-action-text-onlight); font-size: 1.25rem; font-weight: 600; transition: background 0.15s;
+}
+.qty-btn:hover { background: var(--color-action-background-transparent-onlight-hover); }
+.qty-btn:disabled { border-color: var(--color-disabled-border); color: var(--color-disabled-text); cursor: not-allowed; }
+.qty-display { font: var(--mobile-label); color: var(--color-base-text-onlight); min-width: 28px; text-align: center; }
+
+/* ── Order flow ── */
+.order-nav {
+  width: 100%; display: flex; align-items: center;
+  padding: 0 var(--space-s); height: 52px; border-bottom: 1px solid var(--neutral-100);
+  background: #fff;
+}
+.order-nav__back {
+  display: flex; align-items: center; gap: var(--space-3xs);
+  background: none; border: none; cursor: pointer;
+  color: var(--color-action-text-onlight); font: var(--mobile-sublabel); padding: var(--space-2xs);
+  border-radius: var(--radius-s);
+}
+.order-nav__back:hover { background: var(--color-action-background-transparent-onlight-hover); }
+.order-nav__back svg { width: 18px; height: 18px; }
+
+/* ── Wizard progress bar ── */
+.wizard-bar { width: 344px; padding: var(--space-m) 0 var(--space-s); }
+.wizard-bar__track { display: flex; align-items: center; height: 24px; }
+.wizard-cap { width: 6px; height: 12px; flex-shrink: 0; }
+.wizard-cap--done { background: var(--blueberry-600); border-radius: 6px 0 0 6px; }
+.wizard-cap--end  { background: var(--blueberry-50);  border-radius: 0 6px 6px 0; }
+.wizard-seg { flex: 1; height: 12px; }
+.wizard-seg--done { background: var(--blueberry-600); }
+.wizard-seg--todo { background: var(--blueberry-50); }
+.wizard-dot {
+  width: 24px; height: 24px; flex-shrink: 0;
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.wizard-dot::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 6px; bottom: 6px;
+}
+.wizard-dot--done::before    { background: var(--blueberry-600); }
+.wizard-dot--todo::before    { background: var(--blueberry-50); }
+.wizard-dot--current::before { background: linear-gradient(to right, var(--blueberry-600) 50%, var(--blueberry-50) 50%); }
+.wizard-pip { position: relative; z-index: 1; border-radius: 50%; }
+.wizard-dot--done .wizard-pip    { width: 8px; height: 8px; background: #fff; }
+.wizard-dot--todo .wizard-pip    { width: 8px; height: 8px; background: #fff; border: 1.5px solid var(--blueberry-200); }
+.wizard-dot--current .wizard-pip { width: 14px; height: 14px; background: #fff; border: 2.5px solid var(--blueberry-600); }
+
+#viewOrder { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.order-step { width: 344px; display: flex; flex-direction: column; gap: var(--space-s); padding-bottom: var(--space-xl); }
+.order-step .btn-primary, .order-step .btn-outline, .order-step .btn-borderless { align-self: flex-start; }
+.order-step__title { font: var(--mobile-h2); color: var(--color-base-text-onlight); }
+.order-step__optional { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); margin-top: calc(-1 * var(--space-3xs)); }
+
+/* Per-machine section in Step 1 */
+.order-machine {
+  background: #fff; border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-m); overflow: hidden;
+}
+.order-machine + .order-machine { margin-top: var(--space-2xs); }
+.order-machine__header {
+  display: flex; align-items: center; gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-s);
+  background: var(--neutral-50); border-bottom: 1px solid var(--neutral-100);
+}
+.order-machine__icon { width: 32px; height: 32px; flex-shrink: 0; object-fit: contain; }
+.order-machine__info { flex: 1; min-width: 0; }
+.order-machine__name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); }
+.order-machine__model { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); }
+.order-machine__body { padding: var(--space-xs) var(--space-s); display: flex; flex-direction: column; gap: 0; }
+
+.order-consumable-row {
+  display: flex; align-items: center; gap: var(--space-xs);
+  padding: var(--space-xs) 0; border-bottom: 1px solid var(--neutral-100);
+}
+.order-consumable-row:last-child { border-bottom: none; }
+.order-consumable-row__info { flex: 1; min-width: 0; }
+.order-consumable-row__name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); }
+.order-consumable-row__quota { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); margin-top: 2px; }
+
+/* Step 2: Delivery */
+.radio-group { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.radio-item {
+  display: flex; align-items: flex-start; gap: var(--space-xs);
+  background: var(--neutral-50); border: 1.5px solid var(--neutral-200);
+  border-radius: var(--radius-m); padding: var(--space-s); cursor: pointer;
+}
+.radio-item--selected { border-color: var(--color-action-border-onlight); background: var(--blueberry-50); }
+.radio-item input[type="radio"] { margin-top: 3px; accent-color: var(--color-action-background-onlight); flex-shrink: 0; width: 18px; height: 18px; }
+.radio-item__label { font: var(--mobile-body); color: var(--color-base-text-onlight); }
+.radio-item__sub { font: var(--mobile-image-caption); color: var(--color-disabled-text); margin-top: 2px; }
+
+.alt-address-form { display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-xs); }
+.form-field label { display: block; font: var(--mobile-sublabel); color: var(--color-base-text-onlight); margin-bottom: var(--space-3xs); }
+.form-field input, .form-field textarea {
+  width: 100%; border: 1.5px solid var(--neutral-300); border-radius: var(--radius-m);
+  padding: var(--space-xs) var(--space-s); font: var(--mobile-body);
+  color: var(--color-base-text-onlight); background: #fff; resize: none;
+}
+.form-field input:focus, .form-field textarea:focus { border-color: var(--color-action-border-onlight); outline: none; }
+
+/* Step 4: Summary */
+.summary-machine {
+  border: 1px solid var(--neutral-200); border-radius: var(--radius-m); overflow: hidden;
+}
+.summary-machine + .summary-machine { margin-top: var(--space-2xs); }
+.summary-machine__header {
+  background: var(--neutral-50); padding: var(--space-xs) var(--space-s);
+  border-bottom: 1px solid var(--neutral-100);
+  font: var(--mobile-sublabel); color: var(--color-base-text-onlight);
+}
+.summary-machine__model { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); }
+.summary-machine__body { padding: var(--space-xs) var(--space-s); display: flex; flex-direction: column; gap: var(--space-3xs); }
+.summary-item { display: flex; justify-content: space-between; gap: var(--space-xs); }
+.summary-item__name { font: var(--mobile-image-caption); color: var(--color-base-text-onlight); }
+.summary-item__qty { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); white-space: nowrap; }
+
+.summary-section {
+  border: 1px solid var(--neutral-200); border-radius: var(--radius-m); overflow: hidden;
+  margin-top: var(--space-2xs);
+}
+.summary-section__header {
+  background: var(--neutral-50); padding: var(--space-xs) var(--space-s);
+  border-bottom: 1px solid var(--neutral-100);
+  font: var(--mobile-sublabel); color: var(--color-base-text-onlight);
+}
+.summary-section__body { padding: var(--space-xs) var(--space-s); font: var(--mobile-body); color: var(--color-base-text-onlight); }
+
+/* ── Order history card ── */
+/* ── Siste bestilling expander card ── */
+.order-card {
+  width: 344px; background: var(--neutral-50);
+  border-top: 1px solid var(--color-base-border-onlight);
+  border-bottom: 1px solid var(--color-base-border-onlight);
+}
+.order-card__toggle {
+  width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  min-height: 64px; padding: var(--space-2xs);
+}
+.order-card__toggle:hover,
+.order-card--open .order-card__toggle { background: var(--neutral-100); }
+.order-card__main { flex: 1; min-width: 0; padding-left: var(--space-2xs); }
+.order-card__status-row {
+  display: flex; align-items: center; gap: var(--space-2xs); min-height: 28px;
+}
+.order-card__dot-clip { width: 24px; height: 24px; flex-shrink: 0; }
+.order-card__dot-clip img { width: 24px; height: 24px; display: block; }
+.order-card__status-text { font: 400 1rem/1.2 'Source Sans 3', sans-serif; color: var(--neutral-800); }
+.order-card__title { font: 600 1.125rem/1.2 'Source Sans Pro', sans-serif; color: #000; padding-top: 12px; margin-bottom: 4px; }
+.order-card__subtitle { font: 400 1rem/1.2 'Source Sans 3', sans-serif; color: var(--neutral-800); }
+.order-card__chevron-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; min-height: 48px; flex-shrink: 0;
+}
+.order-card__chevron-wrap img { width: 16px; height: 10px; transform: scaleY(-1); transition: transform 0.2s ease; }
+.order-card--open .order-card__chevron-wrap img { transform: scaleY(1); }
+.order-card__body { padding: var(--space-xs) var(--space-s); display: flex; flex-direction: column; gap: var(--space-xs); border-top: 1px solid var(--neutral-100); }
+.order-card__machine-section { display: flex; flex-direction: column; gap: var(--space-3xs); }
+.order-card__machine-section + .order-card__machine-section { padding-top: var(--space-xs); border-top: 1px solid var(--neutral-100); }
+.order-card__machine-name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); margin-bottom: var(--space-3xs); }
+.order-card__line { display: flex; justify-content: space-between; }
+.order-card__item { font: var(--mobile-image-caption); color: var(--color-base-text-onlight); }
+.order-card__qty  { font: var(--mobile-image-caption); color: var(--color-disabled-text); }
+
+/* ── Link list ── */
+.link-list { width: 336px; display: flex; flex-direction: column; list-style: none; padding: 0; margin: 0; }
+.link-list__item {
+  background: var(--component-listelements-background-neutral-light);
+  border-top: 1px solid var(--component-listelements-border-neutral-normal);
+  border-bottom: 1px solid var(--component-listelements-border-neutral-normal);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-xs); padding: var(--space-xs) var(--space-2xs);
+  text-decoration: none; margin-top: -1px; transition: background 0.12s;
+}
+.link-list__item:first-child { margin-top: 0; }
+.link-list__item:hover { background: var(--component-listelements-background-neutral-medium); }
+.link-list__item span { font: var(--mobile-label-subdued); color: var(--color-base-text-onlight); flex: 1; }
+.link-list__chevron { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.link-list__chevron svg { width: 14px; height: 14px; }
+
+/* ── Spacing ── */
+.sp-3xs { height: var(--space-3xs); flex-shrink: 0; width: 100%; }
+.sp-2xs { height: var(--space-2xs); flex-shrink: 0; width: 100%; }
+.sp-xs  { height: var(--space-xs);  flex-shrink: 0; width: 100%; }
+.sp-s   { height: var(--space-s);   flex-shrink: 0; width: 100%; }
+.sp-m   { height: var(--space-m);   flex-shrink: 0; width: 100%; }
+.sp-l   { height: var(--space-l);   flex-shrink: 0; width: 100%; }
+.sp-xl  { height: var(--space-xl);  flex-shrink: 0; width: 100%; }
+
+/* ── Footer ── */
+.footer {
+  background: var(--color-base-background-dark-neutral);
+  width: 100%; padding: var(--space-m) var(--space-xs);
+  display: flex; flex-direction: column; gap: var(--space-s);
+}
+.footer__row { display: flex; align-items: center; gap: var(--space-s); }
+.footer__icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #fff; }
+.footer__icon svg { width: 24px; height: 24px; }
+.footer__text-large { font: var(--mobile-label); color: #fff; display: block; }
+.footer__text-small { font: var(--mobile-image-caption); color: var(--neutral-300); display: block; }
+.footer__divider { height: 1px; background: var(--neutral-800); }
+.footer__links { display: flex; flex-direction: column; gap: var(--space-s); }
+.footer__link { font: var(--mobile-label-subdued); font-size: 1.125rem; color: #fff; text-decoration: none; }
+.footer__link:hover { text-decoration: underline; }
+.footer__lang { display: flex; gap: var(--space-m); align-items: center; }
+.footer__lang-sep { width: 1px; height: 24px; background: var(--neutral-700); }
+.footer__brand { font: var(--mobile-h4); color: #fff; }
+/* ── Field tags (required/optional) ── */
+.field-tag {
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: #474745;
+  display: inline;
+}
+.field-tag--required {
+  background: linear-gradient(180deg, rgba(252,242,191,0) 8%, rgb(252,242,191) 8%, rgb(252,242,191) 92%, rgba(252,242,191,0) 92%);
+}
+.field-tag--optional {
+  background: linear-gradient(180deg, rgba(202,231,237,0) 8%, rgb(202,231,237) 8%, rgb(202,231,237) 92%, rgba(202,231,237,0) 92%);
+}
+
+/* ── Consumable status list (expanded equipment card) ── */
+.consumable-status-list { display: flex; flex-direction: column; }
+.consumable-status-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--space-xs); padding: var(--space-2xs) 0;
+  border-bottom: 1px solid var(--neutral-100);
+}
+.consumable-status-row:last-child { border-bottom: none; }
+.consumable-status-row__name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); flex: 1; }
+.consumable-status-badge {
+  font-size: 0.85rem; font-family: 'Source Sans 3', sans-serif;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;
+}
+.consumable-status-badge--ok   { color: var(--kiwi-800); }
+.consumable-status-badge--wait { color: var(--banana-700); }
+.consumable-status-badge--no   { color: var(--color-disabled-text); }
+
+/* ── Delivery select dropdown ── */
+.delivery-select-wrap { position: relative; }
+.delivery-select-wrap::after {
+  content: '';
+  position: absolute; right: var(--space-s); top: 50%; transform: translateY(-50%);
+  width: 0; height: 0;
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-top: 6px solid var(--color-base-text-onlight-subdued);
+  pointer-events: none;
+}
+.delivery-select {
+  width: 100%; border: 1.5px solid var(--neutral-300); border-radius: var(--radius-m);
+  padding: var(--space-xs) var(--space-s); font: var(--mobile-body);
+  color: var(--color-base-text-onlight); background: #fff;
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+}
+.delivery-select:focus { border-color: var(--color-action-border-onlight); outline: none; }
+.delivery-address-form { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+/* ── History view ── */
+#viewHistory { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.history-card {
+  width: 344px; background: #fff;
+  border-top: 1px solid var(--color-base-border-onlight);
+  border-bottom: 1px solid var(--color-base-border-onlight);
+  margin-bottom: -1px;
+}
+.history-card__toggle {
+  width: 100%; background: #fff; border: none;
+  padding: 8px 8px 8px 16px; display: flex; align-items: flex-start;
+  justify-content: space-between; cursor: pointer; text-align: left;
+  min-height: 64px;
+}
+.history-card__toggle:hover,
+.history-card--open .history-card__toggle { background: var(--neutral-50); }
+.history-card__toggle-text { flex: 1; min-width: 0; padding: 4px 0; }
+.history-card__title { font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
+.history-card__date  { font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
+.history-card__chevron-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; min-height: 48px; flex-shrink: 0;
+}
+.history-card__chevron-wrap img { width: 16px; height: 10px; transform: scaleY(-1); transition: transform 0.2s ease; }
+.history-card--open .history-card__chevron-wrap img { transform: scaleY(1); }
+.history-card__body {
+  padding: var(--space-s); display: flex; flex-direction: column; gap: var(--space-xs);
+  border-top: 1px solid var(--neutral-100);
+}
+
+/* ── Phone frame shell (desktop) ── */
+.phone-wrap { display: contents; }
+.phone-shell { display: contents; }
+.phone-chrome-top, .phone-chrome-bottom { display: none; }
+.phone-btn-silent, .phone-btn-vol-up, .phone-btn-vol-down, .phone-btn-power { display: none; }
+
+@media (min-width: 480px) {
+  body {
+    background: radial-gradient(ellipse at 50% 25%, #cdd9e0 0%, #9ab0bb 50%, #6e8d9b 100%);
+    padding: 60px 0 80px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  /* Outer wrapper — provides relative positioning for side buttons */
+  .phone-wrap {
+    display: block;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* Side buttons */
+  .phone-btn-silent,
+  .phone-btn-vol-up,
+  .phone-btn-vol-down,
+  .phone-btn-power {
+    display: block;
+    position: absolute;
+    background: #2c2c2e;
+    border-radius: 3px;
+  }
+  .phone-btn-silent {
+    left: -4px; top: 112px;
+    width: 4px; height: 30px;
+    border-radius: 3px 0 0 3px;
+    box-shadow: -1px 0 3px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  .phone-btn-vol-up {
+    left: -4px; top: 158px;
+    width: 4px; height: 62px;
+    border-radius: 3px 0 0 3px;
+    box-shadow: -1px 0 3px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  .phone-btn-vol-down {
+    left: -4px; top: 232px;
+    width: 4px; height: 62px;
+    border-radius: 3px 0 0 3px;
+    box-shadow: -1px 0 3px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  .phone-btn-power {
+    right: -4px; top: 172px;
+    width: 4px; height: 80px;
+    border-radius: 0 3px 3px 0;
+    box-shadow: 1px 0 3px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+
+  /* iPhone outer frame */
+  .phone-shell {
+    display: flex;
+    flex-direction: column;
+    width: 390px;
+    height: min(90vh, 852px);
+    background: #1d1d1f;
+    border-radius: 54px;
+    padding: 10px 15px;
+    box-shadow:
+      inset 0 0 0 0.5px rgba(255,255,255,0.18),
+      0 0 0 1.5px #000,
+      0 50px 120px rgba(0,0,0,0.75),
+      0 20px 40px rgba(0,0,0,0.45);
+    overflow: hidden;
+  }
+
+  /* Status bar — appears as part of the screen, white background */
+  .phone-chrome-top {
+    display: flex;
+    align-items: center;
+    padding: 14px 22px 8px;
+    flex-shrink: 0;
+    position: relative;
+    height: 54px;
+    background: #fff;
+    border-radius: 44px 44px 0 0;
+  }
+  /* Dynamic Island — black pill inside the screen */
+  .phone-chrome-top__pill {
+    position: absolute;
+    left: 50%; top: 10px;
+    transform: translateX(-50%);
+    width: 120px; height: 34px;
+    background: #000;
+    border-radius: 18px;
+    z-index: 2;
+  }
+  .phone-chrome-top__time {
+    font: 600 15px/1 'Source Sans Pro', sans-serif;
+    color: #000; flex: 1;
+    position: relative; z-index: 1;
+  }
+  .phone-chrome-top__icons {
+    display: flex; align-items: center; gap: 6px;
+    position: relative; z-index: 1;
+  }
+
+  /* App — scrollable content, fills remaining height */
+  .app {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    overflow-y: auto;
+    border-radius: 0;
+    scrollbar-width: none;
+  }
+  .app::-webkit-scrollbar { display: none; }
+
+  /* Home indicator */
+  .phone-chrome-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 0 0 44px 44px;
+  }
+  .phone-chrome-bottom__bar {
+    width: 130px; height: 5px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 4px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="phone-wrap">
+<div class="phone-btn-silent"></div>
+<div class="phone-btn-vol-up"></div>
+<div class="phone-btn-vol-down"></div>
+<div class="phone-btn-power"></div>
+<div class="phone-shell">
+<div class="phone-chrome-top">
+  <span class="phone-chrome-top__time">9:41</span>
+  <div class="phone-chrome-top__pill"></div>
+  <div class="phone-chrome-top__icons">
+    <svg width="18" height="12" viewBox="0 0 18 12" fill="#000"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="4.5" y="4" width="3" height="8" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.3"/></svg>
+    <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"><path d="M0.5 4C3.2 1.5 5.5 0.5 8 0.5s4.8 1 7.5 3.5"/><path d="M2.5 6.5C4.5 4.8 6.2 4 8 4s3.5 0.8 5.5 2.5"/><path d="M5 9C6.2 7.9 7.1 7.5 8 7.5s1.8 0.4 3 1.5"/><circle cx="8" cy="11" r="0.8" fill="#000"/></svg>
+    <svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x="0.5" y="0.5" width="21" height="12" rx="3.5" stroke="#000" stroke-opacity="0.35"/><rect x="2" y="2" width="17" height="9" rx="2" fill="#000"/><path d="M23 4.5v4a2 2 0 0 0 0-4z" fill="#000" opacity="0.35"/></svg>
+  </div>
+</div>
+<div class="app" id="app">
+
+  <!-- ── SHARED HEADER ──────────────────────────────────── -->
+  <header class="header">
+    <div class="header__top">
+      <div class="header__left">
+        <a class="logo" href="#" aria-label="Helsenorge – til forsiden">
+          <img src="https://www.figma.com/api/mcp/asset/4c6ffd62-159f-453c-9c56-69100855162b" alt="Helsenorge">
+        </a>
+        <button class="icon-btn" aria-label="Åpne meny">
+          <div class="icon-btn__icon" aria-hidden="true">
+            <img src="https://www.figma.com/api/mcp/asset/4e402d3f-6614-49ea-bce2-c24b82ffae4b" alt="">
+          </div>
+          <span class="icon-btn__label">Meny</span>
+        </button>
+        <button class="icon-btn" aria-label="Varsler">
+          <div class="icon-btn__icon" aria-hidden="true">
+            <img src="https://www.figma.com/api/mcp/asset/e8b07b65-8e45-4b49-be52-217aa4524b7c" alt="">
+          </div>
+          <span class="icon-btn__label">Varsler</span>
+        </button>
+      </div>
+      <button class="icon-btn" aria-label="Logg ut">
+        <div class="icon-btn__icon" aria-hidden="true">
+          <img src="https://www.figma.com/api/mcp/asset/113cb517-f03d-4dba-bdef-5b6871c79629" alt="">
+        </div>
+        <span class="icon-btn__label">Logg ut</span>
+      </button>
+    </div>
+    <div class="profile-bar" role="button" tabindex="0" aria-label="Brukermeny">
+      <div class="profile-bar__inner">
+        <div class="avatar" aria-hidden="true">To</div>
+        <span class="profile-bar__name">Tora Hansen</span>
+      </div>
+      <div class="chevron" aria-hidden="true">
+        <img src="https://www.figma.com/api/mcp/asset/52d32568-4c24-45d0-a20f-01141e73b672" alt="">
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════════════
+       FRONT PAGE VIEW
+  ════════════════════════════════════════════════════ -->
+  <div id="viewFront">
+
+    <div class="page-title"><h1>Behandlings&shy;hjelpemidler</h1></div>
+    <div class="sp-s"></div>
+    <p class="page-intro">Her kan du bestille forbruksvarer til utstyr som er forskrevet av din behandler.</p>
+    <div class="sp-s"></div>
+
+    <!-- Order confirmation (shown after submit, persists until delivered) -->
+    <div id="orderConfirmation" class="notification-panel notification-panel--success" role="status" style="display:none">
+      <div class="notification-panel__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="notification-panel__body">
+        <p class="notification-panel__title" id="confirmationTitle">Bestilling sendt</p>
+        <p class="notification-panel__text" id="confirmationText"></p>
+      </div>
+    </div>
+
+    <div class="sp-l"></div>
+
+    <!-- ── EQUIPMENT SECTION ── -->
+    <h2 class="section-h2">Ditt utstyr</h2>
+    <div class="sp-s"></div>
+
+    <!-- Card 1: CPAP -->
+    <div class="equipment-card" data-eq-id="cpap">
+      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+        <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
+        <div class="equipment-card__toggle-text">
+          <div class="equipment-card__name">CPAP</div>
+          <div class="equipment-card__model">ResMed AirSense 11</div>
+        </div>
+        <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="equipment-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">ResMed AirSense 11</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">CPAP</span></div>
+          <div class="duolist__row"><span class="duolist__key">Nummer</span><span class="duolist__value">23-456789</span></div>
+          <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">15.03.2022</span></div>
+          <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Oslo universitetssykehus HF</span></div>
+        </div>
+        <div class="equipment-card__divider"></div>
+        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <div class="consumable-status-list">
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Maske – helmaske M</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Maskepute sett (2 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Filter, fin (6 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Slange, standard 2m</span><span class="consumable-status-badge consumable-status-badge--wait">Tilgjengelig om 62 dager</span></div>
+        </div>
+        <button class="btn-outline" onclick="startOrder('cpap')">Bestill</button>
+      </div>
+    </div>
+
+    <!-- Card 2: Insulinpumpe -->
+    <div class="equipment-card" data-eq-id="insulinpumpe">
+      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+        <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
+        <div class="equipment-card__toggle-text">
+          <div class="equipment-card__name">Insulinpumpe</div>
+          <div class="equipment-card__model">Medtronic MiniMed 780G</div>
+        </div>
+        <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="equipment-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Medtronic MiniMed 780G</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Insulinpumpe</span></div>
+          <div class="duolist__row"><span class="duolist__key">Nummer</span><span class="duolist__value">IP-789012</span></div>
+          <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">22.06.2023</span></div>
+          <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Akershus universitetssykehus HF</span></div>
+        </div>
+        <div class="equipment-card__divider"></div>
+        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <div class="consumable-status-list">
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Reservoar, 3 ml (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Infusjonssett, 60cm (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">CGM sensor (4 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+        </div>
+        <button class="btn-outline" onclick="startOrder('insulinpumpe')">Bestill</button>
+      </div>
+    </div>
+
+    <!-- Card 3: Elektrisk rullestol -->
+    <div class="equipment-card" data-eq-id="rullestol">
+      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+        <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
+        <div class="equipment-card__toggle-text">
+          <div class="equipment-card__name">Elektrisk rullestol</div>
+          <div class="equipment-card__model">Permobil M3 Corpus</div>
+        </div>
+        <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="equipment-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Permobil M3 Corpus</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Elektrisk rullestol</span></div>
+          <div class="duolist__row"><span class="duolist__key">Nummer</span><span class="duolist__value">RS-345678</span></div>
+          <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">08.11.2021</span></div>
+          <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Sunnaas sykehus HF</span></div>
+        </div>
+        <div class="equipment-card__divider"></div>
+        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <div class="consumable-status-list">
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Batteri, li-ion (sett)</span><span class="consumable-status-badge consumable-status-badge--no">Ikke tilgjengelig</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Setepute, trykkavlastende</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Joystick-deksel</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+        </div>
+        <button class="btn-outline" onclick="startOrder('rullestol')">Bestill</button>
+      </div>
+    </div>
+
+    <!-- Card 4: Oksygenkonsentrator -->
+    <div class="equipment-card" data-eq-id="oksygen">
+      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+        <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
+        <div class="equipment-card__toggle-text">
+          <div class="equipment-card__name">Oksygenkonsentrator</div>
+          <div class="equipment-card__model">Inogen One G5</div>
+        </div>
+        <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="equipment-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Inogen One G5</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Oksygenkonsentrator</span></div>
+          <div class="duolist__row"><span class="duolist__key">Nummer</span><span class="duolist__value">OK-234567</span></div>
+          <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">30.08.2023</span></div>
+          <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Haukeland universitetssjukehus</span></div>
+        </div>
+        <div class="equipment-card__divider"></div>
+        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <div class="consumable-status-list">
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Filterpatron (2 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Nesekanyle (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Oksygenslange, 2m</span><span class="consumable-status-badge consumable-status-badge--wait">Tilgjengelig om 14 dager</span></div>
+        </div>
+        <button class="btn-outline" onclick="startOrder('oksygen')">Bestill</button>
+      </div>
+    </div>
+
+    <!-- Card 5: Ernæringspumpe -->
+    <div class="equipment-card" data-eq-id="ernaering">
+      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+        <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
+        <div class="equipment-card__toggle-text">
+          <div class="equipment-card__name">Ernæringspumpe</div>
+          <div class="equipment-card__model">Fresenius Kabi Applix</div>
+        </div>
+        <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="equipment-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Fresenius Kabi Applix</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Ernæringspumpe</span></div>
+          <div class="duolist__row"><span class="duolist__key">Nummer</span><span class="duolist__value">EP-901234</span></div>
+          <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">14.01.2022</span></div>
+          <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Oslo universitetssykehus HF</span></div>
+        </div>
+        <div class="equipment-card__divider"></div>
+        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <div class="consumable-status-list">
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Aggregat, enteral (30 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Gastrostomisett (5 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Holdebag, 1 liter (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+        </div>
+        <button class="btn-outline" onclick="startOrder('ernaering')">Bestill</button>
+      </div>
+    </div>
+
+    <!-- Card 6: Høreapparat -->
+    <div class="equipment-card" data-eq-id="horeapparat">
+      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+        <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
+        <div class="equipment-card__toggle-text">
+          <div class="equipment-card__name">Høreapparat</div>
+          <div class="equipment-card__model">Oticon More 1</div>
+        </div>
+        <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="equipment-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Oticon More 1</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Høreapparat</span></div>
+          <div class="duolist__row"><span class="duolist__key">Nummer</span><span class="duolist__value">HA-567890</span></div>
+          <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">03.04.2023</span></div>
+          <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">St. Olavs hospital HF</span></div>
+        </div>
+        <div class="equipment-card__divider"></div>
+        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <div class="consumable-status-list">
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Batteri 312 (60 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Ørepropp, myk (5 par)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row"><span class="consumable-status-row__name">Rensepads (30 stk)</span><span class="consumable-status-badge consumable-status-badge--wait">Tilgjengelig om 30 dager</span></div>
+        </div>
+        <button class="btn-outline" onclick="startOrder('horeapparat')">Bestill</button>
+      </div>
+    </div>
+
+    <!-- Master order button -->
+    <div class="sp-m"></div>
+    <button class="btn-primary" onclick="startOrder(null)">
+      Bestill forbruksvarer
+    </button>
+
+    <div class="sp-xl"></div>
+
+    <!-- ── ORDER HISTORY ── -->
+    <h2 class="section-h2">Siste bestilling</h2>
+    <div class="sp-s"></div>
+
+    <div class="order-card" id="sistebestilling">
+      <button class="order-card__toggle" onclick="toggleOrderCard(this)" aria-expanded="false">
+        <div class="order-card__main">
+          <div class="order-card__status-row">
+            <div class="order-card__dot-clip">
+              <img src="https://www.figma.com/api/mcp/asset/24f9513d-48e0-4ef0-8aa0-1acb3d6ea16a" alt="">
+            </div>
+            <span class="order-card__status-text">Levert</span>
+          </div>
+          <div class="order-card__title">Forbruksmateriell</div>
+          <div class="order-card__subtitle">Bestilt: 12.10.2024</div>
+        </div>
+        <div class="order-card__chevron-wrap">
+          <img src="https://www.figma.com/api/mcp/asset/9e2f7700-8562-46bf-9756-00cee2419704" alt="">
+        </div>
+      </button>
+      <div class="order-card__body" hidden>
+        <div class="order-card__machine-section">
+          <div class="order-card__machine-name">CPAP</div>
+          <div class="order-card__line"><span class="order-card__item">Maske – helmaske M</span><span class="order-card__qty">1 stk</span></div>
+          <div class="order-card__line"><span class="order-card__item">Maskepute sett</span><span class="order-card__qty">2 sett</span></div>
+          <div class="order-card__line"><span class="order-card__item">Filter, fin (6 stk)</span><span class="order-card__qty">1 pk</span></div>
+        </div>
+        <div class="order-card__machine-section">
+          <div class="order-card__machine-name">Insulinpumpe</div>
+          <div class="order-card__line"><span class="order-card__item">Reservoar, 3 ml (10 stk)</span><span class="order-card__qty">2 pk</span></div>
+          <div class="order-card__line"><span class="order-card__item">CGM sensor (4 stk)</span><span class="order-card__qty">4 stk</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp-xs"></div>
+    <button class="btn-borderless" onclick="showHistory()" style="width:344px;">
+      <span class="btn-borderless__text">Bestillingshistorikk</span>
+      <div class="btn-borderless__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </button>
+
+    <div class="sp-xl"></div>
+
+    <div class="sp-xl"></div>
+
+    <div class="sp-xl"></div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer">
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.57 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div><span class="footer__text-large">23 32 70 00</span><span class="footer__text-small">Veiledning helsenorge.no</span></div>
+      </div>
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <span class="footer__text-large">Hjelp og kontakt</span>
+      </div>
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="footer__lang">
+          <a href="#" class="footer__link">English</a>
+          <div class="footer__lang-sep"></div>
+          <a href="#" class="footer__link">Sámi</a>
+        </div>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Om Helsenorge</a>
+        <a href="#" class="footer__link">Personvern og nettsikkerhet</a>
+        <a href="#" class="footer__link">Tilgjengelighetserklæring</a>
+      </div>
+      <div class="footer__divider"></div>
+      <a href="#" class="footer__link">Last ned Helsenorge-appen</a>
+      <div class="footer__divider"></div>
+      <p class="footer__brand">Drives av Norsk helsenett SF</p>
+    </footer>
+
+  </div><!-- /viewFront -->
+
+  <!-- ════════════════════════════════════════════════════
+       ORDER FLOW VIEW
+  ════════════════════════════════════════════════════ -->
+  <div id="viewOrder" hidden>
+
+    <!-- Top nav bar -->
+    <div class="order-nav">
+      <button class="order-nav__back" onclick="goBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Tilbake
+      </button>
+    </div>
+
+    <!-- Wizard progress bar -->
+    <div class="wizard-bar">
+      <div class="wizard-bar__track" id="wizardTrack"></div>
+    </div>
+
+    <!-- ── STEP 1: Velg forbruksmateriell ── -->
+    <div id="step1" class="order-step">
+      <h2 class="order-step__title">Bestill forbruksmateriell</h2>
+      <p><span class="field-tag field-tag--required">Du må velge minst 1 produkt</span></p>
+      <div id="step1Content"></div>
+      <button class="btn-primary" onclick="goToStep(2)">
+        Neste
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- ── STEP 2: Levering ── -->
+    <div id="step2" class="order-step" hidden>
+      <h2 class="order-step__title">Levering</h2>
+      <p><span class="field-tag field-tag--required">Du må velge minst 1 produkt</span></p>
+      <div class="form-field">
+        <label for="deliverySelect">Leveringsmåte</label>
+        <div class="delivery-select-wrap">
+          <select id="deliverySelect" class="delivery-select" onchange="selectDelivery(this.value)">
+            <option value="post" selected>Sendes i posten</option>
+            <option value="hentes">Hentes</option>
+          </select>
+        </div>
+      </div>
+      <div id="deliveryAddressFields" class="delivery-address-form">
+        <div class="form-field">
+          <label for="delivGate">Gate</label>
+          <input type="text" id="delivGate" placeholder="Gatenavn og nummer">
+        </div>
+        <div class="form-field">
+          <label for="delivPostnr">Postnummer</label>
+          <input type="text" id="delivPostnr" placeholder="0000">
+        </div>
+        <div class="form-field">
+          <label for="delivSted">Sted</label>
+          <input type="text" id="delivSted" placeholder="By">
+        </div>
+        <div class="form-field">
+          <label for="delivTelefon">Telefon</label>
+          <input type="tel" id="delivTelefon" placeholder="00 00 00 00">
+        </div>
+      </div>
+      <button class="btn-primary" onclick="goToStep(3)">
+        Neste
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- ── STEP 3: Kommentar ── -->
+    <div id="step3" class="order-step" hidden>
+      <h2 class="order-step__title">Kommentar til bestilling</h2>
+      <div class="form-field">
+        <label for="orderComment">Vil du legge inn en kommentar? <span class="field-tag field-tag--optional">Valgfritt</span></label>
+        <textarea id="orderComment" rows="5" placeholder="Legg til eventuell kommentar til leverandøren…"></textarea>
+      </div>
+      <button class="btn-primary" onclick="goToStep(4)">
+        Neste
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- ── STEP 4: Bekreft bestilling ── -->
+    <div id="step4" class="order-step" hidden>
+      <h2 class="order-step__title">Bekreft bestilling</h2>
+      <div id="step4Content"></div>
+      <button class="btn-primary" onclick="submitOrder()">
+        Bekreft og send bestilling
+      </button>
+    </div>
+
+  </div><!-- /viewOrder -->
+
+  <!-- ════════════════════════════════════════════════════
+       HISTORY VIEW
+  ════════════════════════════════════════════════════ -->
+  <div id="viewHistory" hidden>
+
+    <!-- Top nav bar -->
+    <div class="order-nav">
+      <button class="order-nav__back" onclick="showFront()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Tilbake
+      </button>
+    </div>
+
+    <div class="sp-m"></div>
+    <h2 class="section-h2">Bestillingshistorikk</h2>
+    <div class="sp-s"></div>
+
+    <!-- History accordions -->
+    <div class="history-card">
+      <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
+        <div class="history-card__toggle-text">
+          <div class="history-card__title">Forbruksmateriell</div>
+          <div class="history-card__date">Bestilt: 12.10.2024</div>
+        </div>
+        <div class="history-card__chevron-wrap"><img src="https://www.figma.com/api/mcp/asset/1951f7b4-9a76-457a-8061-7dbd6f7ac7ad" alt=""></div>
+      </button>
+      <div class="history-card__body" hidden>
+        <div class="order-card__machine-section">
+          <div class="order-card__machine-name">CPAP</div>
+          <div class="order-card__line"><span class="order-card__item">Maske – helmaske M</span><span class="order-card__qty">1 stk</span></div>
+          <div class="order-card__line"><span class="order-card__item">Maskepute sett</span><span class="order-card__qty">2 sett</span></div>
+          <div class="order-card__line"><span class="order-card__item">Filter, fin (6 stk)</span><span class="order-card__qty">1 pk</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="history-card">
+      <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
+        <div class="history-card__toggle-text">
+          <div class="history-card__title">Forbruksmateriell</div>
+          <div class="history-card__date">Bestilt: 04.08.2024</div>
+        </div>
+        <div class="history-card__chevron-wrap"><img src="https://www.figma.com/api/mcp/asset/1951f7b4-9a76-457a-8061-7dbd6f7ac7ad" alt=""></div>
+      </button>
+      <div class="history-card__body" hidden>
+        <div class="order-card__machine-section">
+          <div class="order-card__machine-name">Insulinpumpe</div>
+          <div class="order-card__line"><span class="order-card__item">Reservoar, 3 ml (10 stk)</span><span class="order-card__qty">3 pk</span></div>
+          <div class="order-card__line"><span class="order-card__item">Infusjonssett (10 stk)</span><span class="order-card__qty">3 pk</span></div>
+          <div class="order-card__line"><span class="order-card__item">CGM sensor</span><span class="order-card__qty">4 stk</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="history-card">
+      <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
+        <div class="history-card__toggle-text">
+          <div class="history-card__title">Forbruksmateriell</div>
+          <div class="history-card__date">Bestilt: 15.05.2024</div>
+        </div>
+        <div class="history-card__chevron-wrap"><img src="https://www.figma.com/api/mcp/asset/1951f7b4-9a76-457a-8061-7dbd6f7ac7ad" alt=""></div>
+      </button>
+      <div class="history-card__body" hidden>
+        <div class="order-card__machine-section">
+          <div class="order-card__machine-name">Elektrisk rullestol</div>
+          <div class="order-card__line"><span class="order-card__item">Batteri, li-ion (sett)</span><span class="order-card__qty">1 sett</span></div>
+          <div class="order-card__line"><span class="order-card__item">Setepute, trykkavlastende</span><span class="order-card__qty">1 stk</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp-xl"></div>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.57 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div><span class="footer__text-large">23 32 70 00</span><span class="footer__text-small">Veiledning helsenorge.no</span></div>
+      </div>
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <span class="footer__text-large">Hjelp og kontakt</span>
+      </div>
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="footer__lang">
+          <a href="#" class="footer__link">English</a>
+          <div class="footer__lang-sep"></div>
+          <a href="#" class="footer__link">Sámi</a>
+        </div>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Om Helsenorge</a>
+        <a href="#" class="footer__link">Personvern og nettsikkerhet</a>
+        <a href="#" class="footer__link">Tilgjengelighetserklæring</a>
+      </div>
+      <div class="footer__divider"></div>
+      <a href="#" class="footer__link">Last ned Helsenorge-appen</a>
+      <div class="footer__divider"></div>
+      <p class="footer__brand">Drives av Norsk helsenett SF</p>
+    </footer>
+
+  </div><!-- /viewHistory -->
+
+</div><!-- /app -->
+<div class="phone-chrome-bottom"><div class="phone-chrome-bottom__bar"></div></div>
+</div><!-- /phone-shell -->
+</div><!-- /phone-wrap -->
+
+<script>
+// ── Equipment data ─────────────────────────────────────────
+const EQUIPMENT = [
+  { id:'cpap',         name:'CPAP',                  model:'ResMed AirSense 11',       consumables:[
+    { name:'Maske – helmaske M',       quota:'Maks 1 stk / 6 mnd' },
+    { name:'Maskepute sett (2 stk)',   quota:'Maks 2 sett / 3 mnd' },
+    { name:'Filter, fin (6 stk)',      quota:'Maks 1 pakke / mnd' },
+    { name:'Slange, standard 2m',      quota:'Maks 1 stk / 12 mnd' },
+  ]},
+  { id:'insulinpumpe', name:'Insulinpumpe',           model:'Medtronic MiniMed 780G',   consumables:[
+    { name:'Reservoar, 3 ml (10 stk)',       quota:'Maks 3 pakker / mnd' },
+    { name:'Infusjonssett, 60cm (10 stk)',   quota:'Maks 3 pakker / mnd' },
+    { name:'CGM sensor (4 stk)',             quota:'Maks 4 stk / mnd' },
+  ]},
+  { id:'rullestol',    name:'Elektrisk rullestol',    model:'Permobil M3 Corpus',       consumables:[
+    { name:'Batteri, li-ion (sett)',      quota:'Maks 1 sett / 24 mnd' },
+    { name:'Setepute, trykkavlastende',   quota:'Maks 1 stk / 12 mnd' },
+    { name:'Joystick-deksel',             quota:'Maks 2 stk / 12 mnd' },
+  ]},
+  { id:'oksygen',      name:'Oksygenkonsentrator',    model:'Inogen One G5',            consumables:[
+    { name:'Filterpatron (2 stk)',   quota:'Maks 1 pakke / 3 mnd' },
+    { name:'Nesekanyle (10 stk)',    quota:'Maks 1 pakke / mnd' },
+    { name:'Oksygenslange, 2m',      quota:'Maks 2 stk / 6 mnd' },
+  ]},
+  { id:'ernaering',    name:'Ernæringspumpe',         model:'Fresenius Kabi Applix',    consumables:[
+    { name:'Aggregat, enteral (30 stk)',   quota:'Maks 1 pakke / mnd' },
+    { name:'Gastrostomisett (5 stk)',      quota:'Maks 1 pakke / 3 mnd' },
+    { name:'Holdebag, 1 liter (10 stk)',   quota:'Maks 2 pakker / mnd' },
+  ]},
+  { id:'horeapparat',  name:'Høreapparat',            model:'Oticon More 1',            consumables:[
+    { name:'Batteri 312 (60 stk)',    quota:'Maks 2 pakker / 3 mnd' },
+    { name:'Ørepropp, myk (5 par)',   quota:'Maks 2 pakker / 6 mnd' },
+    { name:'Rensepads (30 stk)',      quota:'Maks 1 pakke / 3 mnd' },
+  ]},
+];
+
+// ── Order state ────────────────────────────────────────────
+let orderState = {
+  quantities: {},   // { equipmentId: [qty, qty, ...] }
+  delivery: 'hjemme',
+  altStreet: '',
+  altPostal: '',
+  comment: '',
+  focusedEqId: null,
+};
+
+function resetOrderState() {
+  orderState.quantities = {};
+  orderState.delivery = 'post';
+  orderState.comment = '';
+  orderState.focusedEqId = null;
+  EQUIPMENT.forEach(eq => {
+    orderState.quantities[eq.id] = eq.consumables.map(() => 0);
+  });
+}
+
+// ── Scroll to top (works for both window and phone-frame app container) ──
+function scrollTop() {
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  const app = document.getElementById('app');
+  if (app) { app.scrollTop = 0; }
+}
+
+// ── View switching ─────────────────────────────────────────
+function showFront() {
+  document.getElementById('viewFront').hidden = false;
+  document.getElementById('viewOrder').hidden = true;
+  document.getElementById('viewHistory').hidden = true;
+  requestAnimationFrame(scrollTop);
+}
+
+function showOrder() {
+  document.getElementById('viewFront').hidden = true;
+  document.getElementById('viewOrder').hidden = false;
+  document.getElementById('viewHistory').hidden = true;
+  updateWizardSteps(1);
+  requestAnimationFrame(scrollTop);
+}
+
+function showHistory() {
+  document.getElementById('viewFront').hidden = true;
+  document.getElementById('viewOrder').hidden = true;
+  document.getElementById('viewHistory').hidden = false;
+  scrollTop();
+}
+
+// ── Start order flow ───────────────────────────────────────
+function startOrder(eqId) {
+  resetOrderState();
+  orderState.focusedEqId = eqId;
+  renderStep1(eqId);
+  // Reset delivery
+  document.getElementById('deliverySelect').value = 'post';
+  document.getElementById('deliveryAddressFields').hidden = false;
+  document.getElementById('orderComment').value = '';
+  showOrder();
+  goToStep(1);
+  if (eqId) {
+    setTimeout(() => {
+      const el = document.getElementById('om-' + eqId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+}
+
+// ── Step navigation ────────────────────────────────────────
+let currentStep = 1;
+
+function goToStep(n) {
+  [1,2,3,4].forEach(i => {
+    document.getElementById('step' + i).hidden = (i !== n);
+  });
+  currentStep = n;
+  updateWizardSteps(n);
+  if (n === 4) renderStep4();
+  scrollTop();
+}
+
+function updateWizardSteps(n) {
+  const total = 4;
+  let html = '<div class="wizard-cap wizard-cap--done"></div>';
+  for (let i = 1; i <= total; i++) {
+    const type = i < n ? 'done' : i === n ? 'current' : 'todo';
+    html += `<div class="wizard-dot wizard-dot--${type}"><div class="wizard-pip"></div></div>`;
+    if (i < total) {
+      html += `<div class="wizard-seg wizard-seg--${i < n ? 'done' : 'todo'}"></div>`;
+    }
+  }
+  html += '<div class="wizard-cap wizard-cap--end"></div>';
+  document.getElementById('wizardTrack').innerHTML = html;
+}
+
+function goBack() {
+  if (currentStep === 1) {
+    showFront();
+  } else {
+    goToStep(currentStep - 1);
+  }
+}
+
+// ── Step 1: render machine + qty controls ──────────────────
+function renderStep1(focusId) {
+  const ICON = 'https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04';
+  let html = '';
+  EQUIPMENT.forEach(eq => {
+    html += `
+    <div class="order-machine" id="om-${eq.id}">
+      <div class="order-machine__header">
+        <img class="order-machine__icon" src="${ICON}" alt="">
+        <div class="order-machine__info">
+          <div class="order-machine__name">${eq.name}</div>
+          <div class="order-machine__model">${eq.model}</div>
+        </div>
+      </div>
+      <div class="order-machine__body">
+        ${eq.consumables.map((c, i) => `
+        <div class="order-consumable-row">
+          <div class="order-consumable-row__info">
+            <div class="order-consumable-row__name">${c.name}</div>
+            <div class="order-consumable-row__quota">${c.quota}</div>
+          </div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(this,'${eq.id}',${i},-1)" aria-label="Reduser antall" disabled>−</button>
+            <span class="qty-display" id="qty-${eq.id}-${i}">0</span>
+            <button class="qty-btn" onclick="changeQty(this,'${eq.id}',${i},1)" aria-label="Øk antall">+</button>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('step1Content').innerHTML = html;
+}
+
+// ── Qty controls ───────────────────────────────────────────
+function changeQty(btn, eqId, idx, delta) {
+  let val = (orderState.quantities[eqId][idx] || 0) + delta;
+  if (val < 0) val = 0;
+  orderState.quantities[eqId][idx] = val;
+  document.getElementById('qty-' + eqId + '-' + idx).textContent = val;
+  // update minus button disabled state
+  const row = btn.closest('.qty-control');
+  row.querySelector('[aria-label="Reduser antall"]').disabled = val === 0;
+}
+
+// ── Step 2: delivery selection ─────────────────────────────
+function selectDelivery(value) {
+  orderState.delivery = value;
+  document.getElementById('deliveryAddressFields').hidden = (value === 'hentes');
+}
+
+// ── History card toggle ─────────────────────────────────────
+function toggleOrderCard(btn) {
+  const card = btn.closest('.order-card');
+  const body = card.querySelector('.order-card__body');
+  const isOpen = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!isOpen));
+  card.classList.toggle('order-card--open', !isOpen);
+  body.hidden = isOpen;
+}
+
+function toggleHistoryCard(btn) {
+  const card = btn.closest('.history-card');
+  const body = card.querySelector('.history-card__body');
+  const isOpen = card.classList.contains('history-card--open');
+  card.classList.toggle('history-card--open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+  body.hidden = isOpen;
+}
+
+
+// ── Step 4: render summary ─────────────────────────────────
+function renderStep4() {
+  // Collect delivery address
+  let addr;
+  if (orderState.delivery === 'hentes') {
+    addr = 'Hentes';
+  } else {
+    const gate   = document.getElementById('delivGate').value.trim();
+    const postnr = document.getElementById('delivPostnr').value.trim();
+    const sted   = document.getElementById('delivSted').value.trim();
+    addr = [gate, postnr, sted].filter(Boolean).join(', ') || 'Adresse ikke utfylt';
+  }
+  const comment = document.getElementById('orderComment').value.trim();
+
+  let itemsHtml = '';
+  let hasItems = false;
+  EQUIPMENT.forEach(eq => {
+    const items = eq.consumables.filter((_, i) => (orderState.quantities[eq.id][i] || 0) > 0);
+    if (!items.length) return;
+    hasItems = true;
+    itemsHtml += `
+    <div class="summary-machine">
+      <div class="summary-machine__header">
+        ${eq.name}<br><span class="summary-machine__model">${eq.model}</span>
+      </div>
+      <div class="summary-machine__body">
+        ${items.map(c => {
+          const i = eq.consumables.indexOf(c);
+          const qty = orderState.quantities[eq.id][i];
+          return `<div class="summary-item"><span class="summary-item__name">${c.name}</span><span class="summary-item__qty">${qty} stk</span></div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  });
+
+  if (!hasItems) {
+    itemsHtml = `<div class="notification-panel notification-panel--warning" style="width:100%">
+      <div class="notification-panel__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div class="notification-panel__body"><p class="notification-panel__title">Ingen varer valgt</p><p class="notification-panel__text">Gå tilbake og velg forbruksvarer å bestille.</p></div>
+    </div>`;
+  }
+
+  const deliveryHtml = `<div class="summary-section"><div class="summary-section__header">Levering</div><div class="summary-section__body">${addr}</div></div>`;
+  const commentHtml = comment ? `<div class="summary-section"><div class="summary-section__header">Kommentar</div><div class="summary-section__body">${comment}</div></div>` : '';
+  const editHtml = `<button class="btn-borderless" onclick="goToStep(1)"><span class="btn-borderless__text">Endre bestilling</span><div class="btn-borderless__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></button>`;
+
+  document.getElementById('step4Content').innerHTML = itemsHtml + deliveryHtml + commentHtml + editHtml;
+}
+
+// ── Submit order ───────────────────────────────────────────
+function submitOrder() {
+  // Build order summary text
+  const lines = [];
+  EQUIPMENT.forEach(eq => {
+    eq.consumables.forEach((c, i) => {
+      const qty = orderState.quantities[eq.id][i] || 0;
+      if (qty > 0) lines.push(`${eq.name}: ${c.name} × ${qty}`);
+    });
+  });
+
+  const orderId = '#' + new Date().getFullYear() + '-' + (Math.floor(Math.random() * 9000) + 1000);
+  const orderData = { orderId, lines, ts: Date.now() };
+  try { localStorage.setItem('bhm_pending_order', JSON.stringify(orderData)); } catch(e) {}
+
+  showConfirmation(orderId, lines);
+  showFront();
+}
+
+function showConfirmation(orderId, lines) {
+  const panel = document.getElementById('orderConfirmation');
+  document.getElementById('confirmationTitle').textContent = 'Bestilling sendt – Ordre ' + orderId;
+  document.getElementById('confirmationText').textContent =
+    'Bestillingen er mottatt og behandles. Forventet levering 3–5 virkedager. ' +
+    'Denne meldingen forsvinner når ordren er levert.';
+  panel.style.display = 'flex';
+}
+
+// ── Accordion toggle ───────────────────────────────────────
+function toggleCard(btn) {
+  const card = btn.closest('.equipment-card');
+  const body = card.querySelector('.equipment-card__body');
+  const isOpen = card.classList.contains('equipment-card--open');
+  card.classList.toggle('equipment-card--open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+  body.hidden = isOpen;
+}
+
+// ── On load: restore pending order ────────────────────────
+(function init() {
+  try {
+    const saved = localStorage.getItem('bhm_pending_order');
+    if (saved) {
+      const data = JSON.parse(saved);
+      showConfirmation(data.orderId, data.lines);
+    }
+  } catch(e) {}
+
+  // URL param ?page= for Figma capture of specific states
+  const page = new URLSearchParams(window.location.search).get('page');
+  if (page === 'expanded') {
+    const card = document.querySelector('.equipment-card');
+    const btn  = card.querySelector('.equipment-card__toggle');
+    toggleCard(btn);
+  } else if (page === 'step1' || page === 'step2' || page === 'step3' || page === 'step4') {
+    resetOrderState();
+    // Pre-fill some quantities for step 1+ so summary looks realistic
+    orderState.quantities['cpap'][0] = 1;
+    orderState.quantities['cpap'][2] = 1;
+    orderState.quantities['insulinpumpe'][0] = 2;
+    orderState.quantities['insulinpumpe'][2] = 4;
+    renderStep1(null);
+    // Sync qty displays
+    EQUIPMENT.forEach(eq => {
+      eq.consumables.forEach((_, i) => {
+        const el = document.getElementById('qty-' + eq.id + '-' + i);
+        if (el) {
+          el.textContent = orderState.quantities[eq.id][i];
+          const row = el.closest('.qty-control');
+          if (row) row.querySelector('[aria-label="Reduser antall"]').disabled = orderState.quantities[eq.id][i] === 0;
+        }
+      });
+    });
+    showOrder();
+    const n = parseInt(page.replace('step',''));
+    goToStep(n);
+  }
+})();
+</script>
+</body>
+</html>
