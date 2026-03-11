@@ -145,7 +145,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   width: 344px; border-radius: var(--radius-m);
   display: flex; gap: var(--space-xs); padding: var(--space-xs) var(--space-s); align-items: flex-start;
 }
-.notification-panel--info    { background: var(--color-notification-background-info);    border-left: 4px solid var(--color-notification-border-info); }
+.notification-panel--info    { background: var(--color-notification-background-info); border: 2px solid var(--color-notification-border-info); border-radius: var(--radius-s); box-shadow: 4px 4px 6px 0px rgba(0,0,0,0.15); gap: 4px; padding: 8px 8px 12px 8px; }
 .notification-panel--success { background: var(--color-notification-background-success); border-left: 4px solid var(--color-notification-border-success); }
 .notification-panel--warning { background: var(--color-notification-background-warning); border-left: 4px solid var(--color-notification-border-warning); }
 .notification-panel--error   { background: var(--color-notification-background-error);   border-left: 4px solid var(--color-notification-border-error); }
@@ -166,19 +166,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .equipment-card + .equipment-card { margin-top: var(--space-2xs); }
 
 .equipment-card__toggle {
-  width: 100%; background: #fff; border: none;
+  width: 100%; background: var(--neutral-50); border: none;
+  border-bottom: 1px solid #fff;
   padding: var(--space-s); display: flex; align-items: center;
   gap: var(--space-xs); cursor: pointer; text-align: left;
 }
 .equipment-card__toggle:hover,
-.equipment-card--open .equipment-card__toggle { background: var(--neutral-50); }
+.equipment-card--open .equipment-card__toggle { background: var(--neutral-100); }
 
 .equipment-card__icon {
   width: 40px; height: 40px; flex-shrink: 0; object-fit: contain;
 }
 .equipment-card__toggle-text { flex: 1; min-width: 0; }
 .equipment-card__name  { font: var(--mobile-body-strong); color: var(--color-base-text-onlight); }
-.equipment-card__model { font: var(--mobile-body); color: var(--color-base-text-onlight); margin-top: 2px; }
+.equipment-card__model { font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight-subdued); margin-top: 2px; }
 
 .equipment-card__chevron {
   width: 20px; height: 20px; flex-shrink: 0;
@@ -189,17 +190,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Body: info + consumables list — hidden when collapsed */
 .equipment-card__body {
-  padding: var(--space-s);
-  display: flex; flex-direction: column; gap: var(--space-xs); align-items: flex-start;
-  border-top: 1px solid var(--neutral-100);
+  padding: 12px 16px 32px 14px;
+  display: flex; flex-direction: column; gap: var(--space-s); align-items: flex-start;
 }
-.equipment-card__divider { height: 1px; background: var(--neutral-100); margin: var(--space-3xs) 0; }
+.equipment-card__body .btn-outline { margin-top: 1rem; }
+.equipment-card__divider { border: none; height: 1px; background: var(--neutral-200); margin: var(--space-xs) 0; width: 100%; }
 
 /* Duolist */
-.duolist { display: flex; flex-direction: column; gap: var(--space-3xs); }
-.duolist__row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-xs); }
-.duolist__key { font: var(--mobile-image-caption); color: var(--color-disabled-text); flex-shrink: 0; }
-.duolist__value { font: var(--mobile-image-caption); color: var(--color-base-text-onlight); text-align: right; }
+.duolist { display: flex; flex-direction: column; gap: var(--space-xs); }
+.duolist__row { display: flex; flex-direction: column; gap: 2px; }
+.duolist__key { font: var(--mobile-body-strong); color: var(--color-base-text-onlight); }
+.duolist__value { font: var(--mobile-body); color: var(--color-base-text-onlight); }
 .duolist__value--strong { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); }
 .duolist__value--urgent { font: var(--mobile-sublabel); color: var(--cherry-500); }
 
@@ -352,6 +353,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .form-field input:focus, .form-field textarea:focus { border-color: var(--color-action-border-onlight); outline: none; }
 
+.form-field__error-msg { display: none; font: var(--mobile-label); color: #A31F0E; margin-bottom: var(--space-2xs); }
+.form-field--error { border-left: 4px solid #A31F0E; background: var(--color-notification-background-error); border-top: 1px solid #D56147; border-right: 1px solid #D56147; border-bottom: 1px solid #D56147; padding: 16px 12px 24px 8px; }
+.form-field--error .form-field__error-msg { display: block; }
+.form-field--error input { border: 2px solid var(--color-base-border-onlight); }
+
 /* Step 4: Summary */
 .summary-machine {
   border: 1px solid var(--neutral-200); border-radius: var(--radius-m); overflow: hidden;
@@ -473,18 +479,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 /* ── Consumable status list (expanded equipment card) ── */
-.consumable-status-list { display: flex; flex-direction: column; }
-.consumable-status-row {
-  display: flex; justify-content: space-between; align-items: center;
-  gap: var(--space-xs); padding: var(--space-2xs) 0;
-  border-bottom: 1px solid var(--neutral-100);
-}
-.consumable-status-row:last-child { border-bottom: none; }
-.consumable-status-row__name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); flex: 1; }
+.consumable-status-list { display: flex; flex-direction: column; gap: var(--space-s); }
+.consumable-status-row { display: flex; flex-direction: column; gap: 2px; }
+.consumable-status-row__name { font: var(--mobile-body-strong); color: var(--color-base-text-onlight); }
+.consumable-status-row__desc { font: var(--mobile-body); color: var(--color-base-text-onlight-subdued); }
 .consumable-status-badge {
-  font-size: 0.85rem; font-family: 'Source Sans 3', sans-serif;
-  white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;
+  font: var(--mobile-body); display: inline-flex; align-items: center; gap: 6px; margin-top: 2px;
 }
+.consumable-status-badge svg { width: 16px; height: 16px; flex-shrink: 0; }
 .consumable-status-badge--ok   { color: var(--kiwi-800); }
 .consumable-status-badge--wait { color: var(--banana-700); }
 .consumable-status-badge--no   { color: var(--color-disabled-text); }
@@ -739,13 +741,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <div class="sp-s"></div>
 
     <!-- Order confirmation (shown after submit, persists until delivered) -->
-    <div id="orderConfirmation" class="notification-panel notification-panel--success" role="status" style="display:none">
-      <div class="notification-panel__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <div class="notification-panel__body">
-        <p class="notification-panel__title" id="confirmationTitle">Bestilling sendt</p>
-        <p class="notification-panel__text" id="confirmationText"></p>
+    <div id="orderConfirmation" class="notification-panel notification-panel--info" role="status" style="display:none">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex-shrink:0;margin-top:3px;"><circle cx="11" cy="11" r="11" fill="#08667C"/><circle cx="11" cy="6.5" r="1.5" fill="white"/><rect x="9.5" y="10" width="3" height="7" rx="1.5" fill="white"/></svg>
+      <div class="notification-panel__body" style="padding: 2px 8px 0 0;">
+        <p id="confirmationHeading" style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);"></p>
+        <p id="confirmationText" style="font: var(--mobile-image-caption); color: var(--color-base-text-onlight); margin-top: 4px;"></p>
       </div>
     </div>
 
@@ -773,13 +773,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">15.03.2022</span></div>
           <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Oslo universitetssykehus HF</span></div>
         </div>
-        <div class="equipment-card__divider"></div>
-        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <hr class="equipment-card__divider">
+        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</h3>
         <div class="consumable-status-list">
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Maske – helmaske M</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Maskepute sett (2 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Filter, fin (6 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Slange, standard 2m</span><span class="consumable-status-badge consumable-status-badge--wait">Tilgjengelig om 62 dager</span></div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Maske – helmaske M</span>
+            <span class="consumable-status-row__desc">Maks 1 stk / 6 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Maskepute sett (2 stk)</span>
+            <span class="consumable-status-row__desc">Maks 2 sett / 3 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Filter, fin (6 stk)</span>
+            <span class="consumable-status-row__desc">Maks 1 pakke / mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Slange, standard 2m</span>
+            <span class="consumable-status-row__desc">Maks 1 stk / 12 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>Tilgjengelig om 62 dager</span>
+          </div>
         </div>
         <button class="btn-outline" onclick="startOrder('cpap')">Bestill</button>
       </div>
@@ -803,12 +819,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">22.06.2023</span></div>
           <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Akershus universitetssykehus HF</span></div>
         </div>
-        <div class="equipment-card__divider"></div>
-        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <hr class="equipment-card__divider">
+        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</h3>
         <div class="consumable-status-list">
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Reservoar, 3 ml (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Infusjonssett, 60cm (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">CGM sensor (4 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Reservoar, 3 ml (10 stk)</span>
+            <span class="consumable-status-row__desc">Maks 3 pakker / mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Infusjonssett, 60cm (10 stk)</span>
+            <span class="consumable-status-row__desc">Maks 3 pakker / mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">CGM sensor (4 stk)</span>
+            <span class="consumable-status-row__desc">Maks 4 stk / mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
         </div>
         <button class="btn-outline" onclick="startOrder('insulinpumpe')">Bestill</button>
       </div>
@@ -832,12 +860,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">08.11.2021</span></div>
           <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Sunnaas sykehus HF</span></div>
         </div>
-        <div class="equipment-card__divider"></div>
-        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <hr class="equipment-card__divider">
+        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</h3>
         <div class="consumable-status-list">
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Batteri, li-ion (sett)</span><span class="consumable-status-badge consumable-status-badge--no">Ikke tilgjengelig</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Setepute, trykkavlastende</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Joystick-deksel</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Batteri, li-ion (sett)</span>
+            <span class="consumable-status-row__desc">Maks 1 sett / 24 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--no"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#62625F"/><line x1="5" y1="8" x2="11" y2="8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>Ikke tilgjengelig</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Setepute, trykkavlastende</span>
+            <span class="consumable-status-row__desc">Maks 1 stk / 12 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Joystick-deksel</span>
+            <span class="consumable-status-row__desc">Maks 2 stk / 12 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
         </div>
         <button class="btn-outline" onclick="startOrder('rullestol')">Bestill</button>
       </div>
@@ -861,12 +901,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">30.08.2023</span></div>
           <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Haukeland universitetssjukehus</span></div>
         </div>
-        <div class="equipment-card__divider"></div>
-        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <hr class="equipment-card__divider">
+        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</h3>
         <div class="consumable-status-list">
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Filterpatron (2 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Nesekanyle (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Oksygenslange, 2m</span><span class="consumable-status-badge consumable-status-badge--wait">Tilgjengelig om 14 dager</span></div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Filterpatron (2 stk)</span>
+            <span class="consumable-status-row__desc">Maks 1 pakke / 3 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Nesekanyle (10 stk)</span>
+            <span class="consumable-status-row__desc">Maks 1 pakke / mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Oksygenslange, 2m</span>
+            <span class="consumable-status-row__desc">Maks 2 stk / 6 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>Tilgjengelig om 14 dager</span>
+          </div>
         </div>
         <button class="btn-outline" onclick="startOrder('oksygen')">Bestill</button>
       </div>
@@ -890,12 +942,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">14.01.2022</span></div>
           <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">Oslo universitetssykehus HF</span></div>
         </div>
-        <div class="equipment-card__divider"></div>
-        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <hr class="equipment-card__divider">
+        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</h3>
         <div class="consumable-status-list">
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Aggregat, enteral (30 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Gastrostomisett (5 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Holdebag, 1 liter (10 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Aggregat, enteral (30 stk)</span>
+            <span class="consumable-status-row__desc">Maks 1 pakke / mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Gastrostomisett (5 stk)</span>
+            <span class="consumable-status-row__desc">Maks 1 pakke / 3 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Holdebag, 1 liter (10 stk)</span>
+            <span class="consumable-status-row__desc">Maks 2 pakker / mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
         </div>
         <button class="btn-outline" onclick="startOrder('ernaering')">Bestill</button>
       </div>
@@ -919,12 +983,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <div class="duolist__row"><span class="duolist__key">Utlevert</span><span class="duolist__value">03.04.2023</span></div>
           <div class="duolist__row"><span class="duolist__key">Eier</span><span class="duolist__value">St. Olavs hospital HF</span></div>
         </div>
-        <div class="equipment-card__divider"></div>
-        <p style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</p>
+        <hr class="equipment-card__divider">
+        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell du kan bestille</h3>
         <div class="consumable-status-list">
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Batteri 312 (60 stk)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Ørepropp, myk (5 par)</span><span class="consumable-status-badge consumable-status-badge--ok">✓ Kan bestilles</span></div>
-          <div class="consumable-status-row"><span class="consumable-status-row__name">Rensepads (30 stk)</span><span class="consumable-status-badge consumable-status-badge--wait">Tilgjengelig om 30 dager</span></div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Batteri 312 (60 stk)</span>
+            <span class="consumable-status-row__desc">Maks 2 pakker / 3 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Ørepropp, myk (5 par)</span>
+            <span class="consumable-status-row__desc">Maks 2 pakker / 6 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
+          </div>
+          <div class="consumable-status-row">
+            <span class="consumable-status-row__name">Rensepads (30 stk)</span>
+            <span class="consumable-status-row__desc">Maks 1 pakke / 3 mnd</span>
+            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>Tilgjengelig om 30 dager</span>
+          </div>
         </div>
         <button class="btn-outline" onclick="startOrder('horeapparat')">Bestill</button>
       </div>
@@ -1057,7 +1133,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <!-- ── STEP 2: Levering ── -->
     <div id="step2" class="order-step" hidden>
       <h2 class="order-step__title">Levering</h2>
-      <p><span class="field-tag field-tag--required">Du må velge minst 1 produkt</span></p>
+      <p><span class="field-tag field-tag--required">Alle felt må fylles ut</span></p>
       <div class="form-field">
         <label for="deliverySelect">Leveringsmåte</label>
         <div class="delivery-select-wrap">
@@ -1069,20 +1145,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       </div>
       <div id="deliveryAddressFields" class="delivery-address-form">
         <div class="form-field">
+          <p class="form-field__error-msg">Du må legge inn gate</p>
           <label for="delivGate">Gate</label>
-          <input type="text" id="delivGate" placeholder="Gatenavn og nummer">
+          <input type="text" id="delivGate" placeholder="Gatenavn og nummer" oninput="clearFieldError(this)">
         </div>
         <div class="form-field">
+          <p class="form-field__error-msg">Du må legge inn postnummer</p>
           <label for="delivPostnr">Postnummer</label>
-          <input type="text" id="delivPostnr" placeholder="0000">
+          <input type="text" id="delivPostnr" placeholder="0000" oninput="clearFieldError(this)">
         </div>
         <div class="form-field">
+          <p class="form-field__error-msg">Du må legge inn sted</p>
           <label for="delivSted">Sted</label>
-          <input type="text" id="delivSted" placeholder="By">
+          <input type="text" id="delivSted" placeholder="By" oninput="clearFieldError(this)">
         </div>
         <div class="form-field">
+          <p class="form-field__error-msg">Du må legge inn telefonnummer</p>
           <label for="delivTelefon">Telefon</label>
-          <input type="tel" id="delivTelefon" placeholder="00 00 00 00">
+          <input type="tel" id="delivTelefon" placeholder="00 00 00 00" oninput="clearFieldError(this)">
         </div>
       </div>
       <button class="btn-primary" onclick="goToStep(3)">
@@ -1341,6 +1421,7 @@ function startOrder(eqId) {
 let currentStep = 1;
 
 function goToStep(n) {
+  if (n === 3 && currentStep === 2 && !validateStep2()) return;
   [1,2,3,4].forEach(i => {
     document.getElementById('step' + i).hidden = (i !== n);
   });
@@ -1416,10 +1497,41 @@ function changeQty(btn, eqId, idx, delta) {
   row.querySelector('[aria-label="Reduser antall"]').disabled = val === 0;
 }
 
-// ── Step 2: delivery selection ─────────────────────────────
+// ── Step 2: delivery selection + validation ─────────────────
 function selectDelivery(value) {
   orderState.delivery = value;
   document.getElementById('deliveryAddressFields').hidden = (value === 'hentes');
+  if (value === 'hentes') clearAllFieldErrors();
+}
+
+function clearFieldError(input) {
+  input.closest('.form-field').classList.remove('form-field--error');
+}
+
+function clearAllFieldErrors() {
+  document.querySelectorAll('.form-field--error').forEach(f => f.classList.remove('form-field--error'));
+}
+
+function validateStep2() {
+  if (document.getElementById('deliverySelect').value === 'hentes') return true;
+  const fields = [
+    { id: 'delivGate' },
+    { id: 'delivPostnr' },
+    { id: 'delivSted' },
+    { id: 'delivTelefon' },
+  ];
+  let valid = true;
+  fields.forEach(({ id }) => {
+    const input = document.getElementById(id);
+    const field = input.closest('.form-field');
+    if (!input.value.trim()) {
+      field.classList.add('form-field--error');
+      valid = false;
+    } else {
+      field.classList.remove('form-field--error');
+    }
+  });
+  return valid;
 }
 
 // ── History card toggle ─────────────────────────────────────
@@ -1492,30 +1604,65 @@ function renderStep4() {
 }
 
 // ── Submit order ───────────────────────────────────────────
+const orderedDates = {}; // key: "eqId-idx", value: Date next orderable
+
+function parseQuotaMonths(quota) {
+  const match = quota.match(/\/\s*(\d+)?\s*mnd/);
+  if (!match) return 1;
+  return match[1] ? parseInt(match[1]) : 1;
+}
+
+function formatNorwegianDate(date) {
+  return String(date.getDate()).padStart(2,'0') + '.' +
+         String(date.getMonth()+1).padStart(2,'0') + '.' +
+         date.getFullYear();
+}
+
+function refreshEquipmentCardStatuses() {
+  const WAIT_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>`;
+  EQUIPMENT.forEach(eq => {
+    const card = document.querySelector(`.equipment-card[data-eq-id="${eq.id}"]`);
+    if (!card) return;
+    const rows = card.querySelectorAll('.consumable-status-row');
+    eq.consumables.forEach((c, i) => {
+      const key = `${eq.id}-${i}`;
+      if (!orderedDates[key] || !rows[i]) return;
+      const badge = rows[i].querySelector('.consumable-status-badge');
+      if (!badge) return;
+      const dateStr = formatNorwegianDate(orderedDates[key]);
+      badge.className = 'consumable-status-badge consumable-status-badge--wait';
+      badge.innerHTML = WAIT_SVG + `kan ikke bestilles før ${dateStr}`;
+    });
+  });
+}
+
 function submitOrder() {
-  // Build order summary text
   const lines = [];
+  const today = new Date();
   EQUIPMENT.forEach(eq => {
     eq.consumables.forEach((c, i) => {
       const qty = orderState.quantities[eq.id][i] || 0;
-      if (qty > 0) lines.push(`${eq.name}: ${c.name} × ${qty}`);
+      if (qty > 0) {
+        lines.push(`${eq.name}: ${c.name} × ${qty}`);
+        const next = new Date(today);
+        next.setMonth(next.getMonth() + parseQuotaMonths(c.quota));
+        orderedDates[`${eq.id}-${i}`] = next;
+      }
     });
   });
 
   const orderId = '#' + new Date().getFullYear() + '-' + (Math.floor(Math.random() * 9000) + 1000);
-  const orderData = { orderId, lines, ts: Date.now() };
-  try { localStorage.setItem('bhm_pending_order', JSON.stringify(orderData)); } catch(e) {}
 
   showConfirmation(orderId, lines);
+  refreshEquipmentCardStatuses();
   showFront();
 }
 
 function showConfirmation(orderId, lines) {
   const panel = document.getElementById('orderConfirmation');
-  document.getElementById('confirmationTitle').textContent = 'Bestilling sendt – Ordre ' + orderId;
+  document.getElementById('confirmationHeading').innerHTML = `Bestilling sendt. &nbsp; Ordre ${orderId}`;
   document.getElementById('confirmationText').textContent =
-    'Bestillingen er mottatt og behandles. Forventet levering 3–5 virkedager. ' +
-    'Denne meldingen forsvinner når ordren er levert.';
+    'Bestillingen er mottatt og behandles. Forventet levering 3–5 virkedager. Denne meldingen forsvinner når ordren er levert.';
   panel.style.display = 'flex';
 }
 
@@ -1529,16 +1676,8 @@ function toggleCard(btn) {
   body.hidden = isOpen;
 }
 
-// ── On load: restore pending order ────────────────────────
+// ── On load ────────────────────────────────────────────────
 (function init() {
-  try {
-    const saved = localStorage.getItem('bhm_pending_order');
-    if (saved) {
-      const data = JSON.parse(saved);
-      showConfirmation(data.orderId, data.lines);
-    }
-  } catch(e) {}
-
   // URL param ?page= for Figma capture of specific states
   const page = new URLSearchParams(window.location.search).get('page');
   if (page === 'expanded') {
