@@ -1725,16 +1725,23 @@ function submitOrder() {
 
   const orderId = '#' + new Date().getFullYear() + '-' + (Math.floor(Math.random() * 9000) + 1000);
 
-  showConfirmation(orderId, lines);
+  showConfirmation(orderId, orderState.delivery);
   refreshEquipmentCardStatuses();
   showFront();
 }
 
-function showConfirmation(orderId, lines) {
+function showConfirmation(orderId, delivery) {
   const panel = document.getElementById('orderConfirmation');
   document.getElementById('confirmationHeading').innerHTML = `Bestilling sendt. &nbsp; Ordre ${orderId}`;
-  document.getElementById('confirmationText').textContent =
-    'Bestillingen er mottatt og behandles. Forventet levering 3–5 virkedager. Denne meldingen forsvinner når ordren er levert.';
+  let msg;
+  if (delivery === 'hentes') {
+    const pickup = new Date();
+    pickup.setDate(pickup.getDate() + 2);
+    msg = `Bestillingen er mottatt og kan hentes på sentralen etter ${formatNorwegianDate(pickup)}. Åpningstid 08:00–17:00.`;
+  } else {
+    msg = 'Bestillingen er mottatt og behandles. Forventet levering 3–5 virkedager. Denne meldingen forsvinner når ordren er levert.';
+  }
+  document.getElementById('confirmationText').textContent = msg;
   panel.style.display = 'flex';
 }
 
