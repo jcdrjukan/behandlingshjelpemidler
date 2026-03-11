@@ -767,7 +767,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
     <!-- Card 1: CPAP -->
     <div class="equipment-card" data-eq-id="cpap">
-      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+      <button class="equipment-card__toggle" onclick="showMachinePage('cpap')">
         <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
         <div class="equipment-card__toggle-text">
           <div class="equipment-card__name">CPAP</div>
@@ -775,46 +775,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         </div>
         <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-      <div class="equipment-card__body" hidden>
-        <div class="duolist">
-          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Airsense 11 Autoset</span></div>
-          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Positivt luftveistrykkapparat, kontinuerlig, auto</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">23244159084</span></div>
-        </div>
-        <hr class="equipment-card__divider">
-        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell</h3>
-        <div class="consumable-status-list">
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Slange</span>
-            <span class="consumable-status-row__desc">CPAP m/varmetråd ClimateLine 11 CPAP Airsense 11</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 15.01.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>kan ikke bestilles før 15.04.2026</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Filter</span>
-            <span class="consumable-status-row__desc">inntak pasient Resmed Air 11 standard [Frp 2 stk/pk]</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 10.09.2025</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Maske</span>
-            <span class="consumable-status-row__desc">NIV helmaske AirFit F30i str. S</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Vannkammer</span>
-            <span class="consumable-status-row__desc">fuktekammer CPAP HumidAir 11</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 20.11.2025</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-        </div>
-        <button class="btn-outline" onclick="startOrder('cpap')">Bestill</button>
-      </div>
     </div>
 
     <!-- Card 2: Bærbar oksygenkonsentrator -->
     <div class="equipment-card" data-eq-id="oksygen-baerbar">
-      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+      <button class="equipment-card__toggle" onclick="showMachinePage('oksygen-baerbar')">
         <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
         <div class="equipment-card__toggle-text">
           <div class="equipment-card__name">Bærbar oksygenkonsentrator</div>
@@ -822,34 +787,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         </div>
         <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-      <div class="equipment-card__body" hidden>
-        <div class="duolist">
-          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Inogen Rove 6</span></div>
-          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Oksygenterapi, oksygenkonsentrator, transportabel</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">24401092-EU</span></div>
-        </div>
-        <hr class="equipment-card__divider">
-        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell</h3>
-        <div class="consumable-status-list">
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Kateter</span>
-            <span class="consumable-status-row__desc">oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 05.02.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>kan ikke bestilles før 05.05.2026</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Kateter</span>
-            <span class="consumable-status-row__desc">oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-        </div>
-        <button class="btn-outline" onclick="startOrder('oksygen-baerbar')">Bestill</button>
-      </div>
     </div>
 
     <!-- Card 3: Stasjonær oksygenkonsentrator -->
     <div class="equipment-card" data-eq-id="oksygen-stasjonaer">
-      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+      <button class="equipment-card__toggle" onclick="showMachinePage('oksygen-stasjonaer')">
         <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
         <div class="equipment-card__toggle-text">
           <div class="equipment-card__name">Stasjonær oksygenkonsentrator</div>
@@ -857,50 +799,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         </div>
         <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-      <div class="equipment-card__body" hidden>
-        <div class="duolist">
-          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">EverFlo Q</span></div>
-          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Oksygenterapi, oksygenkonsentrator, stasjonær</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">2161198</span></div>
-        </div>
-        <hr class="equipment-card__divider">
-        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell</h3>
-        <div class="consumable-status-list">
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Kateter</span>
-            <span class="consumable-status-row__desc">oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 12.01.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Kateter</span>
-            <span class="consumable-status-row__desc">oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Slange</span>
-            <span class="consumable-status-row__desc">oksygen tilførselsslange "Crush resistant" 15,2 meter</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 03.02.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>kan ikke bestilles før 03.05.2026</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Swivel/adapter</span>
-            <span class="consumable-status-row__desc">oksygenslange u/klips</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Filter</span>
-            <span class="consumable-status-row__desc">luftinntak oksygenkonsentrator Everflo grov 5 stk/pk</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-        </div>
-        <button class="btn-outline" onclick="startOrder('oksygen-stasjonaer')">Bestill</button>
-      </div>
     </div>
 
     <!-- Card 4: Forstøverapparat -->
     <div class="equipment-card" data-eq-id="forstover">
-      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+      <button class="equipment-card__toggle" onclick="showMachinePage('forstover')">
         <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
         <div class="equipment-card__toggle-text">
           <div class="equipment-card__name">Forstøverapparat</div>
@@ -908,51 +811,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         </div>
         <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-      <div class="equipment-card__body" hidden>
-        <div class="duolist">
-          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">NebulAIR+</span></div>
-          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Nebulisator, ordinær</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">24AA15A0669</span></div>
-        </div>
-        <hr class="equipment-card__divider">
-        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell</h3>
-        <div class="consumable-status-list">
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Maske</span>
-            <span class="consumable-status-row__desc">forstøverapparat NebulAir Plus voksen</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 28.01.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>kan ikke bestilles før 28.04.2026</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Slange</span>
-            <span class="consumable-status-row__desc">forstøverapparat NebulAir Plus 2 m</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 14.08.2025</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Filter</span>
-            <span class="consumable-status-row__desc">luftinntak Forstøverapparat NebulAir Plus</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Strikk</span>
-            <span class="consumable-status-row__desc">elastisk til maske NebulAir forstøver</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 12.12.2025</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Filter</span>
-            <span class="consumable-status-row__desc">ekspirasjon antibiotika forstøverapparat Nebulair 10 stk/pk</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-        </div>
-        <button class="btn-outline" onclick="startOrder('forstover')">Bestill</button>
-      </div>
     </div>
 
     <!-- Card 5: CGM -->
     <div class="equipment-card" data-eq-id="cgm">
-      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+      <button class="equipment-card__toggle" onclick="showMachinePage('cgm')">
         <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
         <div class="equipment-card__toggle-text">
           <div class="equipment-card__name">CGM</div>
@@ -960,35 +823,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         </div>
         <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-      <div class="equipment-card__body" hidden>
-        <div class="duolist">
-          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">FreeStyle Libre 3 avleser</span></div>
-          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Overvåking, glukosenivå, interstitialvæske</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">NCME119-G0546</span></div>
-        </div>
-        <hr class="equipment-card__divider">
-        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell</h3>
-        <div class="consumable-status-list">
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Sensor/sender</span>
-            <span class="consumable-status-row__desc">CGM Freestyle Libre 3 Plus</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 08.03.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>kan ikke bestilles før 08.04.2026</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Desinfeksjon</span>
-            <span class="consumable-status-row__desc">Klorhexidinsprit 5 mg/ml 250 ml</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 08.03.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-        </div>
-        <button class="btn-outline" onclick="startOrder('cgm')">Bestill</button>
-      </div>
     </div>
 
     <!-- Card 6: Diabetes patch-pumpe -->
     <div class="equipment-card" data-eq-id="insulin-pumpe">
-      <button class="equipment-card__toggle" onclick="toggleCard(this)" aria-expanded="false">
+      <button class="equipment-card__toggle" onclick="showMachinePage('insulin-pumpe')">
         <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
         <div class="equipment-card__toggle-text">
           <div class="equipment-card__name">Diabetes patch-pumpe</div>
@@ -996,29 +835,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         </div>
         <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-      <div class="equipment-card__body" hidden>
-        <div class="duolist">
-          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">OmniPod DASH PDM</span></div>
-          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Infusjon, pumpe, insulin, bærbar</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">040500-18348</span></div>
-        </div>
-        <hr class="equipment-card__divider">
-        <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight);">Forbruksmateriell</h3>
-        <div class="consumable-status-list">
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Plaster</span>
-            <span class="consumable-status-row__desc">film PodPals OmniPod [Frp 10 stk/pk]</span>
-            <span class="consumable-status-badge consumable-status-badge--ok"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kan bestilles</span>
-          </div>
-          <div class="consumable-status-row">
-            <span class="consumable-status-row__name">Insulinpumpe</span>
-            <span class="consumable-status-row__desc">patchpumpe POD engangs Omnipod Dash [Frp 10 stk/pk]</span>
-            <span class="consumable-status-row__last-order">Sist bestilt: 10.02.2026</span>
-            <span class="consumable-status-badge consumable-status-badge--wait"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>kan ikke bestilles før 10.05.2026</span>
-          </div>
-        </div>
-        <button class="btn-outline" onclick="startOrder('insulin-pumpe')">Bestill</button>
-      </div>
     </div>
 
     <!-- Master order button -->
@@ -1109,6 +925,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     </footer>
 
   </div><!-- /viewFront -->
+
+  <!-- ════════════════════════════════════════════════════
+       MACHINE DETAIL VIEW
+  ════════════════════════════════════════════════════ -->
+  <div id="viewMachine" hidden>
+    <div class="order-nav">
+      <button class="order-nav__back" onclick="showFront()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Tilbake
+      </button>
+    </div>
+    <div id="machinePageContent" style="width:344px; margin: 0 auto; padding: var(--space-m) 0 var(--space-xl);"></div>
+  </div><!-- /viewMachine -->
 
   <!-- ════════════════════════════════════════════════════
        ORDER FLOW VIEW
@@ -1335,37 +1164,49 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 <script>
 // ── Equipment data ─────────────────────────────────────────
 const EQUIPMENT = [
-  { id:'cpap', name:'CPAP', model:'Airsense 11 Autoset', consumables:[
-    { name:'Slange CPAP m/varmetråd ClimateLine 11 CPAP Airsense 11', quota:'', nextOrderDate:'2026-04-15' },
-    { name:'Filter inntak pasient Resmed Air 11 standard [Frp 2 stk/pk]', quota:'' },
-    { name:'Maske NIV helmaske AirFit F30i str. S', quota:'' },
-    { name:'Vannkammer fuktekammer CPAP HumidAir 11', quota:'' },
+  { id:'cpap', name:'CPAP', model:'Airsense 11 Autoset',
+    details:{ type:'Positivt luftveistrykkapparat, kontinuerlig, auto', serial:'23244159084' },
+    consumables:[
+      { name:'Slange CPAP m/varmetråd ClimateLine 11 CPAP Airsense 11', quota:'', nextOrderDate:'2026-04-15', lastOrder:'15.01.2026' },
+      { name:'Filter inntak pasient Resmed Air 11 standard [Frp 2 stk/pk]', quota:'', lastOrder:'10.09.2025' },
+      { name:'Maske NIV helmaske AirFit F30i str. S', quota:'' },
+      { name:'Vannkammer fuktekammer CPAP HumidAir 11', quota:'', lastOrder:'20.11.2025' },
   ]},
-  { id:'oksygen-baerbar', name:'Bærbar oksygenkonsentrator', model:'Inogen Rove 6', consumables:[
-    { name:'Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen', quota:'', nextOrderDate:'2026-05-05' },
-    { name:'Kateter oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen', quota:'' },
+  { id:'oksygen-baerbar', name:'Bærbar oksygenkonsentrator', model:'Inogen Rove 6',
+    details:{ type:'Oksygenterapi, oksygenkonsentrator, transportabel', serial:'24401092-EU' },
+    consumables:[
+      { name:'Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen', quota:'', nextOrderDate:'2026-05-05', lastOrder:'05.02.2026' },
+      { name:'Kateter oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen', quota:'' },
   ]},
-  { id:'oksygen-stasjonaer', name:'Stasjonær oksygenkonsentrator', model:'EverFlo Q', consumables:[
-    { name:'Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen', quota:'' },
-    { name:'Kateter oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen', quota:'' },
-    { name:'Slange oksygen tilførselsslange "Crush resistant" 15,2 meter', quota:'', nextOrderDate:'2026-05-03' },
-    { name:'Swivel/adapter oksygenslange u/klips', quota:'' },
-    { name:'Filter luftinntak oksygenkonsentrator Everflo grov 5 stk/pk', quota:'' },
+  { id:'oksygen-stasjonaer', name:'Stasjonær oksygenkonsentrator', model:'EverFlo Q',
+    details:{ type:'Oksygenterapi, oksygenkonsentrator, stasjonær', serial:'2161198' },
+    consumables:[
+      { name:'Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen', quota:'', lastOrder:'12.01.2026' },
+      { name:'Kateter oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen', quota:'' },
+      { name:'Slange oksygen tilførselsslange "Crush resistant" 15,2 meter', quota:'', nextOrderDate:'2026-05-03', lastOrder:'03.02.2026' },
+      { name:'Swivel/adapter oksygenslange u/klips', quota:'' },
+      { name:'Filter luftinntak oksygenkonsentrator Everflo grov 5 stk/pk', quota:'' },
   ]},
-  { id:'forstover', name:'Forstøverapparat', model:'NebulAIR+', consumables:[
-    { name:'Maske forstøverapparat NebulAir Plus voksen', quota:'', nextOrderDate:'2026-04-28' },
-    { name:'Slange forstøverapparat NebulAir Plus 2 m', quota:'' },
-    { name:'Filter luftinntak Forstøverapparat NebulAir Plus', quota:'' },
-    { name:'Strikk elastisk til maske NebulAir forstøver', quota:'' },
-    { name:'Filter ekspirasjon antibiotika forstøverapparat Nebulair 10 stk/pk', quota:'' },
+  { id:'forstover', name:'Forstøverapparat', model:'NebulAIR+',
+    details:{ type:'Nebulisator, ordinær', serial:'24AA15A0669' },
+    consumables:[
+      { name:'Maske forstøverapparat NebulAir Plus voksen', quota:'', nextOrderDate:'2026-04-28', lastOrder:'28.01.2026' },
+      { name:'Slange forstøverapparat NebulAir Plus 2 m', quota:'', lastOrder:'14.08.2025' },
+      { name:'Filter luftinntak Forstøverapparat NebulAir Plus', quota:'' },
+      { name:'Strikk elastisk til maske NebulAir forstøver', quota:'', lastOrder:'12.12.2025' },
+      { name:'Filter ekspirasjon antibiotika forstøverapparat Nebulair 10 stk/pk', quota:'' },
   ]},
-  { id:'cgm', name:'CGM', model:'FreeStyle Libre 3 avleser', consumables:[
-    { name:'Sensor/sender CGM Freestyle Libre 3 Plus', quota:'', nextOrderDate:'2026-04-08' },
-    { name:'Desinfeksjon Klorhexidinsprit 5 mg/ml 250 ml', quota:'' },
+  { id:'cgm', name:'CGM', model:'FreeStyle Libre 3 avleser',
+    details:{ type:'Overvåking, glukosenivå, interstitialvæske', serial:'NCME119-G0546' },
+    consumables:[
+      { name:'Sensor/sender CGM Freestyle Libre 3 Plus', quota:'', nextOrderDate:'2026-04-08', lastOrder:'08.03.2026' },
+      { name:'Desinfeksjon Klorhexidinsprit 5 mg/ml 250 ml', quota:'', lastOrder:'08.03.2026' },
   ]},
-  { id:'insulin-pumpe', name:'Diabetes patch-pumpe', model:'OmniPod DASH PDM', consumables:[
-    { name:'Plaster film PodPals OmniPod [Frp 10 stk/pk]', quota:'' },
-    { name:'Insulinpumpe patchpumpe POD engangs Omnipod Dash [Frp 10 stk/pk]', quota:'', nextOrderDate:'2026-05-10' },
+  { id:'insulin-pumpe', name:'Diabetes patch-pumpe', model:'OmniPod DASH PDM',
+    details:{ type:'Infusjon, pumpe, insulin, bærbar', serial:'040500-18348' },
+    consumables:[
+      { name:'Plaster film PodPals OmniPod [Frp 10 stk/pk]', quota:'' },
+      { name:'Insulinpumpe patchpumpe POD engangs Omnipod Dash [Frp 10 stk/pk]', quota:'', nextOrderDate:'2026-05-10', lastOrder:'10.02.2026' },
   ]},
 ];
 
@@ -1403,13 +1244,56 @@ function showFront() {
   document.getElementById('viewFront').hidden = false;
   document.getElementById('viewOrder').hidden = true;
   document.getElementById('viewHistory').hidden = true;
-  // Collapse all equipment cards
-  document.querySelectorAll('.equipment-card--open').forEach(card => {
-    card.classList.remove('equipment-card--open');
-    card.querySelector('.equipment-card__toggle').setAttribute('aria-expanded', 'false');
-    card.querySelector('.equipment-card__body').hidden = true;
-  });
+  document.getElementById('viewMachine').hidden = true;
   requestAnimationFrame(scrollTop);
+}
+
+function showMachinePage(eqId) {
+  const eq = EQUIPMENT.find(e => e.id === eqId);
+  if (!eq) return;
+  renderMachinePage(eq);
+  document.getElementById('viewFront').hidden = true;
+  document.getElementById('viewMachine').hidden = false;
+  scrollTop();
+}
+
+function renderMachinePage(eq) {
+  const OK_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const WAIT_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>`;
+
+  const consumableRows = eq.consumables.map((c, i) => {
+    const spaceIdx = c.name.indexOf(' ');
+    const typePart = spaceIdx === -1 ? c.name : c.name.slice(0, spaceIdx);
+    const restPart = spaceIdx === -1 ? '' : c.name.slice(spaceIdx + 1);
+    const unavailDate = getUnavailableDate(eq.id, i, c);
+    const lastOrderHtml = c.lastOrder
+      ? `<span class="consumable-status-row__last-order">Sist bestilt: ${c.lastOrder}</span>` : '';
+    const badgeHtml = unavailDate
+      ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}kan ikke bestilles før ${formatNorwegianDate(unavailDate)}</span>`
+      : `<span class="consumable-status-badge consumable-status-badge--ok">${OK_SVG}Kan bestilles</span>`;
+    return `
+      <div class="consumable-status-row">
+        <span class="consumable-status-row__name">${typePart}</span>
+        ${restPart ? `<span class="consumable-status-row__desc">${restPart}</span>` : ''}
+        ${lastOrderHtml}
+        ${badgeHtml}
+      </div>`;
+  }).join('');
+
+  document.getElementById('machinePageContent').innerHTML = `
+    <h1 style="font: var(--mobile-h2); color: var(--color-base-text-onlight); margin-bottom: var(--space-3xs);">${eq.name}</h1>
+    <div style="font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight-subdued); margin-bottom: var(--space-s);">${eq.model}</div>
+    <div class="duolist">
+      <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">${eq.model}</span></div>
+      <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">${eq.details.type}</span></div>
+      <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">${eq.details.serial}</span></div>
+    </div>
+    <hr class="equipment-card__divider" style="margin: var(--space-s) 0;">
+    <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight); margin-bottom: var(--space-s);">Forbruksmateriell</h3>
+    <div class="consumable-status-list">${consumableRows}</div>
+    <div style="margin-top: var(--space-m);">
+      <button class="btn-outline" onclick="startOrder('${eq.id}')">Bestill</button>
+    </div>`;
 }
 
 function showOrder() {
