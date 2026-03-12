@@ -475,12 +475,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   justify-content: space-between; padding: 8px 0 8px 2px; align-self: stretch;
 }
 .equip-list__element { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.equip-list__status-dot-row { display: flex; align-items: center; gap: 8px; padding-left: 46px; }
+.equip-list__status-dot-row { display: flex; align-items: center; gap: 8px; padding-top: 0.5rem; padding-bottom: 2px; padding-left: 8px; }
 .equip-list__status-dot-text { font: 400 16px/1.2 'Source Sans 3', sans-serif; color: #474745; }
-.equip-list__content { display: flex; align-items: center; }
-.equip-list__icon-frame { width: 38px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.equip-list__icon-frame { width: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 .equip-list__icon { width: 38px; height: 38px; object-fit: contain; }
-.equip-list__label { flex: 1; min-width: 0; padding: 12px 0 10px 8px; display: flex; flex-direction: column; gap: 4px; }
+.equip-list__label { flex: 1; min-width: 0; padding: 4px 0 10px 8px; display: flex; flex-direction: column; gap: 4px; }
 .equip-list__name  { font: 600 18px/1.2 'Source Sans Pro', sans-serif; color: #000; }
 .equip-list__model { font: 400 16px/1.2 'Source Sans 3', sans-serif; color: #474745; }
 .equip-list__chevron { width: 44px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
@@ -854,13 +853,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="equip-list__item" data-eq-id="cpap" onclick="showMachinePage('cpap')">
         <div class="equip-list__status-strip"></div>
         <div class="equip-list__inner">
+          <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
           <div class="equip-list__element">
-            <div class="equip-list__content">
-              <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
-              <div class="equip-list__label">
-                <div class="equip-list__name">CPAP</div>
-                <div class="equip-list__model">Airsense 11 Autoset</div>
-              </div>
+            <div class="equip-list__label">
+              <div class="equip-list__name">CPAP</div>
+              <div class="equip-list__model">Airsense 11 Autoset</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -870,13 +867,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="equip-list__item" data-eq-id="oksygen-baerbar" onclick="showMachinePage('oksygen-baerbar')">
         <div class="equip-list__status-strip"></div>
         <div class="equip-list__inner">
+          <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
           <div class="equip-list__element">
-            <div class="equip-list__content">
-              <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
-              <div class="equip-list__label">
-                <div class="equip-list__name">Bærbar oksygenkonsentrator</div>
-                <div class="equip-list__model">Inogen Rove 6</div>
-              </div>
+            <div class="equip-list__label">
+              <div class="equip-list__name">Bærbar oksygenkonsentrator</div>
+              <div class="equip-list__model">Inogen Rove 6</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -886,13 +881,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="equip-list__item" data-eq-id="oksygen-stasjonaer" onclick="showMachinePage('oksygen-stasjonaer')">
         <div class="equip-list__status-strip"></div>
         <div class="equip-list__inner">
+          <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
           <div class="equip-list__element">
-            <div class="equip-list__content">
-              <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
-              <div class="equip-list__label">
-                <div class="equip-list__name">Stasjonær oksygenkonsentrator</div>
-                <div class="equip-list__model">EverFlo Q</div>
-              </div>
+            <div class="equip-list__label">
+              <div class="equip-list__name">Stasjonær oksygenkonsentrator</div>
+              <div class="equip-list__model">EverFlo Q</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -902,13 +895,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="equip-list__item" data-eq-id="forstover" onclick="showMachinePage('forstover')">
         <div class="equip-list__status-strip"></div>
         <div class="equip-list__inner">
+          <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
           <div class="equip-list__element">
-            <div class="equip-list__content">
-              <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
-              <div class="equip-list__label">
-                <div class="equip-list__name">Forstøverapparat</div>
-                <div class="equip-list__model">NebulAIR+</div>
-              </div>
+            <div class="equip-list__label">
+              <div class="equip-list__name">Forstøverapparat</div>
+              <div class="equip-list__model">NebulAIR+</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -918,13 +909,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="equip-list__item" data-eq-id="cgm" onclick="showMachinePage('cgm')">
         <div class="equip-list__status-strip"></div>
         <div class="equip-list__inner">
+          <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
           <div class="equip-list__element">
-            <div class="equip-list__content">
-              <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
-              <div class="equip-list__label">
-                <div class="equip-list__name">CGM</div>
-                <div class="equip-list__model">FreeStyle Libre 3 avleser</div>
-              </div>
+            <div class="equip-list__label">
+              <div class="equip-list__name">CGM</div>
+              <div class="equip-list__model">FreeStyle Libre 3 avleser</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -934,13 +923,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="equip-list__item" data-eq-id="insulin-pumpe-5" onclick="showMachinePage('insulin-pumpe-5')">
         <div class="equip-list__status-strip"></div>
         <div class="equip-list__inner">
+          <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
           <div class="equip-list__element">
-            <div class="equip-list__content">
-              <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
-              <div class="equip-list__label">
-                <div class="equip-list__name">Diabetes patch-pumpe</div>
-                <div class="equip-list__model">OmniPod 5 PDM</div>
-              </div>
+            <div class="equip-list__label">
+              <div class="equip-list__name">Diabetes patch-pumpe</div>
+              <div class="equip-list__model">OmniPod 5 PDM</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -950,17 +937,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="equip-list__item" data-eq-id="insulin-pumpe" onclick="showMachinePage('insulin-pumpe')">
         <div class="equip-list__status-strip"></div>
         <div class="equip-list__inner">
+          <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
           <div class="equip-list__element">
             <div class="equip-list__status-dot-row">
               <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#A31F0E"/><line x1="5" y1="5" x2="11" y2="11" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
               <span class="equip-list__status-dot-text">Deaktivert. Skal returneres.</span>
             </div>
-            <div class="equip-list__content">
-              <div class="equip-list__icon-frame"><img class="equip-list__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt=""></div>
-              <div class="equip-list__label">
-                <div class="equip-list__name">Diabetes patch-pumpe</div>
-                <div class="equip-list__model">OmniPod DASH PDM</div>
-              </div>
+            <div class="equip-list__label">
+              <div class="equip-list__name">Diabetes patch-pumpe</div>
+              <div class="equip-list__model">OmniPod DASH PDM</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -1086,8 +1071,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <!-- ── STEP 1: Velg forbruksmateriell ── -->
     <div id="step1" class="order-step">
       <h2 class="order-step__title">Bestill forbruksmateriell</h2>
-      <p><span class="field-tag field-tag--required">Du må velge minst 1 produkt</span></p>
       <div id="step1Content"></div>
+      <p id="step1Error" hidden style="font:600 16px/1.4 'Source Sans Pro',sans-serif;color:#A31F0E;margin:0 0 1rem 0;">Du må velge minst et produkt</p>
       <button class="btn-primary" onclick="goToStep(2)">
         Neste
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
@@ -1518,7 +1503,14 @@ function startOrder(eqId) {
 // ── Step navigation ────────────────────────────────────────
 let currentStep = 1;
 
+function validateStep1() {
+  const hasItems = Object.values(orderState.quantities).some(arr => arr.some(q => q > 0));
+  document.getElementById('step1Error').hidden = hasItems;
+  return hasItems;
+}
+
 function goToStep(n) {
+  if (n === 2 && currentStep === 1 && !validateStep1()) return;
   if (n === 3 && currentStep === 2 && !validateStep2()) return;
   [1,2,3,4].forEach(i => {
     document.getElementById('step' + i).hidden = (i !== n);
@@ -1630,6 +1622,7 @@ function changeQty(btn, eqId, idx, delta) {
   if (val < 0) val = 0;
   orderState.quantities[eqId][idx] = val;
   document.getElementById('qty-' + eqId + '-' + idx).textContent = val;
+  if (val > 0) document.getElementById('step1Error').hidden = true;
   // update minus button disabled state
   const row = btn.closest('.qty-control');
   row.querySelector('[aria-label="Reduser antall"]').disabled = val === 0;
