@@ -714,6 +714,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 </head>
 <body>
 
+<div id="passwordGate" style="display:none; position:fixed; inset:0; background:#f5f3f3; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; padding:2rem;">
+<p style="font: 600 18px/1.3 'Source Sans Pro', sans-serif; color:#000; margin:0;">Skriv inn passord for å fortsette</p>
+  <div style="display:flex; flex-direction:column; gap:0.5rem; width:100%; max-width:320px;">
+    <input id="passwordInput" type="password" placeholder="Passord" onkeydown="if(event.key==='Enter')checkPassword()"
+      style="border:1.5px solid #ccc; border-radius:6px; padding:10px 14px; font:400 16px/1.5 'Source Sans 3',sans-serif; width:100%; box-sizing:border-box;">
+    <p id="passwordError" style="color:#A31F0E; font:400 14px/1.4 'Source Sans 3',sans-serif; margin:0; display:none;">Feil passord. Prøv igjen.</p>
+    <button onclick="checkPassword()" style="background:#188097; color:#fff; border:none; border-radius:6px; padding:12px; font:600 16px/1 'Source Sans Pro',sans-serif; cursor:pointer;">Logg inn</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    if (sessionStorage.getItem('auth') === '1') return;
+    document.getElementById('passwordGate').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  })();
+  function checkPassword() {
+    if (document.getElementById('passwordInput').value === 'shipahoy') {
+      sessionStorage.setItem('auth', '1');
+      document.getElementById('passwordGate').style.display = 'none';
+      document.body.style.overflow = '';
+    } else {
+      document.getElementById('passwordError').style.display = 'block';
+      document.getElementById('passwordInput').value = '';
+      document.getElementById('passwordInput').focus();
+    }
+  }
+</script>
+
 <div class="phone-wrap">
 <div class="phone-btn-silent"></div>
 <div class="phone-btn-vol-up"></div>
