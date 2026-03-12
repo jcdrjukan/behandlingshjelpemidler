@@ -883,7 +883,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       </button>
     </div>
 
-    <!-- Card 6: Diabetes patch-pumpe -->
+    <!-- Card 6: Diabetes patch-pumpe (ny) -->
+    <div class="equipment-card" data-eq-id="insulin-pumpe-5">
+      <button class="equipment-card__toggle" onclick="showMachinePage('insulin-pumpe-5')">
+        <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
+        <div class="equipment-card__toggle-text">
+          <div class="equipment-card__name">Diabetes patch-pumpe</div>
+          <div class="equipment-card__model">OmniPod 5 PDM</div>
+        </div>
+        <svg class="equipment-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Card 7: Diabetes patch-pumpe (deaktivert) -->
     <div class="equipment-card equipment-card--deaktivert" data-eq-id="insulin-pumpe">
       <button class="equipment-card__toggle" onclick="showMachinePage('insulin-pumpe')">
         <img class="equipment-card__icon" src="https://www.figma.com/api/mcp/asset/3cf82f58-7046-41fa-a291-8be4e14cbc04" alt="">
@@ -1278,6 +1290,12 @@ const EQUIPMENT = [
     consumables:[
       { name:'Sensor/sender CGM Freestyle Libre 3 Plus', quota:'', nextOrderDate:'2026-04-08', lastOrder:'08.03.2026' },
       { name:'Desinfeksjon Klorhexidinsprit 5 mg/ml 250 ml', quota:'', lastOrder:'08.03.2026' },
+  ]},
+  { id:'insulin-pumpe-5', name:'Diabetes patch-pumpe', model:'OmniPod 5 PDM',
+    details:{ type:'Infusjon, pumpe, insulin, bærbar', serial:'051200-29471', url:'#' },
+    consumables:[
+      { name:'Plaster film PodPals OmniPod [Frp 10 stk/pk]', quota:'' },
+      { name:'Insulinpumpe patchpumpe POD engangs Omnipod 5 [Frp 10 stk/pk]', quota:'', nextOrderDate:'2026-05-10', lastOrder:'10.02.2026' },
   ]},
   { id:'insulin-pumpe', name:'Diabetes patch-pumpe', model:'OmniPod DASH PDM',
     deaktivert: true,
