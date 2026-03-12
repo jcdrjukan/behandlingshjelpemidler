@@ -193,6 +193,30 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   margin-bottom: 2px;
 }
 
+/* ── Help expander ── */
+.help-expander { width: 100%; margin-top: 1rem; }
+.help-expander__trigger {
+  display: flex; align-items: center;
+  width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+  padding: 10px 2px 4px 8px; min-height: 44px;
+}
+.help-expander__trigger-inner { display: flex; align-items: flex-start; gap: 8px; }
+.help-expander__question-icon { flex-shrink: 0; margin-top: 1px; }
+.help-expander__trigger-text { font: 600 16px/1.2 'Source Sans 3', sans-serif; color: #5B22A6; padding-top: 3px; }
+.help-expander__chevron { flex-shrink: 0; transition: transform 0.2s ease; margin-left: 1rem; width: 8.8px; height: 5.5px; }
+.help-expander__trigger[aria-expanded="true"] .help-expander__chevron { transform: scaleY(-1); }
+.help-expander__body { }
+.help-expander__content {
+  background: #F4ECFE; border: 1px solid #9153E2; border-radius: 4px;
+  padding: 16px 16px 16px 36px; display: flex; flex-direction: column; gap: 10px;
+}
+.help-expander__text { font: 400 16px/1.5 'Source Sans Pro', sans-serif; color: #000; margin: 0; }
+.help-expander__link {
+  display: inline-flex; align-items: center; text-decoration: none;
+  font: 400 16px/1.5 'Source Sans Pro', sans-serif; color: #126F87;
+}
+.help-expander__link span { border-bottom: 1px solid #58AABB; }
+
 /* Body: info + consumables list — hidden when collapsed */
 .equipment-card__body {
   padding: 12px 16px 32px 14px;
@@ -1174,7 +1198,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 // ── Equipment data ─────────────────────────────────────────
 const EQUIPMENT = [
   { id:'cpap', name:'CPAP', model:'Airsense 11 Autoset',
-    details:{ type:'Positivt luftveistrykkapparat, kontinuerlig, auto', serial:'23244159084' },
+    details:{ type:'Positivt luftveistrykkapparat, kontinuerlig, auto', serial:'23244159084', url:'#' },
     consumables:[
       { name:'Slange CPAP m/varmetråd ClimateLine 11 CPAP Airsense 11', quota:'', nextOrderDate:'2026-04-15', lastOrder:'15.01.2026' },
       { name:'Filter inntak pasient Resmed Air 11 standard [Frp 2 stk/pk]', quota:'', lastOrder:'10.09.2025' },
@@ -1182,13 +1206,13 @@ const EQUIPMENT = [
       { name:'Vannkammer fuktekammer CPAP HumidAir 11', quota:'', lastOrder:'20.11.2025' },
   ]},
   { id:'oksygen-baerbar', name:'Bærbar oksygenkonsentrator', model:'Inogen Rove 6',
-    details:{ type:'Oksygenterapi, oksygenkonsentrator, transportabel', serial:'24401092-EU' },
+    details:{ type:'Oksygenterapi, oksygenkonsentrator, transportabel', serial:'24401092-EU', url:'#' },
     consumables:[
       { name:'Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen', quota:'', nextOrderDate:'2026-05-05', lastOrder:'05.02.2026' },
       { name:'Kateter oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen', quota:'' },
   ]},
   { id:'oksygen-stasjonaer', name:'Stasjonær oksygenkonsentrator', model:'EverFlo Q',
-    details:{ type:'Oksygenterapi, oksygenkonsentrator, stasjonær', serial:'2161198' },
+    details:{ type:'Oksygenterapi, oksygenkonsentrator, stasjonær', serial:'2161198', url:'#' },
     consumables:[
       { name:'Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen', quota:'', lastOrder:'12.01.2026' },
       { name:'Kateter oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen', quota:'' },
@@ -1197,7 +1221,7 @@ const EQUIPMENT = [
       { name:'Filter luftinntak oksygenkonsentrator Everflo grov 5 stk/pk', quota:'' },
   ]},
   { id:'forstover', name:'Forstøverapparat', model:'NebulAIR+',
-    details:{ type:'Nebulisator, ordinær', serial:'24AA15A0669' },
+    details:{ type:'Nebulisator, ordinær', serial:'24AA15A0669', url:'#' },
     consumables:[
       { name:'Maske forstøverapparat NebulAir Plus voksen', quota:'', nextOrderDate:'2026-04-28', lastOrder:'28.01.2026' },
       { name:'Slange forstøverapparat NebulAir Plus 2 m', quota:'', lastOrder:'14.08.2025' },
@@ -1206,14 +1230,14 @@ const EQUIPMENT = [
       { name:'Filter ekspirasjon antibiotika forstøverapparat Nebulair 10 stk/pk', quota:'' },
   ]},
   { id:'cgm', name:'CGM', model:'FreeStyle Libre 3 avleser',
-    details:{ type:'Overvåking, glukosenivå, interstitialvæske', serial:'NCME119-G0546' },
+    details:{ type:'Overvåking, glukosenivå, interstitialvæske', serial:'NCME119-G0546', url:'#' },
     consumables:[
       { name:'Sensor/sender CGM Freestyle Libre 3 Plus', quota:'', nextOrderDate:'2026-04-08', lastOrder:'08.03.2026' },
       { name:'Desinfeksjon Klorhexidinsprit 5 mg/ml 250 ml', quota:'', lastOrder:'08.03.2026' },
   ]},
   { id:'insulin-pumpe', name:'Diabetes patch-pumpe', model:'OmniPod DASH PDM',
     deaktivert: true,
-    details:{ type:'Infusjon, pumpe, insulin, bærbar', serial:'040500-18348' },
+    details:{ type:'Infusjon, pumpe, insulin, bærbar', serial:'040500-18348', url:'#' },
     consumables:[
       { name:'Plaster film PodPals OmniPod [Frp 10 stk/pk]', quota:'' },
       { name:'Insulinpumpe patchpumpe POD engangs Omnipod Dash [Frp 10 stk/pk]', quota:'', nextOrderDate:'2026-05-10', lastOrder:'10.02.2026' },
@@ -1311,6 +1335,25 @@ function renderMachinePage(eq) {
       <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">${eq.model}</span></div>
       <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">${eq.details.type}</span></div>
       <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">${eq.details.serial}</span></div>
+    </div>
+    <div class="help-expander">
+      <button class="help-expander__trigger" onclick="toggleHelpExpander(this)" aria-expanded="false">
+        <div class="help-expander__trigger-inner">
+          <svg class="help-expander__question-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#5B22A6" stroke-width="1.5"/><path d="M8 8c0-1.1.9-2 2-2s2 .9 2 2c0 1.3-2 2-2 3.5" stroke="#5B22A6" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.75" fill="#5B22A6"/></svg>
+          <span class="help-expander__trigger-text">Har du spørsmål om dette produktet?</span>
+        </div>
+        <svg class="help-expander__chevron" viewBox="0 0 16 10" width="16" height="10" fill="none" aria-hidden="true"><polyline points="1,1 8,9 15,1" stroke="#5B22A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="help-expander__body" hidden>
+        <div class="help-expander__content">
+          <p class="help-expander__text">Du kan lese mer produktinformasjon her:</p>
+          <a href="${eq.details.url}" target="_blank" rel="noopener" class="help-expander__link">
+            <span>${eq.model}</span>
+            <svg viewBox="0 0 15 15" width="15" height="15" fill="none" aria-hidden="true" style="margin-left:2px;flex-shrink:0;"><line x1="2" y1="13" x2="13" y2="2" stroke="#126F87" stroke-width="1.5" stroke-linecap="round"/><polyline points="6,2 13,2 13,9" stroke="#126F87" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="help-expander__text" style="margin-top: 1lh;">Har du ytterligere spørsmål om bestillinger eller bruk av dette produktet kan du kontakte Behandlingshjelpemiddel-sentralen på St. Olavs sykehus på telefon 987 65 432.</p>
+        </div>
+      </div>
     </div>
     <hr class="equipment-card__divider" style="margin: var(--space-s) 0;">
     <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight); margin-bottom: var(--space-s);">Forbruksmateriell</h3>
@@ -1657,6 +1700,12 @@ function showConfirmation(orderId, delivery) {
 }
 
 // ── Accordion toggle ───────────────────────────────────────
+function toggleHelpExpander(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', !expanded);
+  btn.closest('.help-expander').querySelector('.help-expander__body').hidden = expanded;
+}
+
 function toggleCard(btn) {
   const card = btn.closest('.equipment-card');
   const body = card.querySelector('.equipment-card__body');
