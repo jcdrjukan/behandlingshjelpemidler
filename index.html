@@ -1474,8 +1474,7 @@ function renderMachinePage(eq) {
         </div>
       </div>
     </div>
-    <hr class="equipment-card__divider" style="margin: var(--space-s) 0;">
-    <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight); margin-bottom: var(--space-s);">Forbruksmateriell</h3>
+    <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight); margin: 1rem 0 1rem 0; background: var(--neutral-100); border-bottom: 2px solid var(--neutral-300); border-radius: 4px 4px 0 0; padding: var(--space-xs);">Forbruksmateriell</h3>
     <div class="consumable-status-list">${consumableRows}</div>
     ${eq.deaktivert ? '' : `<div style="margin-top: var(--space-m);"><button class="btn-outline" onclick="startOrder('${eq.id}')">Bestill</button></div>`}`;
 }
