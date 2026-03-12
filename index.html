@@ -426,17 +426,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* ── Order history card ── */
 /* ── Siste bestilling expander card ── */
 .order-card {
-  width: 344px; background: var(--neutral-50);
+  width: 344px; background: #fff;
   border-top: 1px solid var(--color-base-border-onlight);
   border-bottom: 1px solid var(--color-base-border-onlight);
 }
 .order-card__toggle {
-  width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+  width: 100%; background: #fff; border: none; cursor: pointer; text-align: left;
   display: flex; align-items: center; justify-content: space-between;
   min-height: 64px; padding: var(--space-2xs);
 }
 .order-card__toggle:hover,
-.order-card--open .order-card__toggle { background: var(--neutral-100); }
+.order-card--open .order-card__toggle { background: #E7E7E7; }
 .order-card__main { flex: 1; min-width: 0; padding-left: var(--space-2xs); }
 .order-card__status-row {
   display: flex; align-items: center; gap: var(--space-2xs); min-height: 28px;
@@ -452,7 +452,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .order-card__chevron-wrap img { width: 16px; height: 10px; transform: scaleY(-1); transition: transform 0.2s ease; }
 .order-card--open .order-card__chevron-wrap img { transform: scaleY(1); }
-.order-card__body { padding: var(--space-xs) var(--space-s); display: flex; flex-direction: column; gap: var(--space-xs); border-top: 1px solid var(--neutral-100); }
+.order-card__body { background: #F5F3F3; padding: var(--space-xs) var(--space-s); display: flex; flex-direction: column; gap: var(--space-xs); border-top: 1px solid var(--neutral-100); }
 .order-card__machine-section { display: flex; flex-direction: column; gap: var(--space-3xs); }
 .order-card__machine-section + .order-card__machine-section { padding-top: var(--space-xs); border-top: 1px solid var(--neutral-100); }
 .order-card__machine-name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); margin-bottom: var(--space-3xs); }
@@ -589,7 +589,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   min-height: 64px;
 }
 .history-card__toggle:hover,
-.history-card--open .history-card__toggle { background: var(--neutral-50); }
+.history-card--open .history-card__toggle { background: #E7E7E7; }
 .history-card__toggle-text { flex: 1; min-width: 0; padding: 4px 0; }
 .history-card__title { font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
 .history-card__date  { font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
@@ -600,6 +600,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .history-card__chevron-wrap img { width: 16px; height: 10px; transform: scaleY(-1); transition: transform 0.2s ease; }
 .history-card--open .history-card__chevron-wrap img { transform: scaleY(1); }
 .history-card__body {
+  background: #F5F3F3;
   padding: var(--space-s); display: flex; flex-direction: column; gap: var(--space-xs);
   border-top: 1px solid var(--neutral-100);
 }
