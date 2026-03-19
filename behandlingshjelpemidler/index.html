@@ -232,6 +232,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .duolist__value { font: var(--mobile-body); color: var(--color-base-text-onlight); }
 .duolist__value--strong { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); }
 .duolist__value--urgent { font: var(--mobile-sublabel); color: var(--cherry-500); }
+.unit-card { border: 1px solid var(--neutral-200); border-radius: var(--radius-m); padding: var(--space-s); margin-bottom: var(--space-s); }
+.unit-card__label { font: var(--mobile-sublabel); color: var(--color-base-text-onlight-subdued); margin-bottom: var(--space-xs); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--neutral-200); }
+.equip-list__units { font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight-subdued); }
 
 /* Read-only consumable list (expanded view) */
 .consumable-info-list { display: flex; flex-direction: column; }
@@ -858,6 +861,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
             <div class="equip-list__label">
               <div class="equip-list__name">CPAP</div>
               <div class="equip-list__model">Airsense 11 Autoset</div>
+              <div class="equip-list__units">2 enheter</div>
             </div>
           </div>
           <div class="equip-list__chevron"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -1304,7 +1308,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 // ── Equipment data ─────────────────────────────────────────
 const EQUIPMENT = [
   { id:'cpap', name:'CPAP', model:'Airsense 11 Autoset',
-    details:{ type:'Positivt luftveistrykkapparat, kontinuerlig, auto', serial:'23244159084', url:'#' },
+    units: [
+      { serial: '23244159084', label: 'Hjemme', url: '#' },
+      { serial: '23244159999', label: 'Hytta', url: '#' },
+    ],
+    details:{ type:'Positivt luftveistrykkapparat, kontinuerlig, auto' },
     consumables:[
       { name:'Slange CPAP m/varmetråd ClimateLine 11 CPAP Airsense 11', quota:'', nextOrderDate:'2026-04-15', lastOrder:'15.01.2026' },
       { name:'Filter inntak pasient Resmed Air 11 standard [Frp 2 stk/pk]', quota:'', lastOrder:'10.09.2025' },
@@ -1443,11 +1451,21 @@ function renderMachinePage(eq) {
         <p style="font: 400 16px/24px 'Source Sans 3', sans-serif; color: #000; margin: 0;">Dette utstyret er nå deaktivert og skal returneres til:<br>Behandlingshjelpemiddelsentralen<br>St. Olavs sykehus<br>Kirkeveien 123, Trondheim<br>Åpningstider 08:30–16:00<br>Telefon: 987 65 432</p>
       </div>
     </div>` : ''}
-    <div class="duolist">
-      <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">${eq.model}</span></div>
-      <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">${eq.details.type}</span></div>
-      <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">${eq.details.serial}</span></div>
-    </div>
+    ${(eq.units && eq.units.length > 1)
+      ? eq.units.map(u => `
+        <div class="unit-card">
+          <div class="unit-card__label">${u.label}</div>
+          <div class="duolist">
+            <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">${eq.model}</span></div>
+            <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">${eq.details.type}</span></div>
+            <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">${u.serial}</span></div>
+          </div>
+        </div>`).join('')
+      : `<div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">${eq.model}</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">${eq.details.type}</span></div>
+          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">${eq.units ? eq.units[0].serial : eq.details.serial}</span></div>
+        </div>`}
     <div class="help-expander">
       <button class="help-expander__trigger" onclick="toggleHelpExpander(this)" aria-expanded="false">
         <div class="help-expander__trigger-inner">
