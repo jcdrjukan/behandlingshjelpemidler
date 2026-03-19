@@ -1457,7 +1457,7 @@ function renderMachinePage(eq) {
       ${!(eq.units && eq.units.length > 1) ? `<div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">${eq.units ? eq.units[0].serial : eq.details.serial}</span></div>` : ''}
     </div>
     ${(eq.units && eq.units.length > 1) ? eq.units.map((u, i) => `
-      <div class="unit-card">
+      <div class="unit-card" style="${i === 0 ? 'margin-top: 1rem;' : ''}">
         <div class="unit-card__label">Enhet ${i + 1}</div>
         <div class="duolist">
           <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">${u.serial}</span></div>
