@@ -1345,7 +1345,7 @@ const EQUIPMENT = [
   { id:'cgm', name:'CGM', model:'FreeStyle Libre 3 avleser',
     details:{ type:'Overvåking, glukosenivå, interstitialvæske', serial:'NCME119-G0546', url:'https://freestyleserver.com/Payloads/IFU/2021/q4/ART44904-005_rev-A.pdf' },
     consumables:[
-      { name:'Sensor/sender CGM Freestyle Libre 3 Plus', quota:'', nextOrderDate:'2026-04-08', lastOrder:'08.03.2026' },
+      { name:'Sensor/sender CGM Freestyle Libre 3 Plus', quota:'', nextOrderDate:'2026-04-08', lastOrder:'19.03.2026', activeOrder: true },
       { name:'Desinfeksjon Klorhexidinsprit 5 mg/ml 250 ml', quota:'', lastOrder:'08.03.2026' },
   ]},
   { id:'insulin-pumpe-5', name:'Diabetes patch-pumpe', model:'OmniPod 5 PDM',
@@ -1423,9 +1423,11 @@ function renderMachinePage(eq) {
       ? `<span class="consumable-status-row__last-order">Sist bestilt: ${c.lastOrder}</span>` : '';
     const badgeHtml = eq.deaktivert
       ? `<span class="consumable-status-badge consumable-status-badge--no">${WAIT_SVG}Kan ikke bestilles</span>`
-      : unavailDate
-        ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}kan ikke bestilles før ${formatNorwegianDate(unavailDate)}</span>`
-        : `<span class="consumable-status-badge consumable-status-badge--ok">${OK_SVG}Kan bestilles</span>`;
+      : c.activeOrder
+        ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}Aktiv bestilling</span>`
+        : unavailDate
+          ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}Kan ikke bestilles</span>`
+          : `<span class="consumable-status-badge consumable-status-badge--ok">${OK_SVG}Kan bestilles</span>`;
     return `
       <div class="consumable-status-row">
         <span class="consumable-status-row__name">${typePart}</span>
