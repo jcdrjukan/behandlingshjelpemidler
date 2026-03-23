@@ -405,8 +405,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .order-consumable-row:last-child { border-bottom: none; }
 .order-consumable-row__info { flex: 1; min-width: 0; }
-.order-consumable-row__name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); }
-.order-consumable-row__rest { font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight); }
+.order-consumable-row__name { font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight); }
 .order-consumable-row__quota { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); margin-top: 2px; }
 .order-consumable-row__last-order { font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight-subdued); margin-top: 2px; }
 .order-consumable-row__unavailable { font: var(--mobile-sublabel-subdued); display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; color: var(--banana-700); }
@@ -1662,16 +1661,12 @@ function renderStep1(focusId) {
       </div>
       <div class="order-machine__body">
         ${eq.consumables.map((c, i) => {
-          const spaceIdx = c.name.indexOf(' ');
-          const typePart = spaceIdx === -1 ? c.name : c.name.slice(0, spaceIdx);
-          const restPart = spaceIdx === -1 ? '' : c.name.slice(spaceIdx + 1);
           const unavailDate = getUnavailableDate(eq.id, i, c);
           if (eq.deaktivert || unavailDate) {
             return `
         <div class="order-consumable-row">
           <div class="order-consumable-row__info">
-            <div class="order-consumable-row__name">${typePart}</div>
-            ${restPart ? `<div class="order-consumable-row__rest">${restPart}</div>` : ''}
+            <div class="order-consumable-row__name">${c.name}</div>
             ${c.lastOrder ? `<div class="order-consumable-row__last-order">Sist bestilt: ${c.lastOrder}</div>` : ''}
             <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}Kan ikke bestilles</div>
           </div>
@@ -1685,8 +1680,7 @@ function renderStep1(focusId) {
           return `
         <div class="order-consumable-row">
           <div class="order-consumable-row__info">
-            <div class="order-consumable-row__name">${typePart}</div>
-            ${restPart ? `<div class="order-consumable-row__rest">${restPart}</div>` : ''}
+            <div class="order-consumable-row__name">${c.name}</div>
             ${c.lastOrder ? `<div class="order-consumable-row__last-order">Sist bestilt: ${c.lastOrder}</div>` : ''}
             ${c.quota ? `<div class="order-consumable-row__quota">${c.quota}</div>` : ''}
           </div>
