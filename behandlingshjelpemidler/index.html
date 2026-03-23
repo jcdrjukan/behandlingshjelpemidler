@@ -1534,7 +1534,7 @@ function showOrder() {
   document.getElementById('viewMachine').hidden = true;
   // Set back button label
   const backEq = orderOrigin.eqId ? EQUIPMENT.find(e => e.id === orderOrigin.eqId) : null;
-  document.getElementById('orderBackLabel').textContent = backEq ? backEq.name : 'Behandlingshjelpemidler';
+  document.getElementById('orderBackLabel').textContent = backEq ? backEq.model : 'Behandlingshjelpemidler';
   updateWizardSteps(1);
   requestAnimationFrame(scrollTop);
 }
