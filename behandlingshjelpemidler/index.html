@@ -446,6 +446,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: var(--neutral-50); padding: 8px 12px;
   border-bottom: 1px solid var(--neutral-100);
   font: 700 1rem/120% 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight);
+  margin: 0;
 }
 .summary-machine__model { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); }
 .confirm-table { width: 100%; border-collapse: collapse; }
@@ -1783,9 +1784,9 @@ function renderStep4() {
     hasItems = true;
     itemsHtml += `
     <div class="summary-machine">
-      <div class="summary-machine__header">
+      <h3 class="summary-machine__header">
         ${eq.model}
-      </div>
+      </h3>
       <table class="confirm-table">
         <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
         <tbody>
