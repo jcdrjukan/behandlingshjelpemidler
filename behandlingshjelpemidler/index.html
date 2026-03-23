@@ -443,13 +443,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .summary-machine + .summary-machine { margin-top: var(--space-2xs); }
 .summary-machine__header {
-  background: var(--neutral-50); padding: var(--space-xs) var(--space-s);
+  background: var(--neutral-50); padding: 8px 12px;
   border-bottom: 1px solid var(--neutral-100);
   font: var(--mobile-sublabel); color: var(--color-base-text-onlight);
 }
 .summary-machine__model { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); }
 .confirm-table { width: 100%; border-collapse: collapse; }
-.confirm-table th { padding: 8px 12px; font: 400 16px/20px 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); text-align: left; border-bottom: 1px solid #989693; }
+.confirm-table th { padding: 8px 12px; font: 600 16px/20px 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); text-align: left; border-bottom: 1px solid #989693; }
 .confirm-table th:last-child { width: 1%; white-space: nowrap; }
 .confirm-table td { padding: 8px 12px; font: 400 16px/20px 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); border-bottom: 1px solid #989693; background: #fff; }
 .confirm-table tr:last-child td { border-bottom: none; }
@@ -1784,7 +1784,7 @@ function renderStep4() {
     itemsHtml += `
     <div class="summary-machine">
       <div class="summary-machine__header">
-        ${eq.model}<br><span class="summary-machine__model">${eq.details.type}</span>
+        ${eq.model}
       </div>
       <table class="confirm-table">
         <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
