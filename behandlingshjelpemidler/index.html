@@ -369,6 +369,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .order-consumable-row__name { font: var(--mobile-sublabel); color: var(--color-base-text-onlight); }
 .order-consumable-row__rest { font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight); }
 .order-consumable-row__quota { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); margin-top: 2px; }
+.order-consumable-row__last-order { font: var(--mobile-sublabel-subdued); color: var(--color-base-text-onlight-subdued); margin-top: 2px; }
 .order-consumable-row__unavailable { font: var(--mobile-sublabel-subdued); display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; color: var(--banana-700); }
 .order-consumable-row__unavailable svg { width: 16px; height: 16px; flex-shrink: 0; }
 
@@ -931,7 +932,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
     <!-- Master order button -->
     <div class="sp-m"></div>
-    <button class="btn-primary" onclick="startOrder(null)">
+    <button class="btn-primary" onclick="startOrder(null, 'front')">
       Bestill forbruksvarer
     </button>
 
@@ -1038,6 +1039,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   ════════════════════════════════════════════════════ -->
   <div id="viewOrder" hidden>
 
+    <!-- Back nav -->
+    <div class="order-nav" style="padding-left: 0;">
+      <button class="order-nav__back" id="orderBackBtn" onclick="goBackFromOrder()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span id="orderBackLabel">Behandlingshjelpemidler</span>
+      </button>
+    </div>
+
     <!-- Wizard progress bar -->
     <div class="wizard-bar">
       <div class="wizard-bar__track" id="wizardTrack"></div>
@@ -1059,7 +1068,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         Neste
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-      <button class="order-cancel-link" onclick="showFront()">Avbryt</button>
     </div>
 
     <!-- ── STEP 2: Levering ── -->
@@ -1453,7 +1461,7 @@ function renderMachinePage(eq) {
     </div>
     <h3 style="font: var(--mobile-h3); color: var(--color-base-text-onlight); margin: 1rem 0 1rem 0; background: var(--neutral-100); border-bottom: 2px solid var(--neutral-300); border-radius: 4px 4px 0 0; padding: var(--space-xs);">Forbruksmateriell</h3>
     <div class="consumable-status-list">${consumableRows}</div>
-    ${eq.deaktivert ? '' : `<div style="margin-top: var(--space-m);"><button class="btn-outline" onclick="startOrder('${eq.id}')">Bestill</button></div>`}`;
+    ${eq.deaktivert ? '' : `<div style="margin-top: var(--space-m);"><button class="btn-outline" onclick="startOrder('${eq.id}', 'machine')">Bestill</button></div>`}`;
 }
 
 function showOrder() {
@@ -1461,6 +1469,9 @@ function showOrder() {
   document.getElementById('viewOrder').hidden = false;
   document.getElementById('viewHistory').hidden = true;
   document.getElementById('viewMachine').hidden = true;
+  // Set back button label
+  const backEq = orderOrigin.eqId ? EQUIPMENT.find(e => e.id === orderOrigin.eqId) : null;
+  document.getElementById('orderBackLabel').textContent = backEq ? backEq.name : 'Behandlingshjelpemidler';
   updateWizardSteps(1);
   requestAnimationFrame(scrollTop);
 }
@@ -1473,7 +1484,18 @@ function showHistory() {
 }
 
 // ── Start order flow ───────────────────────────────────────
-function startOrder(eqId) {
+let orderOrigin = { view: 'front', eqId: null };
+
+function goBackFromOrder() {
+  if (orderOrigin.view === 'machine' && orderOrigin.eqId) {
+    showMachinePage(orderOrigin.eqId);
+  } else {
+    showFront();
+  }
+}
+
+function startOrder(eqId, fromView) {
+  orderOrigin = { view: fromView || 'front', eqId: eqId };
   resetOrderState();
   orderState.focusedEqId = eqId;
   renderStep1(eqId);
@@ -1573,6 +1595,7 @@ function renderStep1(focusId) {
           <div class="order-consumable-row__info">
             <div class="order-consumable-row__name">${typePart}</div>
             ${restPart ? `<div class="order-consumable-row__rest">${restPart}</div>` : ''}
+            ${c.lastOrder ? `<div class="order-consumable-row__last-order">Sist bestilt: ${c.lastOrder}</div>` : ''}
             <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}Kan ikke bestilles</div>
           </div>
         </div>`;
@@ -1583,6 +1606,7 @@ function renderStep1(focusId) {
           <div class="order-consumable-row__info">
             <div class="order-consumable-row__name">${typePart}</div>
             ${restPart ? `<div class="order-consumable-row__rest">${restPart}</div>` : ''}
+            ${c.lastOrder ? `<div class="order-consumable-row__last-order">Sist bestilt: ${c.lastOrder}</div>` : ''}
             <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}Kan ikke bestilles</div>
           </div>
         </div>`;
@@ -1592,6 +1616,7 @@ function renderStep1(focusId) {
           <div class="order-consumable-row__info">
             <div class="order-consumable-row__name">${typePart}</div>
             ${restPart ? `<div class="order-consumable-row__rest">${restPart}</div>` : ''}
+            ${c.lastOrder ? `<div class="order-consumable-row__last-order">Sist bestilt: ${c.lastOrder}</div>` : ''}
             ${c.quota ? `<div class="order-consumable-row__quota">${c.quota}</div>` : ''}
           </div>
           <div class="qty-control">
