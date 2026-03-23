@@ -1583,7 +1583,7 @@ function renderStep1(focusId) {
           <div class="order-consumable-row__info">
             <div class="order-consumable-row__name">${typePart}</div>
             ${restPart ? `<div class="order-consumable-row__rest">${restPart}</div>` : ''}
-            <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}kan ikke bestilles før ${formatNorwegianDate(unavailDate)}</div>
+            <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}Kan ikke bestilles</div>
           </div>
         </div>`;
           }
@@ -1754,7 +1754,7 @@ function refreshEquipmentCardStatuses() {
       if (!badge) return;
       const dateStr = formatNorwegianDate(orderedDates[key]);
       badge.className = 'consumable-status-badge consumable-status-badge--wait';
-      badge.innerHTML = WAIT_SVG + `kan ikke bestilles før ${dateStr}`;
+      badge.innerHTML = WAIT_SVG + 'Kan ikke bestilles';
       let lastOrderSpan = rows[i].querySelector('.consumable-status-row__last-order');
       if (!lastOrderSpan) {
         lastOrderSpan = document.createElement('span');
