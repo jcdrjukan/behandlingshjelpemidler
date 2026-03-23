@@ -313,6 +313,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .order-nav__back:hover { background: var(--color-action-background-transparent-onlight-hover); }
 .order-nav__back svg { width: 18px; height: 18px; }
 
+/* ── iOS-style confirmation alert ── */
+.ios-alert-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; padding: 20px;
+}
+.ios-alert {
+  background: rgba(242,242,247,0.98); backdrop-filter: blur(20px);
+  border-radius: 14px; width: 270px; overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+}
+.ios-alert__body {
+  padding: 20px 16px 16px;
+  text-align: center;
+}
+.ios-alert__title {
+  font: 600 17px/1.3 -apple-system, 'SF Pro Display', sans-serif;
+  color: #000; margin-bottom: 4px;
+}
+.ios-alert__message {
+  font: 400 13px/1.4 -apple-system, 'SF Pro Text', sans-serif;
+  color: #000;
+}
+.ios-alert__buttons {
+  display: flex; border-top: 0.5px solid rgba(60,60,67,0.29);
+}
+.ios-alert__btn {
+  flex: 1; padding: 11px 8px;
+  background: none; border: none; cursor: pointer;
+  font: 400 17px/1.3 -apple-system, 'SF Pro Text', sans-serif;
+  color: #007AFF;
+}
+.ios-alert__btn + .ios-alert__btn {
+  border-left: 0.5px solid rgba(60,60,67,0.29);
+}
+.ios-alert__btn--confirm { font-weight: 600; }
+.ios-alert__btn:active { background: rgba(0,0,0,0.1); }
+
 /* ── Wizard progress bar ── */
 .wizard-bar { width: 344px; padding: var(--space-m) 0 var(--space-s); }
 .wizard-bar__track { display: flex; align-items: center; height: 24px; }
@@ -1280,6 +1318,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 </div><!-- /app -->
 <div class="phone-chrome-bottom"><div class="phone-chrome-bottom__bar"></div></div>
+  <!-- iOS-style abandon-order confirmation -->
+  <div class="ios-alert-overlay" id="abandonAlert" hidden>
+    <div class="ios-alert">
+      <div class="ios-alert__body">
+        <div class="ios-alert__title">Ulagrede endringer</div>
+        <div class="ios-alert__message">Du har ulagrede endringer. Er du sikker du vil avslutte?</div>
+      </div>
+      <div class="ios-alert__buttons">
+        <button class="ios-alert__btn" onclick="dismissAbandonAlert()">Avbryt</button>
+        <button class="ios-alert__btn ios-alert__btn--confirm" onclick="confirmAbandonOrder()">Avslutt</button>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /phone-shell -->
 </div><!-- /phone-wrap -->
 
@@ -1487,6 +1539,13 @@ function showHistory() {
 let orderOrigin = { view: 'front', eqId: null };
 
 function goBackFromOrder() {
+  document.getElementById('abandonAlert').hidden = false;
+}
+function dismissAbandonAlert() {
+  document.getElementById('abandonAlert').hidden = true;
+}
+function confirmAbandonOrder() {
+  document.getElementById('abandonAlert').hidden = true;
   if (orderOrigin.view === 'machine' && orderOrigin.eqId) {
     showMachinePage(orderOrigin.eqId);
   } else {
