@@ -449,10 +449,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font: var(--mobile-sublabel); color: var(--color-base-text-onlight);
 }
 .summary-machine__model { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); }
-.summary-machine__body { padding: var(--space-xs) var(--space-s); display: flex; flex-direction: column; gap: var(--space-3xs); }
-.summary-item { display: flex; justify-content: space-between; gap: var(--space-xs); }
-.summary-item__name { font: var(--mobile-body); color: var(--color-base-text-onlight); }
-.summary-item__qty { font: var(--mobile-body); color: var(--color-base-text-onlight); white-space: nowrap; }
+.confirm-table { width: 100%; border-collapse: collapse; }
+.confirm-table th { background: #f5f3f3; padding: 8px 12px; font: 700 20px/24px 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); text-align: left; border-bottom: 1px solid #989693; }
+.confirm-table th:last-child { width: 1%; white-space: nowrap; }
+.confirm-table td { padding: 8px 12px; font: 400 16px/20px 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); border-bottom: 1px solid #989693; }
+.confirm-table tr:last-child td { border-bottom: none; }
+.confirm-table td:last-child { white-space: nowrap; }
 
 .summary-section {
   border: 1px solid var(--neutral-200); border-radius: var(--radius-m); overflow: hidden;
@@ -1788,13 +1790,16 @@ function renderStep4() {
       <div class="summary-machine__header">
         ${eq.name}<br><span class="summary-machine__model">${eq.model}</span>
       </div>
-      <div class="summary-machine__body">
-        ${items.map(c => {
-          const i = eq.consumables.indexOf(c);
-          const qty = orderState.quantities[eq.id][i];
-          return `<div class="summary-item"><span class="summary-item__name">${c.name}</span><span class="summary-item__qty">antall: ${qty}</span></div>`;
-        }).join('')}
-      </div>
+      <table class="confirm-table">
+        <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
+        <tbody>
+          ${items.map(c => {
+            const i = eq.consumables.indexOf(c);
+            const qty = orderState.quantities[eq.id][i];
+            return `<tr><td>${c.name}</td><td>${qty}</td></tr>`;
+          }).join('')}
+        </tbody>
+      </table>
     </div>`;
   });
 
