@@ -134,6 +134,36 @@
 
 /* ── Content column ─────────────────────────────────────────── */
 .content-col { width: 366px; margin: 0 auto; }
+
+/* ── Help expander ──────────────────────────────────────────── */
+.help-expander { width: 100%; }
+.help-expander__trigger {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 10px 2px 4px 8px; min-height: 44px; gap: 8px;
+}
+.help-expander__trigger-inner {
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.help-expander__question-icon { flex-shrink: 0; margin-top: 2px; }
+.help-expander__trigger-text {
+  font: 600 16px/1.2 'Source Sans 3', sans-serif;
+  color: #5B22A6; text-align: left; padding-top: 3px;
+}
+.help-expander__chevron { flex-shrink: 0; margin-top: 4px; transition: transform 0.15s; }
+.help-expander__trigger[aria-expanded="true"] .help-expander__chevron { transform: rotate(180deg); }
+.help-expander__content {
+  background: #F4ECFE; border: 1px solid #9153E2; border-radius: 4px;
+  padding: 16px 16px 16px 36px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.help-expander__text {
+  font: 400 16px/1.5 'Source Sans Pro', sans-serif; color: #000; margin: 0;
+}
+.help-expander__link {
+  font: 400 16px/1.5 'Source Sans Pro', sans-serif;
+  color: #08667C; text-decoration: underline; text-underline-offset: 2px;
+}
 </style>
 </head>
 <body>
@@ -414,14 +444,15 @@
       <div class="help-expander">
         <button class="help-expander__trigger" aria-expanded="false" onclick="toggleHelp(this)">
           <div class="help-expander__trigger-inner">
-            <svg class="help-expander__question-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#5B22A6"/><path d="M12 7a2.5 2.5 0 0 1 1 4.8c-.6.2-1 .8-1 1.4V14" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="16.5" r="0.75" fill="white"/></svg>
+            <svg class="help-expander__question-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="#5B22A6" stroke-width="1.5"/><path d="M10 6.5a2 2 0 0 1 1 3.464c-.6.346-1 .98-1 1.668V13" stroke="#5B22A6" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.75" r="0.75" fill="#5B22A6"/></svg>
             <span class="help-expander__trigger-text">Hvor ser jeg selve prøvesvarene?</span>
           </div>
           <svg class="help-expander__chevron" width="9" height="6" viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M1 1L4.5 5L8 1" stroke="#5B22A6" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
         <div class="help-expander__body" hidden>
           <div class="help-expander__content">
-            <p class="help-expander__text">Prøvesvar er tilgjengelige under «Prøvesvar» i menyen. Merk at det kun er prøver tatt hos aktører som deltar i utprøvingen som er synlige her.</p>
+            <p class="help-expander__text">Oversikten viser kun informasjon om prøver som er bestilt til deg, og som du har tatt. Selve prøvesvaret finner du i tjenesten Prøvesvar.<br><br>Tjenesten er under utprøving og viser derfor bare prøvesvar fra noen legekontor, sykehus og laboratorier.</p>
+            <a class="help-expander__link" href="#">Gå til prøvesvar →</a>
           </div>
         </div>
       </div>
