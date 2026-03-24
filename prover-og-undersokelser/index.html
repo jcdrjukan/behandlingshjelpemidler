@@ -106,23 +106,37 @@
   text-decoration-style: dotted; display: block;
 }
 
-/* ── Tidligere prøver list ──────────────────────────────────── */
-.prev-list { display: flex; flex-direction: column; }
-.prev-item {
+/* ── Accordion list (Tidligere prøver) ──────────────────────── */
+.acc-list { display: flex; flex-direction: column; padding-bottom: 1px; }
+.acc-item {
   border-top: 1px solid #7D7C79; border-bottom: 1px solid #7D7C79;
   margin-bottom: -1px; background: #fff;
-  display: flex; align-items: center;
-  cursor: pointer; min-height: 64px; padding: 0;
-  width: 100%; text-align: left;
 }
-.prev-item:hover { background: #F5F3F3; }
-.prev-item__inner {
-  flex: 1; min-width: 0; padding: 12px 0 12px 16px;
-  display: flex; flex-direction: column; gap: 2px;
+.acc-item__header {
+  display: flex; align-items: stretch; justify-content: space-between;
+  width: 100%; background: none; border: none; cursor: pointer;
+  padding: 8px 0 8px 8px; min-height: 64px; text-align: left;
 }
-.prev-item__type { font: 400 18px/1.2 'Source Sans Pro', sans-serif; color: #000; }
-.prev-item__date { font: 400 16px/1.2 'Source Sans 3', sans-serif; color: #474745; }
-.prev-item__chevron { width: 44px; height: 48px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.acc-item--open .acc-item__header { background: #F5F3F3; border-bottom: 1px solid #fff; }
+.acc-item__label {
+  flex: 1; min-width: 0; padding: 12px 0 12px 8px;
+  font: 400 18px/1.2 'Source Sans Pro', sans-serif; color: #000;
+}
+.acc-item--open .acc-item__label { font-weight: 600; }
+.acc-item__chevron-frame {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; flex-shrink: 0; padding: 4px 0;
+}
+.acc-item__chevron { transition: transform 0.15s; }
+.acc-item--open .acc-item__chevron { transform: rotate(180deg); }
+.acc-item__body { display: none; }
+.acc-item--open .acc-item__body { display: block; }
+.acc-item__content {
+  padding: 12px 16px 32px 14px;
+  font: 400 18px/1.5 'Source Sans Pro', sans-serif; color: #000;
+}
+.acc-item__content p { margin: 0; }
+.acc-item__section-label { font-weight: 600; }
 
 /* ── "Tidligere prøver" link ────────────────────────────────── */
 .earlier-link {
@@ -460,7 +474,7 @@
 
     <div class="sp-xs"></div>
 
-    <div style="width:366px; margin: 0 auto;" class="prev-list" id="prevList"></div>
+    <div style="width:366px; margin: 0 auto;" class="acc-list" id="prevList"></div>
 
     <div class="sp-xl"></div>
 
@@ -516,7 +530,13 @@ const FREMTIDIGE = [
 ];
 
 const TIDLIGERE = [
-  { id: 't1', type: 'Laboratoriemedisin', date: '22.12.2025' },
+  {
+    id: 't1', type: 'Laboratoriemedisin', date: '22.12.2025',
+    prøvemateriale: 'Blod',
+    analyser: ['Hemoglobin'],
+    rekvirent: 'Bent Olsen, Oslo universitetssykehus',
+    utført: '22.12.2025',
+  },
   { id: 't2', type: 'Laboratoriemedisin', date: '09.12.2025' },
   { id: 't3', type: 'Laboratoriemedisin', date: '08.12.2025' },
   { id: 't4', type: 'Laboratoriemedisin', date: '01.12.2025' },
@@ -563,20 +583,40 @@ function renderRekvCards() {
   `).join('');
 }
 
-// ── Render previous list ──────────────────────────────────────
+// ── Render accordion list (Tidligere prøver) ─────────────────
+const ACC_CHEVRON = `<svg class="acc-item__chevron" viewBox="0 0 38 38" width="38" height="38" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M25.7901 14.1587L27.2097 15.5675L18.9993 23.8413L10.79 15.5674L12.2098 14.1588L18.9994 21.0018L25.7901 14.1587Z" fill="#188097"/></svg>`;
+
 function renderPrevList() {
   const container = document.getElementById('prevList');
-  container.innerHTML = TIDLIGERE.map(t => `
-    <button class="prev-item">
-      <div class="prev-item__inner">
-        <div class="prev-item__type">${t.type}</div>
-        <div class="prev-item__date">${t.date}</div>
-      </div>
-      <div class="prev-item__chevron">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#188097" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-    </button>
-  `).join('');
+  container.innerHTML = TIDLIGERE.map(t => {
+    const body = t.prøvemateriale ? `
+      <div class="acc-item__body">
+        <div class="acc-item__content">
+          <p><span class="acc-item__section-label">Prøvemateriale:</span><br>${t.prøvemateriale}</p>
+          <p>&nbsp;</p>
+          <p><span class="acc-item__section-label">Analyse(r):</span><br>${t.analyser.join('<br>')}</p>
+          <p>&nbsp;</p>
+          <p><span class="acc-item__section-label">Rekvirert av:</span><br>${t.rekvirent}</p>
+          <p>&nbsp;</p>
+          <p><span class="acc-item__section-label">Utført:</span><br>${t.utført}</p>
+        </div>
+      </div>` : '';
+    return `
+      <div class="acc-item" id="acc-${t.id}">
+        <button class="acc-item__header" onclick="toggleAccordion('${t.id}')" aria-expanded="false">
+          <div class="acc-item__label">${t.type}<br>${t.date}</div>
+          <div class="acc-item__chevron-frame">${ACC_CHEVRON}</div>
+        </button>
+        ${body}
+      </div>`;
+  }).join('');
+}
+
+function toggleAccordion(id) {
+  const item = document.getElementById('acc-' + id);
+  const isOpen = item.classList.contains('acc-item--open');
+  item.classList.toggle('acc-item--open', !isOpen);
+  item.querySelector('.acc-item__header').setAttribute('aria-expanded', String(!isOpen));
 }
 
 // ── Toggle card expand/collapse ───────────────────────────────
