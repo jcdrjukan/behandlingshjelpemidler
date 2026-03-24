@@ -387,21 +387,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .order-step__optional { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); margin-top: calc(-1 * var(--space-3xs)); }
 
 /* Per-machine section in Step 1 */
-.order-machine { width: 100%; }
-.order-machine + .order-machine { margin-top: var(--space-m); }
+.order-machine { width: 100%; border: 1px solid #7D7C79; background: #F5F3F3; overflow: hidden; }
+.order-machine + .order-machine { margin-top: 8px; }
 .order-machine__header {
-  display: flex; align-items: center; gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-xs);
-  background: var(--neutral-100);
-  border-radius: 4px 4px 0 0;
-  border-bottom: 2px solid var(--neutral-300);
-  margin-bottom: 2px;
+  display: flex; align-items: center;
+  padding: 8px;
+  background: #EAE7E7;
+  border-bottom: 1px solid #fff;
 }
-.order-machine__icon { width: 28px; height: 28px; flex-shrink: 0; object-fit: contain; }
-.order-machine__info { flex: 1; min-width: 0; }
-.order-machine__name { font: var(--mobile-body-strong); color: var(--color-base-text-onlight); }
-.order-machine__model { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); margin-top: 1px; }
-.order-machine__body { display: flex; flex-direction: column; }
+.order-machine__icon { width: 38px; height: 38px; flex-shrink: 0; object-fit: contain; }
+.order-machine__info { flex: 1; min-width: 0; padding: 12px 0 12px 8px; }
+.order-machine__label { font: 600 18px/1.2 'Source Sans Pro', sans-serif; color: #000; }
+.order-machine__body { display: flex; flex-direction: column; background: #fff; padding: 12px 16px 32px 14px; }
 
 .order-consumable-row {
   display: flex; align-items: center; gap: var(--space-xs);
@@ -1662,8 +1659,7 @@ function renderStep1(focusId) {
       <div class="order-machine__header">
         <img class="order-machine__icon" src="${ICON}" alt="">
         <div class="order-machine__info">
-          <div class="order-machine__name">${eq.model}</div>
-          <div class="order-machine__model">${eq.details.type}</div>
+          <div class="order-machine__label">${eq.model}<br>${eq.details.type}</div>
         </div>
       </div>
       <div class="order-machine__body">
