@@ -1815,8 +1815,8 @@ function renderStep4() {
     </div>`;
   }
 
-  const deliveryHtml = `<div class="summary-section"><div class="summary-section__header">Levering</div><div class="summary-section__body">${addr}</div></div>`;
-  const commentHtml = comment ? `<div class="summary-section"><div class="summary-section__header">Kommentar</div><div class="summary-section__body">${comment}</div></div>` : '';
+  const deliveryHtml = `<table class="confirm-table-flat"><thead><tr><th>Levering</th></tr></thead><tbody><tr><td>${addr}</td></tr></tbody></table>`;
+  const commentHtml = comment ? `<table class="confirm-table-flat"><thead><tr><th>Kommentar</th></tr></thead><tbody><tr><td>${comment}</td></tr></tbody></table>` : '';
 
   document.getElementById('step4Content').innerHTML = itemsHtml + deliveryHtml + commentHtml;
 }
