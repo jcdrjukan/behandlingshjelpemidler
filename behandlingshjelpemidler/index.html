@@ -1640,7 +1640,7 @@ function goBack() {
 }
 
 // ── Step 1: render machine + qty controls ──────────────────
-const WAIT_BADGE_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#AB7C00"/><line x1="8" y1="4.5" x2="8" y2="8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="1" fill="#fff"/></svg>`;
+const WAIT_BADGE_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM3.7589 11.7286L3.68615 11.8018C2.7923 10.7884 2.25 9.45753 2.25 8C2.25 4.82436 4.82436 2.25 8 2.25C9.69824 2.25 11.2245 2.98622 12.2771 4.1569L3.7589 11.7286Z" fill="#AB7C00"/></svg>`;
 
 function getUnavailableDate(eqId, i, c) {
   const key = `${eqId}-${i}`;
@@ -1675,7 +1675,7 @@ function renderStep1(focusId) {
           <div class="order-consumable-row__info">
             <div class="order-consumable-row__name">${c.name}</div>
             ${c.lastOrder ? `<div class="order-consumable-row__last-order">Sist bestilt: ${c.lastOrder}</div>` : ''}
-            <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}Kan ikke bestilles</div>
+            <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}kan ikke bestilles</div>
           </div>
           <div class="qty-control">
             <button class="qty-btn" disabled aria-label="Reduser antall">−</button>
@@ -1854,7 +1854,7 @@ function refreshEquipmentCardStatuses() {
       if (!badge) return;
       const dateStr = formatNorwegianDate(orderedDates[key]);
       badge.className = 'consumable-status-badge consumable-status-badge--wait';
-      badge.innerHTML = WAIT_SVG + 'Kan ikke bestilles';
+      badge.innerHTML = WAIT_SVG + 'kan ikke bestilles';
       let lastOrderSpan = rows[i].querySelector('.consumable-status-row__last-order');
       if (!lastOrderSpan) {
         lastOrderSpan = document.createElement('span');
