@@ -537,9 +537,27 @@ const TIDLIGERE = [
     rekvirent: 'Bent Olsen, Oslo universitetssykehus',
     utført: '22.12.2025',
   },
-  { id: 't2', type: 'Laboratoriemedisin', date: '09.12.2025' },
-  { id: 't3', type: 'Laboratoriemedisin', date: '08.12.2025' },
-  { id: 't4', type: 'Laboratoriemedisin', date: '01.12.2025' },
+  {
+    id: 't2', type: 'Laboratoriemedisin', date: '09.12.2025',
+    prøvemateriale: 'Blod',
+    analyser: ['Ferritin', 'Hemoglobin'],
+    rekvirent: 'Doktor Doktorsson, Oslo universitetssykehus',
+    utført: '09.12.2025',
+  },
+  {
+    id: 't3', type: 'Laboratoriemedisin', date: '08.12.2025',
+    prøvemateriale: 'Blod',
+    analyser: ['Hemoglobin', 'Vitamin B12'],
+    rekvirent: 'Asgeir Larsen, Oslo universitetssykehus',
+    utført: '08.12.2025',
+  },
+  {
+    id: 't4', type: 'Laboratoriemedisin', date: '01.12.2025',
+    prøvemateriale: 'Blod',
+    analyser: ['Hemoglobin'],
+    rekvirent: 'Bent Olsen, Oslo universitetssykehus',
+    utført: '01.12.2025',
+  },
 ];
 
 // ── Render rekvisjon cards ────────────────────────────────────
