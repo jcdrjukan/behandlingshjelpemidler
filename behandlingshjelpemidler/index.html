@@ -1464,8 +1464,8 @@ function showMachinePage(eqId) {
 }
 
 function renderMachinePage(eq) {
-  const OK_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none"><circle cx="8" cy="8" r="8" fill="#078141"/><polyline points="4,8.5 6.5,11 12,5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  const WAIT_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 0 A8 8 0 0 1 8 16 Z" fill="#AB7C00"/><line x1="11" y1="4.5" x2="11" y2="9" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="12" r="1" fill="#fff"/></svg>`;
+  const OK_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8Z" fill="#078141"/></svg>`;
+  const WAIT_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM3.7589 11.7286L3.68615 11.8018C2.7923 10.7884 2.25 9.45753 2.25 8C2.25 4.82436 4.82436 2.25 8 2.25C9.69824 2.25 11.2245 2.98622 12.2771 4.1569L3.7589 11.7286Z" fill="#AB7C00"/></svg>`;
 
   const consumableRows = eq.consumables.map((c, i) => {
     const unavailDate = getUnavailableDate(eq.id, i, c);
@@ -1840,7 +1840,7 @@ function formatNorwegianDate(date) {
 }
 
 function refreshEquipmentCardStatuses() {
-  const WAIT_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 0 A8 8 0 0 1 8 16 Z" fill="#AB7C00"/><line x1="11" y1="4.5" x2="11" y2="9" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="12" r="1" fill="#fff"/></svg>`;
+  const WAIT_SVG = `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM3.7589 11.7286L3.68615 11.8018C2.7923 10.7884 2.25 9.45753 2.25 8C2.25 4.82436 4.82436 2.25 8 2.25C9.69824 2.25 11.2245 2.98622 12.2771 4.1569L3.7589 11.7286Z" fill="#AB7C00"/></svg>`;
   const todayStr = formatNorwegianDate(new Date());
   EQUIPMENT.forEach(eq => {
     const card = document.querySelector(`[data-eq-id="${eq.id}"]`);
