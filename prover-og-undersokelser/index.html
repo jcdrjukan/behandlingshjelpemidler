@@ -139,8 +139,8 @@
 .help-expander { width: 100%; }
 .help-expander__trigger {
   width: 100%; background: none; border: none; cursor: pointer;
-  display: flex; align-items: flex-start;
-  padding: 10px 2px 4px 8px; min-height: 44px; gap: 1rem;
+  display: flex; align-items: center;
+  padding: 10px 2px 4px 8px; min-height: 44px; gap: 0.5rem;
 }
 .help-expander__trigger-inner {
   display: flex; align-items: flex-start; gap: 8px;
@@ -150,7 +150,7 @@
   font: 600 16px/1.2 'Source Sans 3', sans-serif;
   color: #5B22A6; text-align: left; padding-top: 3px;
 }
-.help-expander__chevron { flex-shrink: 0; margin-top: 4px; transition: transform 0.15s; }
+.help-expander__chevron { flex-shrink: 0; transition: transform 0.15s; }
 .help-expander__trigger[aria-expanded="true"] .help-expander__chevron { transform: rotate(180deg); }
 .help-expander__content {
   background: #F4ECFE; border: 1px solid #9153E2; border-radius: 4px;
