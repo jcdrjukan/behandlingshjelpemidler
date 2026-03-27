@@ -1890,8 +1890,8 @@ function showConfirmation(orderId, delivery) {
   document.getElementById('confirmationHeading').innerHTML = 'Bestilling er mottatt';
   const contact = 'Dersom du har sp\u00f8rsm\u00e5l om din bestilling kan du kontakte Regional enhet for behandlings\u00adhjelpe\u00admidler. Tel: 72 57 63 00';
   const msg = delivery === 'hentes'
-    ? 'Du vil f\u00e5 beskjed n\u00e5r ordren er klar til henting.<br><br>' + contact
-    : 'Ordren sendes vanligvis innen 1-2 arbeidsdager.<br><br>' + contact;
+    ? 'Du vil f\u00e5 beskjed n\u00e5r ordren er klar til henting. ' + contact
+    : 'Ordren sendes vanligvis innen 1-2 arbeidsdager. ' + contact;
   document.getElementById('confirmationText').innerHTML = msg;
   panel.style.display = 'flex';
 }
