@@ -147,7 +147,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: flex; gap: var(--space-xs); padding: var(--space-xs) var(--space-s); align-items: flex-start;
 }
 .notification-panel--info    { background: var(--color-notification-background-info); border: 2px solid var(--color-notification-border-info); border-radius: var(--radius-s); box-shadow: 4px 4px 6px 0px rgba(0,0,0,0.15); gap: 4px; padding: 8px 8px 12px 8px; }
-.notification-panel--success { background: var(--color-notification-background-success); border-left: 4px solid var(--color-notification-border-success); }
+.notification-panel--success { background: var(--color-notification-background-success); border: 2px solid var(--color-notification-border-success); border-radius: var(--radius-s); box-shadow: 4px 4px 6px 0px rgba(0,0,0,0.15); gap: 8px; padding: 8px 8px 12px 12px; }
 .notification-panel--warning { background: var(--color-notification-background-warning); border-left: 4px solid var(--color-notification-border-warning); }
 .notification-panel--error   { background: #FFF2EA; border: 2px solid #A31F0E; border-radius: 4px; box-shadow: 4px 4px 6px 0px rgba(0,0,0,0.15); gap: 4px; padding: 8px 8px 12px 8px; }
 .notification-panel__icon { width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px; }
@@ -313,7 +313,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .order-nav__back {
   display: flex; align-items: center; gap: var(--space-3xs);
   background: none; border: none; cursor: pointer;
-  color: var(--color-action-text-onlight); font: var(--mobile-sublabel); padding: var(--space-2xs);
+  color: var(--color-base-text-onlight); font: var(--mobile-sublabel); padding: var(--space-2xs);
   border-radius: var(--radius-s);
 }
 .order-nav__back:hover { background: var(--color-action-background-transparent-onlight-hover); }
@@ -388,19 +388,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .order-step__optional { font: var(--mobile-sublabel-subdued); color: var(--color-disabled-text); margin-top: calc(-1 * var(--space-3xs)); }
 
 /* Per-machine section in Step 1 */
-.order-machine { width: 100%; border: 1px solid #7D7C79; background: #F5F3F3; overflow: hidden; }
-.order-machine + .order-machine { margin-top: 8px; }
+.order-machine { width: 100%; border-top: 1px solid #7D7C79; border-bottom: 1px solid #7D7C79; margin-bottom: -1px; background: #fff; }
+.order-machine--open { background: #F5F3F3; }
 .order-machine__header {
   display: flex; align-items: center;
   padding: 8px;
-  background: #EAE7E7;
-  border-bottom: 1px solid #fff;
+  cursor: pointer; background: transparent;
+  border: none; border-bottom: 0 solid #fff; width: 100%; text-align: left;
 }
+.order-machine--open .order-machine__header { border-bottom: 1px solid #fff; }
 .order-machine__icon { width: 38px; height: 38px; flex-shrink: 0; object-fit: contain; }
 .order-machine__info { flex: 1; min-width: 0; padding: 12px 0 12px 8px; }
 .order-machine__label { font: 600 18px/1.2 'Source Sans Pro', sans-serif; color: #000; }
 .order-machine__type { font: 400 16px/1.2 'Source Sans Pro', sans-serif; color: #474745; margin-top: 2px; }
+.order-machine__chevron { width: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.order-machine__chevron-icon { transition: transform 0.2s; }
+.order-machine--open .order-machine__chevron-icon { transform: rotate(180deg); }
 .order-machine__body { display: flex; flex-direction: column; background: #fff; padding: 12px 16px 32px 14px; }
+.order-machine--closed .order-machine__body { display: none; }
 
 .order-consumable-row {
   display: flex; align-items: center; gap: var(--space-xs);
@@ -643,6 +648,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .history-card__toggle-text { flex: 1; min-width: 0; padding: 4px 0; }
 .history-card__title { font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
 .history-card__date  { font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight); }
+.history-card__toggle-text { display: flex; flex-direction: column; }
+.history-card__date--top { order: -1; color: #62625f; }
 .history-card__chevron-wrap {
   display: flex; align-items: center; justify-content: center;
   width: 44px; min-height: 48px; flex-shrink: 0;
@@ -864,11 +871,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <div class="sp-s"></div>
 
     <!-- Order confirmation (shown after submit, persists until delivered) -->
-    <div id="orderConfirmation" class="notification-panel notification-panel--info" role="status" style="display:none">
-      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex-shrink:0;margin-top:3px;"><circle cx="11" cy="11" r="11" fill="#08667C"/><circle cx="11" cy="6.5" r="1.5" fill="white"/><rect x="9.5" y="10" width="3" height="7" rx="1.5" fill="white"/></svg>
-      <div class="notification-panel__body" style="padding: 2px 8px 0 0;">
-        <p id="confirmationHeading" style="font: var(--mobile-sublabel); color: var(--color-base-text-onlight);"></p>
-        <p id="confirmationText" style="font: var(--mobile-image-caption); color: var(--color-base-text-onlight); margin-top: 4px;"></p>
+    <div id="orderConfirmation" class="notification-panel notification-panel--success" role="status" style="display:none">
+      <div style="flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center;">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#078141"/><path d="M8 17l6 6 10-11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="notification-panel__body" style="padding: 8px 8px 0 0;">
+        <p id="confirmationHeading" style="font: 600 18px/26px 'Source Sans Pro', sans-serif; color: #000;"></p>
+        <p id="confirmationText" style="font: 400 18px/26px 'Source Sans Pro', sans-serif; color: #000;"></p>
       </div>
     </div>
 
@@ -993,15 +1002,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
     <div class="sp-xl"></div>
 
-    <!-- ── ORDER HISTORY ── -->
-    <h2 class="section-h2">Siste bestilling</h2>
+    <!-- ── ACTIVE ORDERS ── -->
+    <h2 class="section-h2">Aktive bestillinger</h2>
     <div class="sp-s"></div>
 
     <div class="order-card" id="sistebestilling">
       <button class="order-card__toggle" onclick="toggleOrderCard(this)" aria-expanded="false">
         <div class="order-card__main">
-          <div class="order-card__title">Forbruksmateriell</div>
-          <div class="order-card__subtitle">Bestilt: 12.10.2024</div>
+          <div class="history-card__toggle-text">
+            <div class="history-card__date">Airsense 11 Autoset</div>
+            <div class="history-card__date history-card__date--top">12.10.2024</div>
+          </div>
         </div>
         <div class="order-card__chevron-wrap">
           <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI1Ljc5MDEgMTQuMTU4N0wyNy4yMDk3IDE1LjU2NzVMMTguOTk5MyAyMy44NDEzTDEwLjc5IDE1LjU2NzRMMTIuMjA5OCAxNC4xNTg4TDE4Ljk5OTQgMjEuMDAxOEwyNS43OTAxIDE0LjE1ODdaIiBmaWxsPSIjMTg4MDk3Ii8+PC9zdmc+" alt="">
@@ -1011,9 +1022,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         <div class="duolist">
           <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Airsense 11 Autoset</span></div>
           <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Positivt luftveistrykkapparat, kontinuerlig, auto</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">23244159084</span></div>
           <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">12.10.2024</span></div>
-          <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">16.10.2024</span></div>
+          <div class="duolist__row"><span class="duolist__key">Leveransemåte</span><span class="duolist__value">Hentes</span></div>
+          <div class="duolist__row"><span class="duolist__key">Status</span><span class="duolist__value">Til pakking</span></div>
+          <div class="duolist__row"><span class="duolist__key">Ved spørsmål kontakt</span><span class="duolist__value">Regional enhet for behandlingshjelpemidler. Tel: 72 57 63 00</span></div>
         </div>
         <table class="confirm-table">
           <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
@@ -1213,20 +1225,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <div class="order-nav">
       <button class="order-nav__back" onclick="showFront()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Tilbake
+        Behandlingshjelpemidler
       </button>
     </div>
 
     <div class="sp-m"></div>
-    <h2 class="section-h2">Bestillingshistorikk</h2>
-    <div class="sp-s"></div>
+    <h2 style="width:344px; font: 600 2.25rem/120% 'Source Sans Pro', sans-serif; color: var(--color-base-text-onlight);">Bestillingshistorikk</h2>
+    <div class="sp-xs"></div>
+    <p class="page-intro">Her finner du de 5 siste bestillingene av forbruksmateriell til ditt utstyr.</p>
+    <div class="sp-xl"></div>
 
     <!-- History accordions -->
     <div class="history-card">
       <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
         <div class="history-card__toggle-text">
-          <div class="history-card__title">Forbruksmateriell</div>
-          <div class="history-card__date">Bestilt: 12.10.2024</div>
+<div class="history-card__date">Airsense 11 Autoset</div>
+          <div class="history-card__date history-card__date--top">12.10.2024</div>
         </div>
         <div class="history-card__chevron-wrap"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI1Ljc5MDEgMTQuMTU4N0wyNy4yMDk3IDE1LjU2NzVMMTguOTk5MyAyMy44NDEzTDEwLjc5IDE1LjU2NzRMMTIuMjA5OCAxNC4xNTg4TDE4Ljk5OTQgMjEuMDAxOEwyNS43OTAxIDE0LjE1ODdaIiBmaWxsPSIjMTg4MDk3Ii8+PC9zdmc+" alt=""></div>
       </button>
@@ -1234,7 +1248,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         <div class="duolist">
           <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Airsense 11 Autoset</span></div>
           <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Positivt luftveistrykkapparat, kontinuerlig, auto</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">23244159084</span></div>
           <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">12.10.2024</span></div>
           <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">16.10.2024</span></div>
         </div>
@@ -1252,8 +1265,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <div class="history-card">
       <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
         <div class="history-card__toggle-text">
-          <div class="history-card__title">Forbruksmateriell</div>
-          <div class="history-card__date">Bestilt: 04.08.2024</div>
+<div class="history-card__date">OmniPod DASH PDM</div>
+          <div class="history-card__date">Airsense 11 Autoset</div>
+          <div class="history-card__date history-card__date--top">04.08.2024</div>
         </div>
         <div class="history-card__chevron-wrap"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI1Ljc5MDEgMTQuMTU4N0wyNy4yMDk3IDE1LjU2NzVMMTguOTk5MyAyMy44NDEzTDEwLjc5IDE1LjU2NzRMMTIuMjA5OCAxNC4xNTg4TDE4Ljk5OTQgMjEuMDAxOEwyNS43OTAxIDE0LjE1ODdaIiBmaWxsPSIjMTg4MDk3Ii8+PC9zdmc+" alt=""></div>
       </button>
@@ -1261,7 +1275,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         <div class="duolist">
           <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">OmniPod DASH PDM</span></div>
           <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Infusjon, pumpe, insulin, bærbar</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">040500-18348</span></div>
           <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">04.08.2024</span></div>
           <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">08.08.2024</span></div>
         </div>
@@ -1273,14 +1286,28 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
             <tr><td>CGM sensor</td><td>4</td></tr>
           </tbody>
         </table>
+        <div style="border-top: 1px solid #D6D4D3;"></div>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Airsense 11 Autoset</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Positivt luftveistrykkapparat, kontinuerlig, auto</span></div>
+          <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">04.08.2024</span></div>
+          <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">08.08.2024</span></div>
+        </div>
+        <table class="confirm-table">
+          <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
+          <tbody>
+            <tr><td>Filter inntak pasient Resmed Air 11 standard [Frp 2 stk/pk]</td><td>2</td></tr>
+            <tr><td>Vannkammer fuktekammer CPAP HumidAir 11</td><td>1</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <div class="history-card">
       <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
         <div class="history-card__toggle-text">
-          <div class="history-card__title">Forbruksmateriell</div>
-          <div class="history-card__date">Bestilt: 15.05.2024</div>
+<div class="history-card__date">Permobil M3 Corpus</div>
+          <div class="history-card__date history-card__date--top">15.05.2024</div>
         </div>
         <div class="history-card__chevron-wrap"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI1Ljc5MDEgMTQuMTU4N0wyNy4yMDk3IDE1LjU2NzVMMTguOTk5MyAyMy44NDEzTDEwLjc5IDE1LjU2NzRMMTIuMjA5OCAxNC4xNTg4TDE4Ljk5OTQgMjEuMDAxOEwyNS43OTAxIDE0LjE1ODdaIiBmaWxsPSIjMTg4MDk3Ii8+PC9zdmc+" alt=""></div>
       </button>
@@ -1288,7 +1315,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         <div class="duolist">
           <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Permobil M3 Corpus</span></div>
           <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Rullestol, elektrisk, utendørs</span></div>
-          <div class="duolist__row"><span class="duolist__key">Serienummer</span><span class="duolist__value">PM3-20240312</span></div>
           <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">15.05.2024</span></div>
           <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">20.05.2024</span></div>
         </div>
@@ -1297,6 +1323,73 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <tbody>
             <tr><td>Batteri, li-ion (sett)</td><td>1</td></tr>
             <tr><td>Setepute, trykkavlastende</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="history-card">
+      <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
+        <div class="history-card__toggle-text">
+<div class="history-card__date">EverFlo Q</div>
+          <div class="history-card__date history-card__date--top">22.03.2024</div>
+        </div>
+        <div class="history-card__chevron-wrap"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI1Ljc5MDEgMTQuMTU4N0wyNy4yMDk3IDE1LjU2NzVMMTguOTk5MyAyMy44NDEzTDEwLjc5IDE1LjU2NzRMMTIuMjA5OCAxNC4xNTg4TDE4Ljk5OTQgMjEuMDAxOEwyNS43OTAxIDE0LjE1ODdaIiBmaWxsPSIjMTg4MDk3Ii8+PC9zdmc+" alt=""></div>
+      </button>
+      <div class="history-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">EverFlo Q</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Oksygenterapi, oksygenkonsentrator, stasjonær</span></div>
+          <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">22.03.2024</span></div>
+          <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">27.03.2024</span></div>
+        </div>
+        <table class="confirm-table">
+          <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
+          <tbody>
+            <tr><td>Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen</td><td>4</td></tr>
+            <tr><td>Slange oksygen tilførselsslange "Crush resistant" 15,2 meter</td><td>1</td></tr>
+            <tr><td>Filter luftinntak oksygenkonsentrator Everflo grov 5 stk/pk</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="history-card">
+      <button class="history-card__toggle" onclick="toggleHistoryCard(this)" aria-expanded="false">
+        <div class="history-card__toggle-text">
+<div class="history-card__date">Airsense 11 Autoset</div>
+          <div class="history-card__date">Inogen Rove 6</div>
+          <div class="history-card__date history-card__date--top">18.02.2024</div>
+        </div>
+        <div class="history-card__chevron-wrap"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI1Ljc5MDEgMTQuMTU4N0wyNy4yMDk3IDE1LjU2NzVMMTguOTk5MyAyMy44NDEzTDEwLjc5IDE1LjU2NzRMMTIuMjA5OCAxNC4xNTg4TDE4Ljk5OTQgMjEuMDAxOEwyNS43OTAxIDE0LjE1ODdaIiBmaWxsPSIjMTg4MDk3Ii8+PC9zdmc+" alt=""></div>
+      </button>
+      <div class="history-card__body" hidden>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Airsense 11 Autoset</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Positivt luftveistrykkapparat, kontinuerlig, auto</span></div>
+          <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">18.02.2024</span></div>
+          <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">22.02.2024</span></div>
+        </div>
+        <table class="confirm-table">
+          <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
+          <tbody>
+            <tr><td>Slange CPAP m/varmetråd ClimateLine 11 CPAP Airsense 11</td><td>1</td></tr>
+            <tr><td>Vannkammer fuktekammer CPAP HumidAir 11</td><td>1</td></tr>
+            <tr><td>Filter inntak pasient Resmed Air 11 standard [Frp 2 stk/pk]</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <div style="border-top: 1px solid #D6D4D3;"></div>
+        <div class="duolist">
+          <div class="duolist__row"><span class="duolist__key">Produktnavn</span><span class="duolist__value">Inogen Rove 6</span></div>
+          <div class="duolist__row"><span class="duolist__key">Type</span><span class="duolist__value">Oksygenterapi, oksygenkonsentrator, transportabel</span></div>
+          <div class="duolist__row"><span class="duolist__key">Bestilt</span><span class="duolist__value">18.02.2024</span></div>
+          <div class="duolist__row"><span class="duolist__key">Levert</span><span class="duolist__value">22.02.2024</span></div>
+        </div>
+        <table class="confirm-table">
+          <thead><tr><th>Forbruksvare</th><th>Antall</th></tr></thead>
+          <tbody>
+            <tr><td>Kateter oksygen nesekateter dobbelt 3 lpm 2,1 m Micro Flow voksen</td><td>3</td></tr>
+            <tr><td>Kateter oksygen nesekateter dobbelt 6 lpm 1,2 m Low flow voksen</td><td>2</td></tr>
           </tbody>
         </table>
       </div>
@@ -1463,6 +1556,8 @@ function showMachinePage(eqId) {
   if (!eq) return;
   renderMachinePage(eq);
   document.getElementById('viewFront').hidden = true;
+  document.getElementById('viewOrder').hidden = true;
+  document.getElementById('viewHistory').hidden = true;
   document.getElementById('viewMachine').hidden = false;
   scrollTop();
 }
@@ -1476,11 +1571,11 @@ function renderMachinePage(eq) {
     const lastOrderHtml = c.lastOrder
       ? `<span class="consumable-status-row__last-order">Sist bestilt: ${c.lastOrder}</span>` : '';
     const badgeHtml = eq.deaktivert
-      ? `<span class="consumable-status-badge consumable-status-badge--no">${WAIT_SVG}kan ikke bestilles</span>`
+      ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}bestilling pågår</span>`
       : c.activeOrder
         ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}aktiv bestilling</span>`
         : unavailDate
-          ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}kan ikke bestilles</span>`
+          ? `<span class="consumable-status-badge consumable-status-badge--wait">${WAIT_SVG}bestilling pågår</span>`
           : `<span class="consumable-status-badge consumable-status-badge--ok">${OK_SVG}kan bestilles</span>`;
     return `
       <div class="consumable-status-row">
@@ -1658,17 +1753,21 @@ function getUnavailableDate(eqId, i, c) {
 
 function renderStep1(focusId) {
   const ICON = 'data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgdmlld0JveD0iMCAwIDQxLjM3MTMgMzUuOTIxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9IlVuaW9uIj4KPHBhdGggZD0iTTE0Ljg3NTEgMTQuNzAxMkgxMy4xMDU2VjEzLjgwMThIMTQuODc1MVYxNC43MDEyWiIgZmlsbD0idmFyKC0tZmlsbC0wLCBibGFjaykiLz4KPHBhdGggZD0iTTE0Ljg3NTEgMTAuNDgzNEgxMy4xMDU2VjkuNTgzMDFIMTQuODc1MVYxMC40ODM0WiIgZmlsbD0idmFyKC0tZmlsbC0wLCBibGFjaykiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOS45MDczIDEuMjk4ODNIMTcuOTUwM1Y0LjAyODMySDIxLjE4NTdWNS4zMjcxNUgxOS45Mzc2VjcuNzg4MDlDMjEuMzYxMiA2LjYwMjY2IDIzLjE5MTMgNS44ODg3NCAyNS4xODg2IDUuODg4NjdDMjkuNzI0MSA1Ljg4ODk0IDMzLjQwMTIgOS41NjYwNSAzMy40MDE1IDE0LjEwMTZDMzMuNDAxNSAxNC45NTI3IDMzLjI2OTMgMTUuNzczIDMzLjAyODQgMTYuNTQ0OUgzNi4zNTE3TDM2LjQyOTggMTYuNTQ5OEMzNi42MTAzIDE2LjU3MjYgMzYuNzc0MSAxNi42NzM3IDM2Ljg3NTEgMTYuODI4MUw0MS4yNjk2IDIzLjU0NjlDNDEuMzk1MiAyMy43Mzg5IDQxLjQwNTEgMjMuOTg0NyA0MS4yOTYgMjQuMTg2NUM0MS4xODY4IDI0LjM4ODIgNDAuOTc1NSAyNC41MTM2IDQwLjc0NjIgMjQuNTEzN0gzNi45NzI4VjMyLjgyNDJDMzYuOTcyOCAzNC41Mzg2IDM1LjU3MTQgMzUuOTIxNiAzMy44NTU2IDM1LjkyMTlINy43MTQ5NUM1Ljk5ODg3IDM1LjkyMTkgNC41OTc3NyAzNC41Mzg4IDQuNTk3NzcgMzIuODI0MlYyNC41MTM3SDAuNjI1MTFDMC4zOTU3MDkgMjQuNTEzNiAwLjE4NDQ4OSAyNC4zODgzIDAuMDc1MzA1MyAyNC4xODY1Qy0wLjAzMzc5MzQgMjMuOTg0NyAtMC4wMjM3ODk4IDIzLjczODkgMC4xMDE2NzIgMjMuNTQ2OUw0LjQ5NzE4IDE2LjgyODFMNC41NDQwNiAxNi43NjQ2QzQuNjYxODIgMTYuNjI2MyA0LjgzNTQgMTYuNTQ1MSA1LjAxOTY0IDE2LjU0NDlIMTAuMzc3MVY1LjMyNzE1SDkuMTI5MDJWNC4wMjgzMkgxMi4zNjQ0VjEuMjk4ODNIMTAuNDA3M1YwSDE5LjkwNzNWMS4yOTg4M1pNMjEuNDQ4NCAyNC4yMzE0QzIxLjMzMjkgMjQuNDA3OCAyMS4xMzU3IDI0LjUxMzcgMjAuOTI0OSAyNC41MTM3SDUuODQ3NzdWMzIuODI0MkM1Ljg0Nzc3IDMzLjgzOTEgNi42Nzk4MyAzNC42NzE5IDcuNzE0OTUgMzQuNjcxOUgyNC41NjM2VjE5LjQ2NzhMMjEuNDQ4NCAyNC4yMzE0Wk0yNS44MTM2IDM0LjY3MTlIMzMuODU1NkMzNC44OTA1IDM0LjY3MTYgMzUuNzIyOCAzMy44Mzg5IDM1LjcyMjggMzIuODI0MlYyNC41MTM3SDI5LjcxNUMyOS41MDQ0IDI0LjUxMzUgMjkuMzA3OSAyNC40MDc2IDI5LjE5MjUgMjQuMjMxNEwyNS44MTM2IDE5LjA2NTRWMzQuNjcxOVpNMS43ODEzNiAyMy4yNjM3SDIwLjU4OEwyNC4xNjQyIDE3Ljc5NDlINS4zNTc1M0wxLjc4MTM2IDIzLjI2MzdaTTMwLjA1MjggMjMuMjYzN0gzOS41OTA5TDM2LjAxMzggMTcuNzk0OUgyNi40NzY3TDMwLjA1MjggMjMuMjYzN1pNMTEuNjc2OSAxNi41NDQ5SDE3LjM0ODdDMTcuMTA4MSAxNS43NzI5IDE2Ljk3NTcgMTQuOTUyOCAxNi45NzU3IDE0LjEwMTZDMTYuOTc1OCAxMi4yNDEyIDE3LjU5NSAxMC41MjU1IDE4LjYzNzggOS4xNDg0NFY1LjMyODEySDExLjY3NjlWMTYuNTQ0OVpNMjUuMTg4NiA3LjEzODY3QzIxLjM0MzMgNy4xMzg4MiAxOC4yMjYgMTAuMjU2MyAxOC4yMjU3IDE0LjEwMTZDMTguMjI1NyAxNC45NjE2IDE4LjM4MzggMTUuNzg0NSAxOC42NjkxIDE2LjU0NDlIMjMuNDg4NFYxNS44MDQ3SDIxLjIzODRWMTIuNDA0M0gyMy40ODg0VjEwLjE1NDNIMjYuODg4OFYxMi40MDQzSDI5LjEzODhWMTUuODA0N0gyNi44ODg4VjE2LjU0NDlIMzEuNzA3MUMzMS45OTI3IDE1Ljc4NDUgMzIuMTUxNSAxNC45NjE2IDMyLjE1MTUgMTQuMTAxNkMzMi4xNTEyIDEwLjI1NjQgMjkuMDMzOCA3LjEzODk0IDI1LjE4ODYgNy4xMzg2N1pNMjQuMzg4OCAxMy4zMDQ3SDIyLjEzODhWMTQuOTA0M0gyNC4zODg4VjE2LjU0NDlIMjUuOTg4NFYxNC45MDQzSDI4LjIzODRWMTMuMzA0N0gyNS45ODg0VjExLjA1NDdIMjQuMzg4OFYxMy4zMDQ3Wk0xMy42NjMyIDQuMDI3MzRIMTYuNjQ5NVYxLjI5ODgzSDEzLjY2MzJWNC4wMjczNFoiIGZpbGw9InZhcigtLWZpbGwtMCwgYmxhY2spIi8+CjwvZz4KPC9zdmc+Cg==';
+  const CHEVRON = `<svg class="order-machine__chevron-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   let html = '';
   EQUIPMENT.forEach(eq => {
+    const isOpen = (focusId === null) || (eq.id === focusId);
+    const stateClass = isOpen ? 'order-machine--open' : 'order-machine--closed';
     html += `
-    <div class="order-machine" id="om-${eq.id}">
-      <div class="order-machine__header">
+    <div class="order-machine ${stateClass}" id="om-${eq.id}">
+      <button class="order-machine__header" onclick="toggleOrderMachine(this)" type="button">
         <img class="order-machine__icon" src="${ICON}" alt="">
         <div class="order-machine__info">
           <div class="order-machine__label">${eq.model}</div>
           <div class="order-machine__type">${eq.details.type}</div>
         </div>
-      </div>
+        <span class="order-machine__chevron">${CHEVRON}</span>
+      </button>
       <div class="order-machine__body">
         ${eq.consumables.map((c, i) => {
           const unavailDate = getUnavailableDate(eq.id, i, c);
@@ -1678,7 +1777,7 @@ function renderStep1(focusId) {
           <div class="order-consumable-row__info">
             <div class="order-consumable-row__name">${c.name}</div>
             ${c.lastOrder ? `<div class="order-consumable-row__last-order">Sist bestilt: ${c.lastOrder}</div>` : ''}
-            <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}kan ikke bestilles</div>
+            <div class="order-consumable-row__unavailable">${WAIT_BADGE_SVG}bestilling pågår</div>
           </div>
           <div class="qty-control">
             <button class="qty-btn" disabled aria-label="Reduser antall">−</button>
@@ -1705,6 +1804,14 @@ function renderStep1(focusId) {
     </div>`;
   });
   document.getElementById('step1Content').innerHTML = html;
+}
+
+// ── Order machine expander ──────────────────────────────────
+function toggleOrderMachine(btn) {
+  const machine = btn.closest('.order-machine');
+  const willOpen = machine.classList.contains('order-machine--closed');
+  machine.classList.toggle('order-machine--open', willOpen);
+  machine.classList.toggle('order-machine--closed', !willOpen);
 }
 
 // ── Qty controls ───────────────────────────────────────────
@@ -1852,7 +1959,7 @@ function refreshEquipmentCardStatuses() {
       if (!badge) return;
       const dateStr = formatNorwegianDate(orderedDates[key]);
       badge.className = 'consumable-status-badge consumable-status-badge--wait';
-      badge.innerHTML = WAIT_SVG + 'kan ikke bestilles';
+      badge.innerHTML = WAIT_SVG + 'bestilling pågår';
       let lastOrderSpan = rows[i].querySelector('.consumable-status-row__last-order');
       if (!lastOrderSpan) {
         lastOrderSpan = document.createElement('span');
