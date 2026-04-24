@@ -178,6 +178,81 @@
   font: 400 16px/1.5 'Source Sans Pro', sans-serif;
   color: #08667C; text-decoration: underline; text-underline-offset: 2px;
 }
+
+/* ── Varsler header badge ────────────────────────────────── */
+.icon-btn-wrap { position: relative; display: inline-flex; }
+.header-badge {
+  position: absolute; top: 2px; right: 2px;
+  background: #C83521; border: 2px solid #fff;
+  border-radius: 100px; min-width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font: 700 11px/1 'Source Sans Pro', sans-serif; color: #fff;
+  padding: 0 3px; pointer-events: none;
+}
+
+/* ── Forside ─────────────────────────────────────────────── */
+.forside-hero {
+  background: #D2EDF3; padding: 24px 16px 20px; width: 100%;
+}
+.forside-hero__greeting {
+  font: 400 20px/1.3 'Source Sans Pro', sans-serif; color: #000;
+}
+.forside-hero__name {
+  font: 600 36px/1.22 'Source Sans Pro', sans-serif; color: #000;
+}
+.forside-services-section {
+  background: #F5F3F3; padding: 16px 0 24px;
+}
+.forside-services-label {
+  width: 366px; margin: 0 auto 8px;
+  font: 600 18px/1.3 'Source Sans Pro', sans-serif; color: #000;
+}
+
+/* ── Varsler page ────────────────────────────────────────── */
+.varsler-meta {
+  width: 366px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 0;
+}
+.varsler-count {
+  font: 600 18px/1.3 'Source Sans Pro', sans-serif; color: #000;
+}
+.varsler-rediger {
+  font: 400 18px/1.3 'Source Sans Pro', sans-serif;
+  color: #126F87; text-decoration: underline; text-underline-offset: 2px;
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.varsel-list {
+  width: 366px; margin: 0 auto;
+}
+.varsel-item {
+  background: #F5F3F3; padding: 12px 16px 12px 12px;
+  display: flex; gap: 12px; align-items: flex-start;
+  border-bottom: 1px solid #D6D4D3;
+}
+.varsel-item--unread {
+  background: #D2EDF3; border-left: 6px solid #188097; padding-left: 10px;
+}
+.varsel-item__icon { width: 36px; height: 36px; flex-shrink: 0; }
+.varsel-item__icon svg { width: 36px; height: 36px; display: block; }
+.varsel-item__body { flex: 1; min-width: 0; }
+.varsel-item__title {
+  font: 600 16px/1.3 'Source Sans Pro', sans-serif; color: #000; margin-bottom: 2px;
+}
+.varsel-item__text {
+  font: 400 16px/1.5 'Source Sans Pro', sans-serif; color: #000; margin: 0 0 6px;
+}
+.varsel-cta {
+  font: 400 16px/1.5 'Source Sans Pro', sans-serif;
+  color: #126F87; text-decoration: underline; text-underline-offset: 2px;
+  background: none; border: none; cursor: pointer; padding: 0;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.varsler-load-more {
+  display: block; width: 366px; margin: 16px auto 0;
+  background: none; border: 1px solid #7D7C79; padding: 10px; text-align: center;
+  font: 400 18px/1.3 'Source Sans Pro', sans-serif; color: #000; cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -212,12 +287,15 @@
           </div>
           <span class="icon-btn__label">Meny</span>
         </button>
-        <button class="icon-btn" aria-label="Søk">
-          <div class="icon-btn__icon" aria-hidden="true">
-            <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 7C11.4772 7 7 11.4772 7 17C7 22.5228 11.4772 27 17 27C19.4013 27 21.6049 26.1287 23.3155 24.6818L29.3173 30.6836L30.7315 29.2694L24.7297 23.2676C26.1266 21.5698 27 19.385 27 17C27 11.4772 22.5228 7 17 7ZM9 17C9 12.5817 12.5817 9 17 9C21.4183 9 25 12.5817 25 17C25 21.4183 21.4183 25 17 25C12.5817 25 9 21.4183 9 17Z" fill="black"/></svg>
-          </div>
-          <span class="icon-btn__label">Søk</span>
-        </button>
+        <div class="icon-btn-wrap">
+          <button class="icon-btn" onclick="showView('viewVarsler')" aria-label="Varsler">
+            <div class="icon-btn__icon" aria-hidden="true">
+              <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><path d="M19 8.5C15.134 8.5 12 11.634 12 15.5V24.5H26V15.5C26 11.634 22.866 8.5 19 8.5Z" fill="black"/><rect x="10" y="24" width="18" height="2.5" rx="1.25" fill="black"/><path d="M16.5 26.5C16.5 28.1569 17.6193 29.5 19 29.5C20.3807 29.5 21.5 28.1569 21.5 26.5H16.5Z" fill="black"/><line x1="19" y1="6" x2="19" y2="9" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <span class="icon-btn__label">Varsler</span>
+          </button>
+          <div class="header-badge" id="headerBadge">1</div>
+        </div>
       </div>
       <button class="icon-btn" aria-label="Logg ut">
         <div class="icon-btn__icon" aria-hidden="true">
@@ -240,11 +318,148 @@
   </header>
 
   <!-- ════════════════════════════════════════════════════
+       FORSIDE — Helsenorge
+  ════════════════════════════════════════════════════ -->
+  <div id="viewForside">
+    <div class="forside-hero">
+      <div style="width:366px; margin: 0 auto;">
+        <div class="forside-hero__greeting">God morgen,</div>
+        <div class="forside-hero__name">Tora Hansen</div>
+      </div>
+    </div>
+
+    <div class="forside-services-section">
+      <div class="forside-services-label">Tjenester</div>
+      <div class="tile-list" style="margin: 0 auto;">
+        <button class="tile-item">
+          <div class="tile-item__inner">
+            <div class="tile-item__text">
+              <div class="tile-item__title">Meldinger</div>
+            </div>
+            <div class="tile-item__right">
+              <div class="tile-item__chevron"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#474745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+            </div>
+          </div>
+        </button>
+        <button class="tile-item">
+          <div class="tile-item__inner">
+            <div class="tile-item__text">
+              <div class="tile-item__title">Timeavtaler</div>
+            </div>
+            <div class="tile-item__right">
+              <div class="tile-item__chevron"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#474745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+            </div>
+          </div>
+        </button>
+        <button class="tile-item" onclick="showView('viewLanding')">
+          <div class="tile-item__inner">
+            <div class="tile-item__text">
+              <div class="tile-item__title">Prøver og undersøkelser</div>
+            </div>
+            <div class="tile-item__right">
+              <div class="tile-item__chevron"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#474745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+            </div>
+          </div>
+        </button>
+        <button class="tile-item">
+          <div class="tile-item__inner">
+            <div class="tile-item__text">
+              <div class="tile-item__title">Medisiner</div>
+            </div>
+            <div class="tile-item__right">
+              <div class="tile-item__chevron"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#474745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+            </div>
+          </div>
+        </button>
+        <button class="tile-item">
+          <div class="tile-item__inner">
+            <div class="tile-item__text">
+              <div class="tile-item__title">Behandlingshjelpemidler</div>
+            </div>
+            <div class="tile-item__right">
+              <div class="tile-item__chevron"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#474745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="sp-xl"></div>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.57 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><span class="footer__text-large">23 32 70 00</span><span class="footer__text-small">Veiledning helsenorge.no</span></div>
+      </div>
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span class="footer__text-large">Hjelp og kontakt</span>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Om Helsenorge</a>
+        <a href="#" class="footer__link">Personvern og nettsikkerhet</a>
+        <a href="#" class="footer__link">Tilgjengelighetserklæring</a>
+        <a href="#" class="footer__link">Last ned Helsenorge-appen</a>
+      </div>
+      <div class="footer__divider"></div>
+      <p class="footer__brand">Drives av Norsk helsenett SF</p>
+    </footer>
+  </div><!-- /viewForside -->
+
+  <!-- ════════════════════════════════════════════════════
+       VARSLER
+  ════════════════════════════════════════════════════ -->
+  <div id="viewVarsler" hidden>
+    <div class="order-nav" style="padding-left: 0;">
+      <button class="order-nav__back" onclick="showView('viewForside')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Forside
+      </button>
+    </div>
+
+    <div style="width:366px; margin: 0 auto; padding: 1rem 0 0;">
+      <h1 style="font: 600 36px/1.22 'Source Sans Pro', sans-serif; color: #000;">Varsler</h1>
+    </div>
+
+    <div class="varsler-meta">
+      <span class="varsler-count">1 ulest</span>
+      <button class="varsler-rediger">Rediger</button>
+    </div>
+
+    <div class="varsel-list" id="varselList"></div>
+
+    <button class="varsler-load-more">Last inn flere</button>
+
+    <div class="sp-xl"></div>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.57 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><span class="footer__text-large">23 32 70 00</span><span class="footer__text-small">Veiledning helsenorge.no</span></div>
+      </div>
+      <div class="footer__row">
+        <div class="footer__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span class="footer__text-large">Hjelp og kontakt</span>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Om Helsenorge</a>
+        <a href="#" class="footer__link">Personvern og nettsikkerhet</a>
+        <a href="#" class="footer__link">Tilgjengelighetserklæring</a>
+        <a href="#" class="footer__link">Last ned Helsenorge-appen</a>
+      </div>
+      <div class="footer__divider"></div>
+      <p class="footer__brand">Drives av Norsk helsenett SF</p>
+    </footer>
+  </div><!-- /viewVarsler -->
+
+  <!-- ════════════════════════════════════════════════════
        LANDING VIEW — "Prøver og undersøkelser"
   ════════════════════════════════════════════════════ -->
-  <div id="viewLanding">
+  <div id="viewLanding" hidden>
     <div class="order-nav" style="padding-left: 0;">
-      <button class="order-nav__back">
+      <button class="order-nav__back" onclick="showView('viewForside')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         Forside
       </button>
@@ -574,7 +789,7 @@ function renderRekvCards() {
               <div class="rekv-card__type">${r.type}</div>
             </div>
             <div class="rekv-card__date-group">
-              <span class="rekv-card__date-label">Ta prøven:</span><br>${r.dateRange}
+              Ta prøven ${r.dateRange}
             </div>
             <button class="rekv-card__toggle-btn" onclick="toggleCard('${r.id}')" aria-expanded="false">
               ${CHEVRON_DOWN} Se detaljer
@@ -655,9 +870,50 @@ function toggleHelp(btn) {
   body.hidden = expanded;
 }
 
+// ── Render varsler list ───────────────────────────────────────
+function renderVarsler() {
+  const list = document.getElementById('varselList');
+  const envelopeIcon = `<svg viewBox="0 0 40 40" fill="none" width="36" height="36"><rect x="4" y="10" width="32" height="22" rx="2" stroke="#62625F" stroke-width="1.5"/><path d="M4 14l16 10 16-10" stroke="#62625F" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+  const formIcon = `<svg viewBox="0 0 40 40" fill="none" width="36" height="36"><rect x="8" y="4" width="24" height="32" rx="2" stroke="#62625F" stroke-width="1.5"/><line x1="13" y1="13" x2="27" y2="13" stroke="#62625F" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="19" x2="27" y2="19" stroke="#62625F" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="25" x2="22" y2="25" stroke="#62625F" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+
+  list.innerHTML = `
+    <div class="varsel-item varsel-item--unread">
+      <div class="varsel-item__icon">${LAB_ICON}</div>
+      <div class="varsel-item__body">
+        <div class="varsel-item__title">Fremtidig prøve</div>
+        <p class="varsel-item__text">Du har mottatt informasjon om en fremtidig undersøkelse fra Asgeir Larsen, Medisinsk poliklinikk.</p>
+        <button class="varsel-cta" onclick="goToFremtidige()">
+          Gå til tjenesten
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="varsel-item">
+      <div class="varsel-item__icon">${envelopeIcon}</div>
+      <div class="varsel-item__body">
+        <div class="varsel-item__title">Ny melding</div>
+        <p class="varsel-item__text">Du har mottatt en ny melding fra Oslo universitetssykehus.</p>
+      </div>
+    </div>
+    <div class="varsel-item">
+      <div class="varsel-item__icon">${formIcon}</div>
+      <div class="varsel-item__body">
+        <div class="varsel-item__title">Skjema mottatt</div>
+        <p class="varsel-item__text">Ditt helseskjema er mottatt og behandlet.</p>
+      </div>
+    </div>
+  `;
+}
+
+function goToFremtidige() {
+  const badge = document.getElementById('headerBadge');
+  if (badge) badge.style.display = 'none';
+  showView('viewFremtidige');
+}
+
 // ── View navigation ───────────────────────────────────────────
 function showView(id) {
-  ['viewLanding', 'viewFremtidige', 'viewTidligere'].forEach(v => {
+  ['viewForside', 'viewVarsler', 'viewLanding', 'viewFremtidige', 'viewTidligere'].forEach(v => {
     document.getElementById(v).hidden = (v !== id);
   });
   document.getElementById('app').scrollTop = 0;
@@ -666,11 +922,14 @@ function showView(id) {
 // ── Init ──────────────────────────────────────────────────────
 renderRekvCards();
 renderPrevList();
+renderVarsler();
 
 // URL ?view= param for capture
 (function() {
   const p = new URLSearchParams(window.location.search).get('view');
-  if (p === 'fremtidige') showView('viewFremtidige');
+  if (p === 'varsler') showView('viewVarsler');
+  else if (p === 'landing') showView('viewLanding');
+  else if (p === 'fremtidige') showView('viewFremtidige');
   else if (p === 'tidligere') showView('viewTidligere');
 })();
 </script>
