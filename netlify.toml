@@ -1,7 +1,2 @@
 [build]
-  publish = "."
-
-[[redirects]]
-  from = "/"
-  to = "/prover-og-undersokelser/index.html"
-  status = 302
+  publish = "behandlingshjelpemidler"
