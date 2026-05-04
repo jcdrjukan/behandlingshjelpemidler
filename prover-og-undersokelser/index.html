@@ -114,7 +114,7 @@
 
 /* ── HelpBubble ─────────────────────────────────────────────── */
 .help-bubble {
-  position: fixed; z-index: 1000; width: 300px; display: none;
+  position: absolute; z-index: 1000; width: 300px; display: none;
 }
 .help-bubble--visible { display: block; }
 .help-bubble__box {
@@ -413,7 +413,7 @@
     <svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x="0.5" y="0.5" width="21" height="12" rx="3.5" stroke="#000" stroke-opacity="0.35"/><rect x="2" y="2" width="17" height="9" rx="2" fill="#000"/><path d="M23 4.5v4a2 2 0 0 0 0-4z" fill="#000" opacity="0.35"/></svg>
   </div>
 </div>
-<div class="app" id="app">
+<div class="app" id="app" style="position:relative;">
 
   <!-- ── SHARED HEADER ──────────────────────────────────── -->
   <header class="header">
@@ -904,6 +904,19 @@
     </footer>
   </div><!-- /viewTidligere -->
 
+<div id="helpBubble" class="help-bubble" role="tooltip">
+  <div class="help-bubble__box">
+    <div class="help-bubble__caret" id="helpBubbleArrow"></div>
+    <button class="help-bubble__close" onclick="closeHelpBubble()" aria-label="Lukk">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <line x1="2" y1="2" x2="16" y2="16" stroke="#5B22A6" stroke-width="2" stroke-linecap="round"/>
+        <line x1="16" y1="2" x2="2" y2="16" stroke="#5B22A6" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p id="helpBubbleText" class="help-bubble__text"></p>
+    <a id="helpBubbleLink" href="#" class="help-bubble__link" target="_blank" rel="noopener">Les mer på snl.no</a>
+  </div>
+</div>
 </div><!-- /app -->
 <div class="phone-chrome-bottom"><div class="phone-chrome-bottom__bar"></div></div>
 </div><!-- /phone-shell -->
@@ -962,17 +975,22 @@ function openHelpBubble(el, termKey) {
   const bubble = document.getElementById('helpBubble');
   bubble.classList.add('help-bubble--visible');
 
+  const app = document.getElementById('app');
+  const appRect = app.getBoundingClientRect();
   const rect = el.getBoundingClientRect();
   const bubbleW = 300;
-  let left = rect.left - 30;
-  if (left + bubbleW > window.innerWidth - 8) left = window.innerWidth - bubbleW - 8;
+
+  const top = (rect.bottom - appRect.top) + app.scrollTop + 4;
+  let left = (rect.left - appRect.left) - 30;
+  const appW = appRect.width;
+  if (left + bubbleW > appW - 8) left = appW - bubbleW - 8;
   if (left < 8) left = 8;
 
-  const caretLeft = Math.max(10, rect.left - left + rect.width / 2 - 6);
+  const caretLeft = Math.max(10, (rect.left - appRect.left) - left + rect.width / 2 - 6);
   document.getElementById('helpBubbleArrow').style.left = caretLeft + 'px';
 
   bubble.style.left = left + 'px';
-  bubble.style.top = (rect.bottom + 4) + 'px';
+  bubble.style.top = top + 'px';
 }
 
 function closeHelpBubble() {
@@ -1205,20 +1223,6 @@ renderVarsler();
   else if (p === 'tidligere') showView('viewTidligere');
 })();
 </script>
-<div id="helpBubble" class="help-bubble" role="tooltip">
-  <div class="help-bubble__box">
-    <div class="help-bubble__caret" id="helpBubbleArrow"></div>
-    <button class="help-bubble__close" onclick="closeHelpBubble()" aria-label="Lukk">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <line x1="2" y1="2" x2="16" y2="16" stroke="#5B22A6" stroke-width="2" stroke-linecap="round"/>
-        <line x1="16" y1="2" x2="2" y2="16" stroke="#5B22A6" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <p id="helpBubbleText" class="help-bubble__text"></p>
-    <a id="helpBubbleLink" href="#" class="help-bubble__link" target="_blank" rel="noopener">Les mer på snl.no</a>
-  </div>
-</div>
-
 <script src="https://mcp.figma.com/mcp/html-to-design/capture.js"></script>
 </body>
 </html>
