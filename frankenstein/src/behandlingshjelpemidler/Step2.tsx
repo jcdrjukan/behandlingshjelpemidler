@@ -105,8 +105,9 @@ export default function Step2({ delivery, errors, onChange, onNext, onBack, onAb
           <Panel.A>
             <p style={{ font: 'var(--mobile-label)', margin: '0 0 4px 0' }}>Medisinsk utstyrssentralen</p>
             <p style={{ font: 'var(--mobile-label-subdued)', color: 'var(--color-base-text-onlight-subdued)', margin: 0 }}>
-              St. Olavs sykehus, Øst for Eir-bygget<br />
-              Åpningstider: Man–fre 08:00–15:30
+              Olav Kyrres gate 13<br />
+              7030 Trondheim<br />
+              Telefon: 725 73 300
             </p>
           </Panel.A>
         </Panel>
@@ -117,8 +118,9 @@ export default function Step2({ delivery, errors, onChange, onNext, onBack, onAb
           <Panel.A>
             <p style={{ font: 'var(--mobile-label)', margin: '0 0 4px 0' }}>Poliklinisk skranke</p>
             <p style={{ font: 'var(--mobile-label-subdued)', color: 'var(--color-base-text-onlight-subdued)', margin: 0 }}>
-              St. Olavs sykehus, Hjerte-lunge-senteret<br />
-              Åpningstider: Man–fre 08:00–15:00
+              Prinsesse Kristinas gate 3<br />
+              7030 Trondheim<br />
+              Telefon: 725 82 400
             </p>
           </Panel.A>
         </Panel>

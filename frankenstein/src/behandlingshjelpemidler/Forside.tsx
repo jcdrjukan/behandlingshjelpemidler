@@ -29,8 +29,6 @@ function OrderCard({ order }: OrderCardProps) {
 
   const activeItems = order.equipmentItems.filter(({ quantities }) => quantities.some(q => q > 0));
   const machineNames = activeItems.map(({ eq }) => eq.model).join(', ');
-  const produktnavn = activeItems.map(({ eq }) => eq.model).join(', ');
-  const type = activeItems.map(({ eq }) => eq.details.type).join(', ');
   const allItems = order.equipmentItems.flatMap(({ eq, quantities }) =>
     eq.consumables
       .map((c, i) => ({ name: c.name, qty: quantities[i] ?? 0 }))
@@ -58,8 +56,6 @@ function OrderCard({ order }: OrderCardProps) {
     <ExpanderList variant="line" color="white">
       <ExpanderList.Expander title={titleEl} expanded={open} onExpand={setOpen}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Field label="Produktnavn" value={produktnavn} />
-          <Field label="Type" value={type} />
           <Field label="Bestilt" value={order.date} />
           <Field label="Forsendelsesmetode" value={DELIVERY_MODE_LABEL[order.delivery]} />
           <Field label="Adresse" value={
@@ -138,7 +134,7 @@ export default function Forside({
 
       <h1 style={{ font: 'var(--mobile-h1)', margin: '32px 0 0 0' }}>Behandlings&shy;hjelpemidler</h1>
       <p style={{ font: 'var(--mobile-preamble)', margin: '24px 0 0 0' }}>
-        Her kan du bestille forbruksmateriell og se bestillingshistorikk for ditt utstyr.
+        Her får du oversikt over utstyret du har fått i forbindelse med behandling. Du kan også bestille forbruksmateriell til utstyret ditt.
       </p>
 
       {justSubmitted && (

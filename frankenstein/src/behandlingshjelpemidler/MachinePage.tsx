@@ -117,7 +117,7 @@ export default function MachinePage({ eq, orderedDates: _orderedDates, onBack, o
       )}
 
       {/* Help expander */}
-      <HelpExpanderStandalone triggerText="Har du spørsmål om dette produktet?">
+      <HelpExpanderStandalone triggerText="Har du spørsmål om utstyret eller materiellet?">
         <p style={{ margin: 0 }}>
           For spørsmål om utstyret, kontakt din behandler eller helseforetaket som eier utstyret.
           Serienummer og eierinformasjon finner du i oversikten over.
