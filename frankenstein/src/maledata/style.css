@@ -185,12 +185,21 @@
 .md-panels {
   display: flex;
   flex-direction: column;
+  /* Permanent breathing room below the sticky strip, so its opaque
+     background can never sit flush against the first panel — matters for
+     the focus ring below, which extends outside the panel's own box. */
+  margin-top: 8px;
 }
 
 .md-panel {
   padding: 10px 0 4px;
   border-top: 0.5px solid var(--core-color-neutral-200, #d6d4d3);
   transition: background-color 0.2s ease;
+  /* Keeps this much clearance above the panel when it's scrolled into
+     view (card click, or any future keyboard/anchor navigation) so the
+     sticky strip (~108px tall) never ends up flush against the panel's
+     top edge and clipping the focus ring below. */
+  scroll-margin-top: 124px;
 }
 .md-panel:focus {
   outline: 2px solid var(--core-color-blueberry-400, #58aabb);

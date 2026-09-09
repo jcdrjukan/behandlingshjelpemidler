@@ -118,9 +118,11 @@ export default function MachinePage({ eq, orderedDates: _orderedDates, onBack, o
 
       {/* Help expander */}
       <HelpExpanderStandalone triggerText="Har du spørsmål om utstyret eller materiellet?">
+        <p style={{ margin: '0 0 8px 0' }}>
+          Kontakt behandleren din eller helseforetaket som eier utstyret. Du finner serienummeret og informasjon om hvem som eier utstyret i oversikten over.
+        </p>
         <p style={{ margin: 0 }}>
-          For spørsmål om utstyret, kontakt din behandler eller helseforetaket som eier utstyret.
-          Serienummer og eierinformasjon finner du i oversikten over.
+          <a href="https://behandlingshjelpemidler.no/enhet/">Se kontaktinformasjonen til behandlingshjelpemiddelenheter i Norge.</a>
         </p>
       </HelpExpanderStandalone>
 

@@ -27,17 +27,19 @@ interface OrderCardProps {
 function OrderCard({ order }: OrderCardProps) {
   const [open, setOpen] = useState(false);
 
-  const activeItems = order.equipmentItems.filter(({ quantities }) => quantities.some(q => q > 0));
-  const machineNames = activeItems.map(({ eq }) => eq.model).join(', ');
   const allItems = order.equipmentItems.flatMap(({ eq, quantities }) =>
     eq.consumables
       .map((c, i) => ({ name: c.name, qty: quantities[i] ?? 0 }))
       .filter(x => x.qty > 0)
   );
+  // The device name isn't something we actually have access to for an
+  // order — show what was ordered instead.
+  const forbruksvareCount = allItems.length;
+  const forbruksvareLabel = `${forbruksvareCount} ${forbruksvareCount === 1 ? 'forbruksvare' : 'forbruksvarer'}`;
 
   const titleEl = (
     <span>
-      <span style={{ display: 'block', font: 'var(--mobile-body-strong)' }}>{machineNames}</span>
+      <span style={{ display: 'block', font: 'var(--mobile-body-strong)' }}>{forbruksvareLabel}</span>
       <span style={{ display: 'block', font: 'var(--mobile-body)' }}>{order.date}</span>
     </span>
   );
