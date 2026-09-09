@@ -1,0 +1,412 @@
+/* ── Måledata — "Målingene mine" prototype ────────────────────────── */
+
+.md-shell {
+  width: 390px;
+  min-height: 100%;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header text sizing (matches the other prototypes' header fix). */
+.md-shell .nav-icon-btn__label,
+.md-shell .profile-bar__name {
+  font-size: 16px;
+}
+.md-shell .nav-icon-btn__label {
+  margin-bottom: 0.5rem;
+}
+.md-avatar {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.md-page {
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.md-page [class*="title--title1"] {
+  font-size: 2rem !important;
+  line-height: 2.375rem !important;
+}
+
+.md-followup {
+  /* Matches --mobile-preamble (400/1.25rem/130%) — the same token every
+     other prototype uses for the lede paragraph right under its H1. */
+  font: 400 1.25rem/1.3 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-800, #474745);
+  margin: -8px 0 0;
+}
+
+.md-section-title {
+  /* Matches --mobile-h3-title3 (600/1.375rem/136%) — the same numbers
+     pasientens-planer, sykdom-kritisk-info and legemiddelliste all
+     reproduce for their own section titles. */
+  font: 600 1.375rem/1.36 'Source Sans Pro', sans-serif;
+  color: #000;
+  margin: 0 0 12px;
+}
+
+/* ── Siste målinger ────────────────────────────────────────────── */
+/* Single column, not a 2-up grid — at real body-text sizes a name like
+   "Blodtrykk (over)" doesn't have room to breathe in a half-width tile. */
+.md-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.md-card {
+  background: var(--core-color-neutral-100, #eae7e7);
+  border: 0.5px solid transparent;
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: left;
+  width: 100%;
+  min-height: 44px;
+  color: inherit;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.md-card:hover {
+  border-color: var(--core-color-neutral-400, #aaa8a6);
+}
+.md-card:focus-visible {
+  outline: 2px solid var(--core-color-blueberry-400, #58aabb);
+  outline-offset: 2px;
+}
+.md-card__label {
+  /* --mobile-body */
+  font: 400 1.125rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+  margin: 0;
+}
+.md-card__value {
+  /* --mobile-h4-title4 — bolder/larger than body so the actual reading
+     stands out as the one thing on the card most worth reading at a
+     glance. */
+  font: 600 1.25rem/1.3 'Source Sans Pro', sans-serif;
+  margin: 4px 0 0;
+  color: #000;
+}
+.md-card__unit {
+  /* --mobile-help-text — the smallest size anywhere on this page, used
+     only for this secondary unit suffix next to the much larger value. */
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+}
+.md-card__sub {
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  margin: 4px 0 0;
+  color: var(--core-color-neutral-600, #7d7c79);
+}
+.md-card__sub--warn {
+  color: var(--color-notification-text-warning, #916500);
+}
+
+/* ── Chart card ────────────────────────────────────────────────── */
+.md-chart-card {
+  background: #fff;
+  border: 0.5px solid var(--core-color-neutral-300, #bdbab9);
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+}
+
+.md-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.md-chip {
+  /* --mobile-body — these are tappable toggles as much as they are text,
+     so they get full body size rather than the smaller badge-style type
+     a chip would normally use. */
+  font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif;
+  padding: 8px 16px;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 0.5px solid var(--core-color-neutral-400, #aaa8a6);
+  background: transparent;
+  cursor: pointer;
+  color: #000;
+}
+.md-chip--on {
+  background: var(--color-base-background-blueberry-subtle, #e4f7f9);
+  border-color: var(--core-color-blueberry-400, #58aabb);
+  color: var(--core-color-blueberry-700, #08667c);
+}
+.md-chip:focus-visible {
+  outline: 2px solid var(--core-color-blueberry-400, #58aabb);
+  outline-offset: 2px;
+}
+
+/* ── Sticky timeframe strip ───────────────────────────────────── */
+.md-strip {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  border-bottom: 0.5px solid var(--core-color-neutral-300, #bdbab9);
+  padding: 6px 0 4px;
+}
+.md-strip__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 6px 10px;
+  margin-bottom: 4px;
+}
+.md-strip__select {
+  margin: 0;
+  flex-shrink: 0;
+}
+.md-strip__select [class*="select-wrapper"] {
+  margin: 0;
+}
+.md-strip__range {
+  /* --mobile-help-text */
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+  white-space: nowrap;
+  padding-bottom: 8px;
+}
+.md-axis-svg {
+  display: block;
+}
+
+/* ── Panels ────────────────────────────────────────────────────── */
+.md-panels {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-panel {
+  padding: 10px 0 4px;
+  border-top: 0.5px solid var(--core-color-neutral-200, #d6d4d3);
+  transition: background-color 0.2s ease;
+}
+.md-panel:focus {
+  outline: 2px solid var(--core-color-blueberry-400, #58aabb);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.md-panel--flash {
+  background-color: var(--color-base-background-blueberry-subtle, #e4f7f9);
+}
+
+/* Title and actions stack instead of sharing one row — at real body-text
+   sizes a long series name plus both action links no longer fit next to
+   each other on 358px of usable width. */
+.md-panel__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.md-panel__title {
+  /* --mobile-body-strong */
+  font: 600 1.125rem/1.5 'Source Sans Pro', sans-serif;
+  margin: 0;
+  color: #000;
+}
+.md-panel__unit {
+  /* --mobile-help-text */
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+}
+.md-panel__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.md-panel__link {
+  /* --mobile-help-text */
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-blueberry-700, #08667c);
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  min-height: 44px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.md-panel__hide {
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  min-height: 44px;
+  cursor: pointer;
+}
+.md-panel__svg {
+  display: block;
+  margin-top: 4px;
+}
+
+.md-empty {
+  font: 400 1.125rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+  padding: 16px 0;
+  margin: 0;
+}
+
+/* ── Legend ────────────────────────────────────────────────────── */
+/* Stacked, not an inline wrap-flow — "Utenfor målområdet" and
+   "Skjema-registrert" don't fit next to their neighbours on one line at
+   readable size, and a legend nobody can read defeats its own purpose. */
+.md-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+  margin-top: 16px;
+}
+.md-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Table view / CSV links ───────────────────────────────────── */
+.md-chart-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+.md-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--core-color-blueberry-700, #08667c);
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  min-height: 44px;
+  cursor: pointer;
+  /* --mobile-body */
+  font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif;
+  text-decoration: underline;
+}
+
+.md-table-view {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.md-table-view__title {
+  /* --mobile-body-strong */
+  font: 600 1.125rem/1.5 'Source Sans Pro', sans-serif;
+  margin: 0 0 8px;
+  color: #000;
+}
+.md-table-view__title span {
+  font-weight: 400;
+  color: var(--core-color-neutral-700, #62625f);
+}
+
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* --mobile-body — the table is the priority accessible artifact (see
+     data.ts's working-notes reference), so it gets full body size, not a
+     compact/dense treatment. */
+  font: 400 1.125rem/1.5 'Source Sans Pro', sans-serif;
+}
+.md-table__caption {
+  caption-side: top;
+  text-align: left;
+  font: 400 1rem/1.5 'Source Sans Pro', sans-serif;
+  color: var(--core-color-neutral-700, #62625f);
+  padding-bottom: 6px;
+}
+.md-table th,
+.md-table td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 0.5px solid var(--core-color-neutral-200, #d6d4d3);
+}
+.md-table th {
+  font-weight: 600;
+  color: #000;
+}
+.md-table td {
+  color: var(--core-color-neutral-800, #474745);
+}
+
+/* ── Footer (shared Helsenorge footer, scoped to this prototype) ─── */
+.md-footer {
+  background: #2B2C2B;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: auto;
+}
+.md-footer__top {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 20px;
+}
+.md-footer__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #fff;
+}
+.md-footer__row svg { flex-shrink: 0; margin-top: 2px; }
+.md-footer__link-title {
+  font: 400 1rem/1.4 'Source Sans Pro', sans-serif;
+  color: #fff;
+  margin: 0;
+}
+.md-footer__link-sub {
+  font: 400 0.875rem/1.4 'Source Sans Pro', sans-serif;
+  color: #BDBAB9;
+  margin: 0;
+}
+.md-footer__lang {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.md-footer__lang-sep {
+  width: 1px;
+  height: 16px;
+  background: #62625F;
+  flex-shrink: 0;
+}
+.md-footer__divider {
+  height: 1px;
+  background: #474745;
+  margin: 16px 0;
+}
+.md-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.md-footer__link {
+  font: 400 1rem/1.4 'Source Sans Pro', sans-serif;
+  color: #fff;
+  text-decoration: none;
+}
+.md-footer__link:hover { text-decoration: underline; }
+.md-footer__brand {
+  font: 600 1rem/1.4 'Source Sans Pro', sans-serif;
+  color: #fff;
+  margin: 0;
+}

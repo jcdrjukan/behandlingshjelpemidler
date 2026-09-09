@@ -93,6 +93,14 @@
     padding: 0;
     background: transparent;
     box-shadow: none;
+    /* Base rule sets overflow:hidden to clip content to the rounded phone
+       shape at desktop width. At narrow widths .phone-frame__screen below
+       hands scrolling off to the real browser window (overflow:visible,
+       height:auto) — but without resetting this too, .phone-frame's own
+       leftover overflow:hidden still becomes the nearest scrolling
+       ancestor for any position:sticky descendant, breaking sticky
+       everywhere in the app on an actual phone-width viewport. */
+    overflow: visible;
   }
   .phone-frame__screen {
     border-radius: 0;

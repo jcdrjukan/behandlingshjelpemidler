@@ -17,12 +17,13 @@ import Legemiddelliste from './legemiddelliste';
 import PasientensPlaner from './pasientens-planer';
 import Forside from './forside';
 import Gravid from './gravid';
+import Maledata from './maledata';
 import { hasCompletedVeiviser } from './psykisk-helse/data';
 import { loadActivatedTjenester, type ValgbarTjenesteId } from './forside/data';
 import { applyPrototypeMeta } from './prototypeMeta';
 import './App.css';
 
-type Prototype = 'prover' | 'behandlingshjelpemidler' | 'psykisk-helse' | 'sykdom-kritisk-info' | 'legemiddelliste' | 'pasientens-planer' | 'forside' | 'gravid';
+type Prototype = 'prover' | 'behandlingshjelpemidler' | 'psykisk-helse' | 'sykdom-kritisk-info' | 'legemiddelliste' | 'pasientens-planer' | 'forside' | 'gravid' | 'maledata';
 
 // Detect dedicated per-prototype Netlify sites by hostname
 const hostname = window.location.hostname;
@@ -37,6 +38,7 @@ const dedicatedPrototype: Prototype | null =
   hostname.includes('pasient') || hostname.includes('plan') ||
   hostname.startsWith('fluffy-cobbler') ? 'pasientens-planer' :
   hostname.includes('forside') ? 'forside' :
+  hostname.includes('maledata') || hostname.includes('måledata') ? 'maledata' :
   null;
 
 function getInitialPrototype(): Prototype {
@@ -49,11 +51,12 @@ function getInitialPrototype(): Prototype {
   if (hash === 'pasientens-planer') return 'pasientens-planer';
   if (hash === 'forside') return 'forside';
   if (hash === 'gravid') return 'gravid';
+  if (hash === 'maledata') return 'maledata';
   return 'prover';
 }
 
 const directLink = !!dedicatedPrototype ||
-  ['behandlingshjelpemidler', 'psykisk-helse', 'sykdom-kritisk-info', 'legemiddelliste', 'pasientens-planer', 'forside', 'gravid'].includes(window.location.hash.slice(1));
+  ['behandlingshjelpemidler', 'psykisk-helse', 'sykdom-kritisk-info', 'legemiddelliste', 'pasientens-planer', 'forside', 'gravid', 'maledata'].includes(window.location.hash.slice(1));
 
 function App() {
   const [prototype, setPrototype] = useState<Prototype>(getInitialPrototype);
@@ -146,6 +149,12 @@ function App() {
           >
             Gravid
           </button>
+          <button
+            className={`prototype-switcher__btn${prototype === 'maledata' ? ' prototype-switcher__btn--active' : ''}`}
+            onClick={() => switchPrototype('maledata')}
+          >
+            Måledata
+          </button>
         </div>
       )}
 
@@ -223,6 +232,7 @@ function App() {
             />
           )}
           {prototype === 'gravid' && <Gravid onNavigateHome={goHome} />}
+          {prototype === 'maledata' && <Maledata onNavigateHome={goHome} />}
         </div>
         <div className="phone-frame__home" />
       </div>

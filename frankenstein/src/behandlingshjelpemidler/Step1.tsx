@@ -166,7 +166,7 @@ export default function Step1({
 
       {showError && (
         <p role="alert" style={{ margin: 'var(--space-m) 0 0 0', font: 'var(--mobile-label)', color: 'var(--cherry-700)' }}>
-          Du må velge minst et produkt
+          Du må velge minst ett forbruksmateriell
         </p>
       )}
       <StepButtons
