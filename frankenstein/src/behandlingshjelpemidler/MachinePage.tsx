@@ -81,6 +81,12 @@ export default function MachinePage({ eq, orderedDates: _orderedDates, onBack, o
         </EyebrowHeader>
       </div>
 
+      {eq.isAnnet && (
+        <p style={{ font: 'var(--mobile-preamble)', margin: '24px 0 0 0' }}>
+          Forbruksvarer i denne kategorien har ingen tilknytning eller tilhørighet til et annet utstyr.
+        </p>
+      )}
+
       {eq.deaktivert && (
         <NotificationPanel variant="error" className="bhm-deaktivert-panel">
           <p style={{ margin: 0, fontWeight: 400 }}>
@@ -89,14 +95,17 @@ export default function MachinePage({ eq, orderedDates: _orderedDates, onBack, o
         </NotificationPanel>
       )}
 
-      {/* Details duolist */}
-      <section style={{ marginBottom: 'var(--space-m)' }}>
-        <Duolist boldColumn="first">
-          <DuolistGroup term="Type" description={eq.details.type} />
-          <DuolistGroup term="Produsent" description={eq.details.produsent} />
-          {eq.modelNo && <DuolistGroup term="Modellnr." description={eq.modelNo} />}
-        </Duolist>
-      </section>
+      {/* Details duolist — "Annet" has no Type/Produsent/Modellnr, since it
+          isn't tied to a specific piece of utstyr. */}
+      {!eq.isAnnet && (
+        <section style={{ marginBottom: 'var(--space-m)' }}>
+          <Duolist boldColumn="first">
+            <DuolistGroup term="Type" description={eq.details.type} />
+            <DuolistGroup term="Produsent" description={eq.details.produsent} />
+            {eq.modelNo && <DuolistGroup term="Modellnr." description={eq.modelNo} />}
+          </Duolist>
+        </section>
+      )}
 
       {/* Device-specific info (Serienr./Utlevert/Eier) — always shown as its
           own panel box, one per physical unit, even when there's only one. */}
@@ -116,15 +125,18 @@ export default function MachinePage({ eq, orderedDates: _orderedDates, onBack, o
         </section>
       )}
 
-      {/* Help expander */}
-      <HelpExpanderStandalone triggerText="Har du spørsmål om utstyret eller materiellet?">
-        <p style={{ margin: '0 0 8px 0' }}>
-          Kontakt behandleren din eller helseforetaket som eier utstyret. Du finner serienummeret og informasjon om hvem som eier utstyret i oversikten over.
-        </p>
-        <p style={{ margin: 0 }}>
-          <a href="https://behandlingshjelpemidler.no/enhet/">Se kontaktinformasjonen til behandlingshjelpemiddelenheter i Norge.</a>
-        </p>
-      </HelpExpanderStandalone>
+      {/* Help expander — not shown for "Annet", which explains itself via
+          the ingress above instead. */}
+      {!eq.isAnnet && (
+        <HelpExpanderStandalone triggerText="Har du spørsmål om utstyret eller materiellet?">
+          <p style={{ margin: '0 0 8px 0' }}>
+            Kontakt behandleren din eller helseforetaket som eier utstyret. Du finner serienummeret og informasjon om hvem som eier utstyret i oversikten over.
+          </p>
+          <p style={{ margin: 0 }}>
+            <a href="https://behandlingshjelpemidler.no/enhet/">Se kontaktinformasjonen til behandlingshjelpemiddelenheter i Norge.</a>
+          </p>
+        </HelpExpanderStandalone>
+      )}
 
       {/* Consumable section */}
       {!eq.deaktivert && (

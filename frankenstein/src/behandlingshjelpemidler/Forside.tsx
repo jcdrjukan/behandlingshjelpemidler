@@ -104,7 +104,11 @@ export default function Forside({
   onStartOrder,
   onShowHistory,
 }: ForsideProps) {
-  const activeEquipment = equipment.filter(e => !e.deaktivert);
+  // "Annet" always sorts to the end of the list, regardless of where it
+  // sits in the underlying data.
+  const activeEquipment = equipment
+    .filter(e => !e.deaktivert)
+    .sort((a, b) => (a.isAnnet ? 1 : 0) - (b.isAnnet ? 1 : 0));
   const deaktivertEquipment = equipment.filter(e => e.deaktivert);
 
   // Order-status ("kan bestilles" / "aktiv bestilling") is temporarily
@@ -164,7 +168,7 @@ export default function Forside({
                 <ElementHeader>
                   {/* Order status badge temporarily hidden — see note above getEquipStatus. */}
                   <ElementHeader.Text firstText={eq.model} firstTextEmphasised />
-                  <ElementHeader.Text firstText={eq.details.type} subText />
+                  <ElementHeader.Text firstText={eq.subtitle ?? eq.details.type} subText />
                   {eq.units && eq.units.length > 1 && (
                     <ElementHeader.Text firstText={`(${eq.units.length} enheter)`} subText />
                   )}

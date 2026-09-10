@@ -32,6 +32,15 @@ export interface Equipment {
   consumables: Consumable[];
   deaktivert?: boolean;
   deaktivertMessage?: string;
+  /** Subtext shown under the name in "Ditt utstyr". Defaults to
+   *  details.type when omitted. */
+  subtitle?: string;
+  /** Marks the "Annet" catch-all entry for forbruksvarer that aren't
+   *  connected to any specific utstyr — no Type/Produsent/Modellnr and no
+   *  per-unit Serienr./Utlevert/Eier panel, a different help trigger, and
+   *  it always sorts to the end of "Ditt utstyr" regardless of array
+   *  position. */
+  isAnnet?: boolean;
 }
 
 export type DeliveryMode = 'post' | 'hentes' | 'hentes2';
@@ -158,6 +167,18 @@ export const EQUIPMENT: Equipment[] = [
     consumables: [
       { name: 'Plaster film PodPals OmniPod [Frp 10 stk/pk]', quota: '' },
       { name: 'Insulinpumpe patchpumpe POD engangs Omnipod Dash [Frp 10 stk/pk]', quota: '', nextOrderDate: '2026-05-10', lastOrder: '10.02.2026' },
+    ],
+  },
+  {
+    id: 'annet',
+    name: 'Annet',
+    model: 'Annet',
+    subtitle: 'Forbruksmateriell uten tilhørende utstyr',
+    isAnnet: true,
+    details: { type: '', produsent: '' },
+    consumables: [
+      { name: 'Hansker undersøkelse, non-steril, nitril [Frp 100 stk/pk]', quota: '', lastOrder: '02.02.2026' },
+      { name: 'Desinfeksjonsservietter overflate [Frp 100 stk/pk]', quota: '' },
     ],
   },
 ];
