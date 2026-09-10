@@ -110,7 +110,7 @@ export default function Step1({
           const titleEl = (
             <span style={{ flex: 1 }}>
               <span style={{ display: 'block', font: 'var(--mobile-body-strong)' }}>{eq.model}</span>
-              <span style={{ display: 'block', font: 'var(--mobile-label-subdued)', color: 'var(--color-base-text-onlight-subdued)' }}>{eq.name}</span>
+              <span style={{ display: 'block', font: 'var(--mobile-label-subdued)', color: 'var(--color-base-text-onlight-subdued)' }}>{eq.subtitle ?? eq.name}</span>
             </span>
           );
 

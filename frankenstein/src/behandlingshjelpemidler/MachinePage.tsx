@@ -83,7 +83,7 @@ export default function MachinePage({ eq, orderedDates: _orderedDates, onBack, o
 
       {eq.isAnnet && (
         <p style={{ font: 'var(--mobile-preamble)', margin: '24px 0 0 0' }}>
-          Forbruksvarer i denne kategorien har ingen tilknytning eller tilhørighet til et annet utstyr.
+          Følgende forbruksvarer er selvstendige, med ingen avhengighet eller tilknytning til annet utstyr.
         </p>
       )}
 
