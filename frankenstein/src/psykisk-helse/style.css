@@ -9,6 +9,30 @@
   flex-direction: column;
 }
 
+/* ── Real-viewport breakpoint neutralization ──────────────────────
+   Several design-system components bump their own size past a real
+   min-width:768px media query, keyed to the actual browser window —
+   not to this fixed ~390px phone-frame mockup. Force every affected
+   component back to its mobile sizing regardless of how wide the real
+   window gets. Selectors use [class*="_name_"] (the CSS-module
+   delimiter around the literal SCSS class name) rather than the hash
+   itself, since the hash isn't guaranteed stable across builds;
+   :not([class*="name__"]) excludes BEM child classes that would
+   otherwise also match the same substring. */
+.ph-shell [class*="_panel_"]:not([class*="panel__"]) {
+  padding-top: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 1rem !important;
+  padding-left: calc(1rem - 6px) !important;
+}
+.ph-shell [class*="_link-list__anchor--medium_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+.ph-shell [class*="_tag_"] {
+  height: 1.25rem !important;
+}
+
 /* ── Page content ────────────────────────────────────────────────── */
 .ph-page {
   padding: 3rem 1rem 3rem;
@@ -328,6 +352,8 @@
 .ph-shell [class*="element-header__icon"] svg {
   width: 38px !important;
   height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
 }
 
 /* ── Emergency panel ─────────────────────────────────────────────── */

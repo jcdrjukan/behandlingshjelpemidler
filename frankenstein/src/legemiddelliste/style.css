@@ -29,6 +29,36 @@
 .ll-shell [class*="element-header__icon"] svg {
   width: 38px !important;
   height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
+}
+
+/* Same class of bug, broader pass: Select, Panel, ExpanderList link
+   text, the explicit small-size LinkList row, and Tag all also bump
+   past the same real min-width:768px breakpoint. [class*="_name_"]
+   isolates the literal SCSS class name from the CSS-module hash (not
+   guaranteed stable across builds) and from BEM child classes that
+   would otherwise share the same substring. */
+.ll-shell [class*="_select_"] {
+  height: calc(2.75rem + 0.25rem) !important;
+  font-size: 1.125rem !important;
+}
+.ll-shell [class*="_panel_"]:not([class*="panel__"]) {
+  padding-top: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 1rem !important;
+  padding-left: calc(1rem - 6px) !important;
+}
+.ll-shell [class*="_expander-list-link_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+.ll-shell [class*="_link-list__anchor--small_"] {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+.ll-shell [class*="_tag_"] {
+  height: 1.25rem !important;
 }
 
 .ll-shell {

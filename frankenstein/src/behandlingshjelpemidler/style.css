@@ -81,6 +81,56 @@
   flex-direction: column;
 }
 
+/* ── Real-viewport breakpoint neutralization ──────────────────────
+   Several design-system components bump their own size past a real
+   min-width:768px media query, keyed to the actual browser window —
+   not to this fixed ~390px phone-frame mockup. Force every affected
+   component back to its mobile sizing regardless of how wide the real
+   window gets. Selectors use [class*="_name_"] (the CSS-module
+   delimiter around the literal SCSS class name) rather than the hash
+   itself, since the hash isn't guaranteed stable across builds;
+   :not([class*="name__"]) excludes BEM child classes that would
+   otherwise also match the same substring. */
+.bhm-page [class*="_select_"] {
+  height: calc(2.75rem + 0.25rem) !important;
+  font-size: 1.125rem !important;
+}
+.bhm-page [class*="_input-container_"]:not([class*="input-container__"]) {
+  min-height: calc(2.75rem + 0.25rem) !important;
+}
+.bhm-page [class*="_panel_"]:not([class*="panel__"]) {
+  padding-top: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 1rem !important;
+  padding-left: calc(1rem - 6px) !important;
+}
+.bhm-page [class*="_notification-panel_"]:not([class*="notification-panel__"]) {
+  padding-left: 0.5rem !important;
+  padding-right: 1rem !important;
+}
+.bhm-page [class*="_notification-panel__children_"],
+.bhm-page [class*="_notification-panel__label_"] {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+.bhm-page [class*="_link-list__anchor--medium_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+.bhm-page [class*="_expander-list-link_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+/* ElementHeader leading icon bumps from 38px to 48px past the same
+   breakpoint — same fix already applied in Forside/Psykisk
+   helse/Legemiddelliste. */
+.bhm-page [class*="element-header__icon"] svg {
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
+}
+
 /* =====================================================================
    Header — uses the shared .header/.top-bar/.nav-icon-btn/.profile-bar
    classes from App.css (same markup as every other prototype) so this

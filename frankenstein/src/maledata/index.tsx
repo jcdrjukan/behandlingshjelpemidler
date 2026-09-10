@@ -4,6 +4,9 @@ import Icon from '@helsenorge/designsystem-react/components/Icon';
 import Avatar from '@helsenorge/designsystem-react/components/Avatar';
 import Title from '@helsenorge/designsystem-react/components/Title';
 import Select from '@helsenorge/designsystem-react/components/Select';
+import VisualCheckboxCloud from '@helsenorge/designsystem-react/components/VisualCheckboxCloud/VisualCheckboxCloud';
+import NotificationPanel from '@helsenorge/designsystem-react/components/NotificationPanel/NotificationPanel';
+import EmptyState from '@helsenorge/designsystem-react/components/EmptyState/EmptyState';
 import Menu from '@helsenorge/designsystem-react/components/Icons/Menu';
 import Bell from '@helsenorge/designsystem-react/components/Icons/Bell';
 import Logout from '@helsenorge/designsystem-react/components/Icons/Logout';
@@ -99,25 +102,6 @@ function LatestCard({ series, onSelect }: LatestCardProps) {
   );
 }
 
-interface SeriesChipProps {
-  series: MaledataSeries;
-  shown: boolean;
-  onToggle: (id: string) => void;
-}
-
-function SeriesChip({ series, shown, onToggle }: SeriesChipProps) {
-  return (
-    <button
-      type="button"
-      className={`md-chip${shown ? ' md-chip--on' : ''}`}
-      aria-pressed={shown}
-      onClick={() => onToggle(series.id)}
-    >
-      {shown ? '✓ ' : '+ '}
-      {series.name}
-    </button>
-  );
-}
 
 interface SeriesTableProps {
   series: MaledataSeries;
@@ -401,7 +385,13 @@ export default function Maledata({ onNavigateHome }: MaledataProps) {
 
       <main className="md-page">
         <Title htmlMarkup="h1" appearance="title1">Måledata</Title>
-        <p className="md-followup">Følges opp av hjemmetjenesten, hverdager 08–15</p>
+        <p className="md-ingress">
+          Her ser du målingene dine over tid, sammen med målområdene som er satt for deg.
+        </p>
+
+        <NotificationPanel variant="info" fluid className="md-followup-panel">
+          <p style={{ margin: 0, fontWeight: 400 }}>Følges opp av hjemmetjenesten, hverdager 08–15.</p>
+        </NotificationPanel>
 
         <section>
           <h2 className="md-section-title">Siste målinger</h2>
@@ -414,11 +404,19 @@ export default function Maledata({ onNavigateHome }: MaledataProps) {
 
         <section className="md-chart-card">
           <h2 className="md-section-title">Vis målinger</h2>
-          <div className="md-chips">
+          <VisualCheckboxCloud className="md-chips">
             {SERIES.map(s => (
-              <SeriesChip key={s.id} series={s} shown={!!shown[s.id]} onToggle={toggleShown} />
+              <VisualCheckboxCloud.Checkbox
+                key={s.id}
+                name="md-series"
+                value={s.id}
+                checked={!!shown[s.id]}
+                onChange={() => toggleShown(s.id)}
+              >
+                {s.name}
+              </VisualCheckboxCloud.Checkbox>
             ))}
-          </div>
+          </VisualCheckboxCloud>
 
           <div className="md-strip">
             <div className="md-strip__row">
@@ -454,7 +452,9 @@ export default function Maledata({ onNavigateHome }: MaledataProps) {
               />
             ))}
             {visibleSeries.length === 0 && (
-              <p className="md-empty">Ingen målinger vist. Velg minst én måling over.</p>
+              // compact size only ever renders `title` (no additionalText) —
+              // say what to do about it directly in the title itself.
+              <EmptyState size="compact" title="Ingen målinger vist — velg minst én over" />
             )}
           </div>
 

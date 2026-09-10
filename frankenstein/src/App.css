@@ -131,6 +131,17 @@
 .mobile-shell .nav-icon-btn__label {
   margin-bottom: 0.5rem;
 }
+
+/* LinkList row text ("Prøvesvar"/"Analyser..."/"Fremtidige prøver")
+   bumps from 18/28px to 20/30px past a real min-width:768px media
+   query, keyed to the actual browser window — not to this fixed
+   ~390px phone-frame mockup. Same fix as every other prototype's own
+   style.css. */
+.mobile-shell [class*="_link-list__anchor--medium_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+
 .prover-avatar {
   margin-top: 2px;
   margin-bottom: 2px;

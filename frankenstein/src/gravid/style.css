@@ -9,6 +9,19 @@
   flex-direction: column;
 }
 
+/* Panel's own padding jumps from 16/16/16/10px to 24/24/24/18px past a
+   real min-width:768px media query, keyed to the actual browser window
+   — not to this fixed ~390px phone-frame mockup. Force it back to the
+   mobile value regardless of how wide the real window gets. Same class
+   of bug already patched (via a different mechanism) in
+   Pasientens-planer. */
+.gr-shell [class*="_panel_"]:not([class*="panel__"]) {
+  padding-top: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 1rem !important;
+  padding-left: calc(1rem - 6px) !important;
+}
+
 /* ── Header text sizing (matches Forside's header fix) ──────────────
    nav-icon-btn__label/profile-bar__name are shared App.css classes used
    by every prototype's header — force the 16px size and 0.5rem label

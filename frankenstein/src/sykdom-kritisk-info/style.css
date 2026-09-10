@@ -9,6 +9,33 @@
   flex-direction: column;
 }
 
+/* ── Real-viewport breakpoint neutralization ──────────────────────
+   Several design-system components bump their own size past a real
+   min-width:768px media query, keyed to the actual browser window —
+   not to this fixed ~390px phone-frame mockup. Force every affected
+   component back to its mobile sizing regardless of how wide the real
+   window gets. (EmptyState here already uses size="compact", which is
+   immune by default — its unconditional rule already beats the
+   media-gated base rule in cascade order, so no override needed.)
+   Selectors use [class*="_name_"] (the CSS-module delimiter around the
+   literal SCSS class name) rather than the hash itself, since the hash
+   isn't guaranteed stable across builds; :not([class*="name__"])
+   excludes BEM child classes that would otherwise also match the same
+   substring. */
+.ski-shell [class*="_panel_"]:not([class*="panel__"]) {
+  padding-top: 1rem !important;
+  padding-right: 1rem !important;
+  padding-bottom: 1rem !important;
+  padding-left: calc(1rem - 6px) !important;
+}
+.ski-shell [class*="_expander-list-link_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+.ski-shell [class*="_tag_"] {
+  height: 1.25rem !important;
+}
+
 /* ── Header text sizing (matches Forside's header fix) ──────────────
    nav-icon-btn__label/profile-bar__name are shared App.css classes used
    by every prototype's header — force the 16px size and 0.5rem label

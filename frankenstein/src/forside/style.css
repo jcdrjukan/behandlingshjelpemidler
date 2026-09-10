@@ -14,6 +14,38 @@
   flex-direction: column;
 }
 
+/* ── Real-viewport breakpoint neutralization ──────────────────────
+   Several design-system components bump their own size (or, for Tile,
+   their alignment) past a real min-width:768px media query, keyed to
+   the actual browser window — not to this fixed ~390px phone-frame
+   mockup. Force every affected component back to its mobile rendering
+   regardless of how wide the real window gets. Selectors use
+   [class*="_name_"] (the CSS-module delimiter around the literal SCSS
+   class name) rather than the hash itself, since the hash isn't
+   guaranteed stable across builds; :not([class*="name__"]) excludes
+   BEM child classes that would otherwise also match the same
+   substring. */
+.fs-shell [class*="_link-list__anchor--medium_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+/* Tile is the one case here where the breakpoint changes actual layout
+   (centered -> left-aligned), not just size, so it gets full coverage. */
+.fs-shell [class*="_tile_"]:not([class*="tile__"]) {
+  padding: 0.5rem 0.5rem 0.75rem !important;
+  justify-content: center !important;
+}
+.fs-shell [class*="_tile__title_"] {
+  font-size: 1.125rem !important;
+  line-height: 1.74rem !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  margin: 0.25rem 0 0 !important;
+}
+.fs-shell [class*="_title-wrapper_"] {
+  align-items: center !important;
+}
+
 /* .top-bar is a shared global class (App.css) used by every prototype,
    normally white — scoped here (not edited globally) so only Forside's
    logo/meny/varsler/logg-ut row picks up the same light-blue background
@@ -61,6 +93,8 @@
 .fs-shell [class*="element-header__icon"] svg {
   width: 38px !important;
   height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
 }
 
 .fs-page {

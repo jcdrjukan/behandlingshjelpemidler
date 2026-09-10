@@ -22,6 +22,30 @@
   margin-bottom: 2px;
 }
 
+/* ── Real-viewport breakpoint neutralization ──────────────────────
+   Several design-system components bump their own size past a real
+   min-width:768px media query, keyed to the actual browser window —
+   not to this fixed ~390px phone-frame mockup. Force every affected
+   component back to its mobile sizing regardless of how wide the real
+   window gets. Selectors use [class*="_name_"] (the CSS-module
+   delimiter around the literal SCSS class name) rather than the
+   hash itself, since the hash isn't guaranteed stable across builds;
+   :not([class*="name__"]) excludes BEM child classes that would
+   otherwise also match the same substring. */
+.md-shell [class*="_select_"] {
+  height: calc(2.75rem + 0.25rem) !important;
+  font-size: 1.125rem !important;
+}
+.md-shell [class*="_notification-panel_"]:not([class*="notification-panel__"]) {
+  padding-left: 0.5rem !important;
+  padding-right: 1rem !important;
+}
+.md-shell [class*="_notification-panel__children_"],
+.md-shell [class*="_notification-panel__label_"] {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+
 .md-page {
   padding: 1.5rem 1rem 2rem;
   display: flex;
@@ -34,12 +58,20 @@
   line-height: 2.375rem !important;
 }
 
-.md-followup {
+.md-ingress {
   /* Matches --mobile-preamble (400/1.25rem/130%) — the same token every
      other prototype uses for the lede paragraph right under its H1. */
   font: 400 1.25rem/1.3 'Source Sans Pro', sans-serif;
   color: var(--core-color-neutral-800, #474745);
   margin: -8px 0 0;
+}
+
+/* Patient-specific "who is following this up" message — deliberately
+   NOT styled as part of the ingress. It's per-patient configuration
+   (municipal home care and its hours in the pilot), not general service
+   copy, so it gets an infobox treatment instead. */
+.md-followup-panel {
+  margin-top: 4px;
 }
 
 .md-section-title {
@@ -116,34 +148,51 @@
   padding: 14px 14px 16px;
 }
 
+/* VisualCheckboxCloud handles its own flex-wrap/gap layout and pill
+   styling (real design-system component, replacing a hand-rolled chip) —
+   this just adds the same bottom margin the old chips had. */
 .md-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
   margin-bottom: 12px;
 }
-
-.md-chip {
-  /* --mobile-body — these are tappable toggles as much as they are text,
-     so they get full body size rather than the smaller badge-style type
-     a chip would normally use. */
-  font: 400 1.125rem/1.2 'Source Sans Pro', sans-serif;
-  padding: 8px 16px;
-  min-height: 44px;
-  border-radius: 999px;
-  border: 0.5px solid var(--core-color-neutral-400, #aaa8a6);
-  background: transparent;
-  cursor: pointer;
-  color: #000;
+/* VisualCheckboxCloud's own styles switch to a much wider gap
+   (24px 16px) past a real min-width:768px media query — meant for an
+   actual wide viewport, but the phone-frame mockup here stays a fixed
+   ~390px regardless of how wide the real browser window gets. Force the
+   mobile gap back so the pills don't visibly spread out just because the
+   real window (not the mockup) got wider. Same class of bug already
+   patched for Title/Modal elsewhere in this app. */
+.md-chips [class*="visual-checkbox-cloud"] {
+  gap: 2px 12px !important;
 }
-.md-chip--on {
-  background: var(--color-base-background-blueberry-subtle, #e4f7f9);
-  border-color: var(--core-color-blueberry-400, #58aabb);
-  color: var(--core-color-blueberry-700, #08667c);
+/* Same bug hits the individual pill's own min-height/padding (32px tall
+   mobile default -> 48px past the same real min-width:768px query),
+   plus its text via font-mixins' title6 (16px/22px -> 18px/25px, a
+   separate rule living in a different scss file, missed on the first
+   pass) — force the mobile values back everywhere so the pills never
+   grow just because the real browser window got wider. */
+.md-chips [class*="visual-checkbox__pill"] {
+  min-height: 2rem !important;
+  padding: 0.25rem 1.75rem !important;
+  font-size: 1rem !important;
+  line-height: 1.375rem !important;
+  /* The real culprit: the outer <label> wrapper is an inline-flex
+     container with the browser default align-items:stretch, and its
+     OWN padding (unrelated to anything above) drops from 0.313rem to 0
+     at the same breakpoint — so the stretched pill silently grows to
+     fill that extra space regardless of the min-height/padding/font
+     overrides above, which only ever set a floor stretch could exceed.
+     Opting this one flex item out of stretch makes it size from its own
+     content again, independent of the outer wrapper's breakpoint. */
+  align-self: center !important;
 }
-.md-chip:focus-visible {
-  outline: 2px solid var(--core-color-blueberry-400, #58aabb);
-  outline-offset: 2px;
+/* Confirmed via the rendered DOM that the component always adds this
+   modifier class on check (rather than relying only on :has()), so no
+   :has() fallback is needed — a :has(input:checked) variant here would
+   over-match, since "visual-checkbox-cloud" (the outer wrapper) also
+   contains "visual-checkbox" as a substring and would satisfy :has()
+   the moment any one chip is checked, incorrectly widening every pill. */
+.md-chips [class*="visual-checkbox--checked"] [class*="visual-checkbox__pill"] {
+  padding: 0.25rem 1.25rem !important;
 }
 
 /* ── Sticky timeframe strip ───────────────────────────────────── */
@@ -164,7 +213,7 @@
   margin-bottom: 4px;
 }
 .md-strip__select {
-  margin: 0;
+  margin: 0 0 0.5rem 0;
   flex-shrink: 0;
 }
 .md-strip__select [class*="select-wrapper"] {
@@ -200,6 +249,12 @@
      sticky strip (~108px tall) never ends up flush against the panel's
      top edge and clipping the focus ring below. */
   scroll-margin-top: 124px;
+}
+/* The sticky strip above already has its own border-bottom — without
+   this, the first panel's border-top sits a few px below it and the two
+   lines read as a doubled divider. */
+.md-panel:first-child {
+  border-top: none;
 }
 .md-panel:focus {
   outline: 2px solid var(--core-color-blueberry-400, #58aabb);
@@ -260,13 +315,6 @@
 .md-panel__svg {
   display: block;
   margin-top: 4px;
-}
-
-.md-empty {
-  font: 400 1.125rem/1.5 'Source Sans Pro', sans-serif;
-  color: var(--core-color-neutral-700, #62625f);
-  padding: 16px 0;
-  margin: 0;
 }
 
 /* ── Legend ────────────────────────────────────────────────────── */
